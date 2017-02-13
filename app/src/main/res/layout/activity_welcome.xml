@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_welcome"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="20dp"
+    android:paddingRight="25dp"
+    android:paddingLeft="25dp"
+    android:background="#45bfa5"
+    >
+
+    <TextView
+        android:text="@string/welcome_title"
+        android:id="@+id/welcome_title"
+        android:textSize="35sp"
+        android:textStyle="bold|italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#fafafa">
+    </TextView>
+    <ImageView
+        android:id="@+id/welcome_title_image"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/imageedit_2_2145574916"
+
+        android:layout_below="@id/welcome_title" />
+    <View
+        android:id="@+id/separatorSix"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"
+        android:layout_below="@id/welcome_title_image"/>
+    <Button
+        android:text="@string/your_data_btn"
+        android:id="@+id/your_data_btn"
+        android:textSize="22sp"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/separatorSix"
+        android:background="@drawable/btn_radius"
+        android:textColor="#fafafa">
+
+    </Button>
+    <Button
+        android:text="@string/surveys_btn"
+        android:id="@+id/surveys_btn"
+        android:textSize="22sp"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/your_data_btn"
+        android:background="@drawable/btn_radius"
+        android:textColor="#fafafa">
+
+    </Button>
+    <ImageButton
+        android:id="@+id/settings_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/settings_50"
+        android:layout_below="@id/surveys_btn"
+        android:background="#45bfa5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-40dp">
+
+    </ImageButton>
+    <TextView
+        android:id="@+id/username_label"
+        android:text="@string/username_label"
+        android:layout_width="wrap_content"
+        android:textSize="22sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="40dp"
+        android:textColor="#fafafa"
+        android:textStyle="italic"/>
+
+
+</RelativeLayout>

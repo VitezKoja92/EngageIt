@@ -1,0 +1,2 @@
+include ':app', ':PolljoySDK1'
+project(':PolljoySDK1').projectDir = new File('PolljoySDK')

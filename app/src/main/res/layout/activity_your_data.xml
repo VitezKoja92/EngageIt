@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:id="@+id/activity_your_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:paddingRight="25dp"
+    android:paddingLeft="25dp"
+    android:paddingBottom="10dp">
+
+    <TextView
+        android:text="@string/your_data_title"
+        android:id="@+id/welcome_title"
+        android:textSize="35sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="50dp"
+        android:textAlignment="center"
+        android:textColor="#fafafa"
+        android:textStyle="bold|italic">
+
+    </TextView>
+    <View
+        android:id="@+id/separatorSix"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+    <Button
+        android:text="@string/wearable_data_btn"
+        android:id="@+id/wareable_data_btn"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_radius">
+    </Button>
+    <Button
+        android:text="@string/survey_data_btn"
+        android:id="@+id/survey_data_btn"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/btn_radius">
+    </Button>
+</LinearLayout>

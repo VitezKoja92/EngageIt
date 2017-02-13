@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_agreement"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:paddingRight="25dp"
+    android:paddingLeft="25dp"
+    android:paddingBottom="10dp"
+    android:baselineAligned="false">
+
+    <TextView
+        android:id="@+id/terms_and_conditions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/aggrement"
+        android:textSize="24sp"
+        android:paddingBottom="50dp"
+        android:textAlignment="center"
+        android:layout_weight="1"
+        android:textColor="#fafafa"
+        android:textStyle="bold|italic"/>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/accept_btn"
+            android:text="@string/acceptbtn"
+            android:layout_height="70dp"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginRight="3dp"
+            android:background="@drawable/btn_radius"/>
+
+        <Button
+            android:id="@+id/refuse_btn"
+            android:text="@string/refusebtn"
+            android:layout_height="70dp"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:background="@drawable/btn_radius"/>
+
+    </LinearLayout>
+</LinearLayout>
+

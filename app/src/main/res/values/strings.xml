@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">EngageIt</string>
+    <string name="acceptbtn">Accept</string>
+    <string name="refusebtn">Refuse</string>
+    <string name="aggrement">The data collected with this app will be used only for the purpose of the University research.
+        The data will be collected in private manner so that it cannot be related to its provider.
+    Using the buttons bellow you can either \"Accept\" or \"Refuse\" to allow us to collect your data.</string>
+    <string name="refuse_text">You can be sure that your data won\'t be used for illegal activities. Please help us by providing your data... Would you?</string>
+    <string name="refuse_ok">Okay, I will!</string>
+    <string name="refuse_title">Please change your mind...</string>
+    <string name="refuse_nok">No, I can\'t...</string>
+    <string name="add_profile">Add Your Profile</string>
+    <string name="age_title">Age</string>
+    <string name="gender_title">Gender</string>
+    <string name="faculty_title">Faculty</string>
+    <string name="studies_level">Level of studies</string>
+    <string name="course_title">Course</string>
+
+
+    <string name="reg_done_btn">Done</string>
+    <string name="settings_title">Settings</string>
+    <string name="registration">Registration details</string>
+    <string name="terms_and_conditions">Terms and Conditions details</string>
+    <string name="exit_title">Exit</string>
+    <string name="exit_text">Do you want to exit?</string>
+    <string name="exit_yes">Yes</string>
+    <string name="exit_no">No</string>
+    <string name="welcome_title">Welcome to</string>
+    <string name="your_data_btn">Your Data</string>
+    <string name="inclass_btn">In Class \nQuestions</string>
+    <string name="surveys_btn">Surveys</string>
+    <string name="generalSurvey">General Survey</string>
+    <string name="pamSurvey">PAM</string>
+    <string name="post_lecture">Post-lecture Survey</string>
+    <string name="your_data_title">Your Data</string>
+    <string name="wearable_data_btn">Wearable Data</string>
+    <string name="survey_data_btn">Survey Data</string>
+    <string name="login_title">Login</string>
+    <string name="course_hint">Course</string>
+    <string name="sign_in_button">Next</string>
+
+    <string name="login_hint">* If you already have a username, just press \"Sign in\". Otherwise you should enter new username, then first press \"Sign up\", and then \"Sign in\". </string>
+    <string name="attend_text">Will you attend the next lecture?</string>
+    <string name="attend_yes">I will!</string>
+    <string name="attend_no">Sorry, I won\'t...</string>
+    <string name="attend_title">Attendance</string>
+    <string name="editRegistrationBtn">Edit Registration</string>
+    <string name="editProfileTitle">Edit Your Profile</string>
+    <string name="editProfileHint">Hint: Click on your course to edit your registration.</string>
+    <string name="registrationEdit_title">Edit Registration</string>
+    <string name="username_label">Username: /</string>
+    <string name="add_your_profile_btn">Add Your Profile</string>
+    <string name="edit_your_profile_btn">Edit Your Profile</string>
+    <string name="choose_other_profiles_btn">Choose Other Profiles</string>
+    <string name="username">Username</string>
+    <string name="courseDialogBtn">Choose courses</string>
+    <string name="choose_profiles_title">Choose Profile</string>
+    <string name="choose_profile_hint">* Click on the username in order to activate specific profile.</string>
+
+    <string name="dialog_password_title">Enter Admin password to proceed</string>
+    <string name="password_hint">Password</string>
+    <string name="logout">Logout</string>
+
+    <string-array name="courses">
+        <item>Information Security</item>
+        <item>Cyber Communication</item>
+        <item>Software Architecture</item>
+    </string-array>
+
+</resources>
+
