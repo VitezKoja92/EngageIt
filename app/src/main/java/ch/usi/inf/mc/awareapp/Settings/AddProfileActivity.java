@@ -264,7 +264,6 @@ public class AddProfileActivity extends AppCompatActivity {
                 UserData.SelectedCourses = selectedCoursesString;
                 System.out.println("Selected courses are: "+ UserData.SelectedCourses);
                 UserData.Username = username;
-                UserData.AddProfileCounter ++;
                 startActivity(i);
 //                //finish();
             }

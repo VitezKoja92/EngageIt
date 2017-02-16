@@ -64,7 +64,6 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
                     }
                 }
                 UserData.SelectedCourses = registration._courses;
-                UserData.AddProfileCounter++;
                 Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
             }

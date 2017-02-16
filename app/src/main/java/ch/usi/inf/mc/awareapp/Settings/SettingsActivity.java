@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.R;
 import ch.usi.inf.mc.awareapp.TermsActivity;
@@ -27,11 +28,15 @@ public class SettingsActivity extends AppCompatActivity {
     Button termsBtn;
     Button logoutBtn;
     final Context context = this;
+    DatabaseHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        dbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        System.out.println("Number of registrations: "+dbHandler.getAllRegistrations().size());
 
 
         //Defining editProfile button
@@ -96,7 +101,7 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(UserData.AddProfileCounter >= 1){ // check the database
+                if(dbHandler.getAllRegistrations().size() > 0){ // check the database
                     LayoutInflater inflater = LayoutInflater.from(context);
                     View passwordView = inflater.inflate(R.layout.dialog_password, null);
 

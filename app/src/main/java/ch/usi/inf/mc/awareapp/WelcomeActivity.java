@@ -70,15 +70,25 @@ public class WelcomeActivity extends Activity {
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
 
+        //Join AWARE and Aware study
+        Intent startAware = new Intent(getApplicationContext(), Aware.class);
+        startService(startAware);
+        Aware.startESM(this);
+        Aware.startScheduler(this);
+
+        Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
+        Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
+        sendBroadcast(sync);
+
+
         //Remote storing of the data
         switchDriveController = new SwitchDriveController(getString(R.string.server_address), getString(R.string.token), getString(R.string.password));
         sqLiteController = new SQLiteController(getApplicationContext());
 
-        Uploader uploader = new Uploader(androidID, switchDriveController, sqLiteController);
-        uploader.upload();
+//        Uploader uploader = new Uploader(androidID, switchDriveController, sqLiteController);
+//        uploader.upload();
 
-        Aware.startESM(this);
-        Aware.startScheduler(this);
+
 
         dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         calendar = Calendar.getInstance();
