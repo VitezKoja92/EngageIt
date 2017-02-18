@@ -69,9 +69,9 @@ public class WelcomeActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
-
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
-
+        dbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        username = UserData.Username;
 
         //Join AWARE and Aware study
 //        Intent startAware = new Intent(getApplicationContext(), Aware.class);
@@ -84,7 +84,7 @@ public class WelcomeActivity extends Activity {
 //        sendBroadcast(sync);
 
 
-        /* REMOTE STORAGE - BEGIN*/
+        /************** REMOTE STORAGE - BEGIN **************/
 
         //Remote storing of the data
         switchDriveController = new SwitchDriveController(getString(R.string.server_address), getString(R.string.token), getString(R.string.password));
@@ -122,6 +122,11 @@ public class WelcomeActivity extends Activity {
             }
             i++;
         }
+        /************** REMOTE STORAGE - END **************/
+
+
+
+        /************** TRIGGER SCHEDULERS - BEGIN **************/
 
         dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         calendar = Calendar.getInstance();
@@ -137,9 +142,10 @@ public class WelcomeActivity extends Activity {
             scheduler.createFirstPostLectureESM(this,UserData.SelectedCourses);
             scheduler.createSecondPostLectureESM(this,UserData.SelectedCourses);
         }
+        /************** TRIGGER SCHEDULERS - END **************/
 
-        dbHandler = DatabaseHandler.getInstance(getApplicationContext());
-        username = UserData.Username;
+
+
 
         usernameLabel = (TextView)findViewById(R.id.username_label);
         usernameLabel.setText("User: "+ username);
@@ -153,6 +159,10 @@ public class WelcomeActivity extends Activity {
         System.out.println("Username from UserData: "+ UserData.Username);
         System.out.println("Courses from UserData: "+ UserData.SelectedCourses);
 
+
+
+
+        /************** DEFINING BUTTONS - BEGIN **************/
 
         /* Defining "Surveys" button - By clicking it it should lead us to "SurveysActivity" */
         surveysBtn = (Button)findViewById(R.id.surveys_btn);
@@ -192,6 +202,7 @@ public class WelcomeActivity extends Activity {
                 startActivity(i);
             }
         });
+        /************** DEFINING BUTTONS - END **************/
     }
 
 
@@ -238,5 +249,19 @@ public class WelcomeActivity extends Activity {
 //                " WHERE " + LocalDbUtility.getTableColumns(table)[0] + " > " + Integer.toString(getRecordId(table));
         return localController.rawQuery(query, null);
     }
+
+    /************** OBSERVE CHANGES IN AWARE DATABASE - BEGIN **************/
+
+    @Override
+    protected void onResume(){
+        //getContentResolver().registerContentObserver();
+    }
+
+    protected void onDestroy(){
+        //getContentResolver().unregisterContentObserver();
+    }
+
+
+    /************** OBSERVE CHANGES IN AWARE DATABASE - END **************/
 
 }

@@ -29,6 +29,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public static final String TABLE_REGISTRATION = "RegistrationTable";
     public static final String TABLE_PAM = "PAMTable";
+    public static final String TABLE_ESM = "ESMTable";
 
 
     //Registration Table columns names
@@ -58,6 +59,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     //private static final String CURRENT_DATE_AND_TIME = "CurrentDateAndTime";
 
 
+    //ESM Table column names
+    private static final String TIMESTAMP = "Timestamp";
+    private static final String DEVICE_ID = "Device_id";
+    private static final String ESM_JSON = "ESM_json";
+    private static final String ESM_STATUS = "ESM_status";
+    private static final String ESM_EXPIRATION_THRESHOLD = "ESM_expiration_threshold";
+    private static final String ESM_NOTIFICATION_TIMEOUT = "ESM_notification_timeout";
+    private static final String DOUBLE_ESM_USER_ANSWER_TIMESTAMP = "Double_ESM_user_answer_timestamp";
+    private static final String ESM_USER_ANSWER = "ESM_user_answer";
+    private static final String ESM_TRIGGER = "ESM_trigger";
 
 
     @Override
@@ -88,9 +99,25 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 CURRENT_DATE_AND_TIME + " TEXT"+
                 ")";
 
+        //String for creation of the ESM table
+        String CREATE_ESM_TABLE = "CREATE TABLE "+TABLE_ESM +
+                "(" +
+                _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                TIMESTAMP + " REAL," +
+                DEVICE_ID + " TEXT," +
+                ESM_JSON + " TEXT," +
+                ESM_STATUS + " INTEGER," +
+                ESM_EXPIRATION_THRESHOLD + " INTEGER," +
+                ESM_NOTIFICATION_TIMEOUT + " INTEGER," +
+                DOUBLE_ESM_USER_ANSWER_TIMESTAMP + " REAL," +
+                ESM_USER_ANSWER + " TEXT," +
+                ESM_TRIGGER + " TEXT" +
+                ")";
+
 
         db.execSQL(CREATE_REGISTRATION_TABLE);
         db.execSQL(CREATE_PAM_TABLE);
+        db.execSQL(CREATE_ESM_TABLE);
 
         //creating utility table
         db.execSQL(UploaderUtilityTable.getCreateQuery());
@@ -155,7 +182,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         }
     }
 
-    //Method for inserting registration details in the database
+    //Method for inserting PAM details in the database
     public void addPAM(PAMClass pam) {
         SQLiteDatabase db = getWritableDatabase();
         db.beginTransaction();
@@ -176,6 +203,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         } catch (SQLException e) {
             e.printStackTrace();
             Log.d(TAG, "Error while trying to add PAM to database");
+        } finally {
+            db.endTransaction();
+        }
+    }
+    //Method for inserting ESM details in the database
+    public void addESM(ESMClass esm) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.beginTransaction();
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(_ID, esm._id);
+            values.put(TIMESTAMP, esm._timestamp);
+            values.put(DEVICE_ID, esm._device_id);
+            values.put(ESM_JSON, esm._esm_json);
+            values.put(ESM_STATUS, esm._esm_status);
+            values.put(ESM_EXPIRATION_THRESHOLD, esm._esm_expiration_threshold);
+            values.put(ESM_NOTIFICATION_TIMEOUT, esm._esm_notification_timeout);
+            values.put(DOUBLE_ESM_USER_ANSWER_TIMESTAMP, esm._double_esm_user_answer_timestamp);
+            values.put(ESM_USER_ANSWER, esm._esm_user_answer);
+            values.put(ESM_TRIGGER, esm._esm_trigger);
+
+            db.insertOrThrow(TABLE_ESM, null, values);
+            db.setTransactionSuccessful();
+            System.out.println("good "+values);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Log.d(TAG, "Error while trying to add ESM to database");
         } finally {
             db.endTransaction();
         }
@@ -254,6 +310,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return PAMList;
     }
 
+    //Method for getting all data from ESM table
+    public List<ESMClass> getAllESMs(){
+        List<ESMClass> esmsList = new ArrayList<>();
+        String selectQuery = "SELECT * FROM "+TABLE_ESM;
+        SQLiteDatabase db = getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        try{
+            if(cursor.moveToFirst()){
+                do{
+                    ESMClass esm = new ESMClass();
+
+                    esm._id= cursor.getInt(cursor.getColumnIndex(_ID));
+                    esm._timestamp= cursor.getDouble(cursor.getColumnIndex(TIMESTAMP));
+                    esm._device_id= cursor.getString(cursor.getColumnIndex(DEVICE_ID));
+                    esm._esm_json = cursor.getString(cursor.getColumnIndex(ESM_JSON));
+                    esm._esm_status= cursor.getInt(cursor.getColumnIndex(ESM_STATUS));
+                    esm._esm_expiration_threshold= cursor.getInt(cursor.getColumnIndex(ESM_EXPIRATION_THRESHOLD));
+                    esm._esm_notification_timeout= cursor.getInt(cursor.getColumnIndex(ESM_NOTIFICATION_TIMEOUT));
+                    esm._double_esm_user_answer_timestamp= cursor.getDouble(cursor.getColumnIndex(DOUBLE_ESM_USER_ANSWER_TIMESTAMP));
+                    esm._esm_user_answer= cursor.getString(cursor.getColumnIndex(ESM_USER_ANSWER));
+                    esm._esm_trigger = cursor.getString(cursor.getColumnIndex(ESM_TRIGGER));
+
+                    esmsList.add(esm);
+                }while(cursor.moveToNext());
+            }
+        }catch (Exception e){
+            Log.d(TAG, "Error while trying to get posts from database");
+        }finally {
+            if(cursor != null && !cursor.isClosed()){
+                cursor.close();
+            }
+        }
+        return esmsList;
+    }
+
 
     //Method for updating registration
     public void updateRegistration(String age, String gender, String faculty, String level, String courses, Boolean regDone, Boolean terms, String username, String currentTime){
@@ -283,6 +376,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.beginTransaction();
             db.execSQL("UPDATE " + TABLE_PAM +
                     " SET Username='"+ username +"', Attendance='"+attendance+"', PAMAnswer='"+answer+"', CurrentDateAndTime='"+timestamp+
+                    "' WHERE _id ='"+id+"';");
+            db.setTransactionSuccessful();
+        }catch (SQLException e){
+            Log.d(TAG, "Error while trying to update PAM detail");
+        }finally {
+            db.endTransaction();
+        }
+
+    }
+
+    //Method for updating ESM
+    public void updateESM(int id, double timestamp, String device_id, String esm_json, String esm_status, String expiration_threshold,
+                          String notification_timeout, double answer_timestamp, String user_answer, String trigger){
+
+        SQLiteDatabase db = getWritableDatabase();
+
+        try{
+            db.beginTransaction();
+            db.execSQL("UPDATE " + TABLE_ESM +
+                    " SET Timestamp='"+ timestamp +"', Device_id='"+device_id+"', ESM_json='"+esm_json+"', ESM_status='"+esm_status+
+                    "', ESM_expiration_threshold='"+expiration_threshold+"', ESM_notification_timeout='"+notification_timeout+
+                    "', Double_ESM_user_answer_timestamp='"+answer_timestamp+"', ESM_user_answer='"+user_answer+"', ESM_trigger='"+trigger+
                     "' WHERE _id ='"+id+"';");
             db.setTransactionSuccessful();
         }catch (SQLException e){

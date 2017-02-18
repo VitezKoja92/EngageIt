@@ -225,9 +225,9 @@ public class SurveysActivity extends AppCompatActivity {
 //                esm.putExtra(ESM.EXTRA_ESM, generalEsmString);
 //                sendBroadcast(esm);
 //
-//                String[] tableColumns = {"timestamp", "esm_status", "esm_user_answer"};
-//                String[] tableArguments = {};
-//                Cursor data = getContentResolver().query(ESM_Provider.ESM_Data.CONTENT_URI, tableColumns, "",tableArguments,"");
+                String[] tableColumns = {"timestamp", "esm_status", "esm_user_answer"};
+                String[] tableArguments = {};
+                Cursor data = getContentResolver().query(ESM_Provider.ESM_Data.CONTENT_URI, tableColumns, "",tableArguments,"");
 //
 //                ArrayList<String> questions = new ArrayList<String>();
 //                while(data.moveToNext()){
