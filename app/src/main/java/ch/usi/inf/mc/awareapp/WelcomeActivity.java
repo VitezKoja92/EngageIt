@@ -63,6 +63,8 @@ public class WelcomeActivity extends Activity {
     String androidID;
     SwitchDriveController switchDriveController;
     SQLiteController localController;
+    int month;
+    int dayOfMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,16 +134,22 @@ public class WelcomeActivity extends Activity {
         calendar = Calendar.getInstance();
         weekday = dayFormat.format(calendar.getTime());
         scheduler = new MyScheduler();
+        month = calendar.get(Calendar.MONTH) + 1;
+        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
 
-        //Triggering schedulers
-        if(!UserData.Username.equals("/")){
-            scheduler.createFirstPAM(UserData.SelectedCourses, this);
-            scheduler.createSecondPAM(UserData.SelectedCourses, this);
-            scheduler.createThirdPAM(UserData.SelectedCourses, this);
-            scheduler.createFirstPostLectureESM(this,UserData.SelectedCourses);
-            scheduler.createSecondPostLectureESM(this,UserData.SelectedCourses);
+        //Trigger schedulers only in period between February 20th and March 12th
+        if((month == 2 && dayOfMonth >=20 && dayOfMonth <= 29) || (month == 3 && dayOfMonth >=1 && dayOfMonth <= 12)){
+            //Triggering schedulers
+            if(!UserData.Username.equals("/")){
+//                scheduler.createFirstPAM(UserData.SelectedCourses, this);
+//                scheduler.createSecondPAM(UserData.SelectedCourses, this);
+//                scheduler.createThirdPAM(UserData.SelectedCourses, this);
+//                scheduler.createFirstPostLectureESM(this,UserData.SelectedCourses);
+//                scheduler.createSecondPostLectureESM(this,UserData.SelectedCourses);
+            }
         }
+
         /************** TRIGGER SCHEDULERS - END **************/
 
 
@@ -252,14 +260,14 @@ public class WelcomeActivity extends Activity {
 
     /************** OBSERVE CHANGES IN AWARE DATABASE - BEGIN **************/
 
-    @Override
-    protected void onResume(){
-        //getContentResolver().registerContentObserver();
-    }
-
-    protected void onDestroy(){
-        //getContentResolver().unregisterContentObserver();
-    }
+//    @Override
+//    protected void onResume(){
+//        getContentResolver().registerContentObserver();
+//    }
+//
+//    protected void onDestroy(){
+//        getContentResolver().unregisterContentObserver();
+//    }
 
 
     /************** OBSERVE CHANGES IN AWARE DATABASE - END **************/

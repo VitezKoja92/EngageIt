@@ -584,42 +584,42 @@ public class MyScheduler {
 
             ESM_Radio esmRadio1 = new ESM_Radio();
             esmRadio1.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("I am interested in the topic explained in this lecture.");
+                    .setInstructions("I was happy in this lecture.");
 
 
             ESM_Radio esmRadio2 = new ESM_Radio();
             esmRadio2.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("I felt happy in this lecture.");
+                    .setInstructions("I didn't feel very accomplished in this lecture.");
 
             ESM_Radio esmRadio3 = new ESM_Radio();
             esmRadio3.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("I liked being at this lecture.");
+                    .setInstructions("I felt excited by the work in this lecture.");
 
             ESM_Radio esmRadio4 = new ESM_Radio();
             esmRadio4.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("I didn't feel bored during this lecture.");
+                    .setInstructions("I liked being at this lecture.");
 
             ESM_Radio esmRadio5 = new ESM_Radio();
             esmRadio5.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("I think the teacher was engaged during this lecture.");
+                    .setInstructions("I am interested in the work done in this lecture.");
 
             ESM_Radio esmRadio6 = new ESM_Radio();
             esmRadio6.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("I think the teacher felt confident with the topic he/she explained.");
+                    .setInstructions("My classroom is an interesting place to be.");
 
 
-            ESM_Freetext esmFreeText = new ESM_Freetext();
-            esmFreeText.setNotificationTimeout(60 * 100)            //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("Please describe the moment(s) during which you felt particularly engaged")
-                    .setSubmitButton("Done");
-
-
-            ESM_QuickAnswer esmQuickAnswer = new ESM_QuickAnswer();
-            esmQuickAnswer.addQuickAnswer("Yes")
-                    .addQuickAnswer("No")
-                    .setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
-                    .setInstructions("Did you feel particularly engaged in one or more moments during the lecture?")
-                    .addFlow("Yes", esmFreeText.build());
+//            ESM_Freetext esmFreeText = new ESM_Freetext();
+//            esmFreeText.setNotificationTimeout(60 * 100)            //Timeout should be set so that FirstLectureESM expires at 19:00
+//                    .setInstructions("Please describe the moment(s) during which you felt particularly engaged")
+//                    .setSubmitButton("Done");
+//
+//
+//            ESM_QuickAnswer esmQuickAnswer = new ESM_QuickAnswer();
+//            esmQuickAnswer.addQuickAnswer("Yes")
+//                    .addQuickAnswer("No")
+//                    .setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
+//                    .setInstructions("Did you feel particularly engaged in one or more moments during the lecture?")
+//                    .addFlow("Yes", esmFreeText.build());
 
             ArrayList<ESM_Radio> esms = new ArrayList<>();
             esms.add(esmRadio1);
@@ -643,20 +643,19 @@ public class MyScheduler {
             factory.addESM(esmRadio4);
             factory.addESM(esmRadio5);
             factory.addESM(esmRadio6);
-            factory.addESM(esmQuickAnswer);
 
 
             //First post-lecture questionnaire for Linear Algebra
             if(userCourses.contains(LinearAlgebra.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Linear Algebra (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Linear Algebra (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Linear Algebra (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Linear Algebra (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Linear Algebra (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Linear Algebra (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Linear Algebra (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Linear Algebra (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Linear Algebra (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Linear Algebra (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Linear Algebra (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Linear Algebra (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
 
                     com.aware.utils.Scheduler.Schedule first_post_lecture1 = new com.aware.utils.Scheduler.Schedule("first_post_lecture1" + UserData.Username);
                     first_post_lecture1.addWeekday(LinearAlgebra.getDay1().Day);
@@ -683,14 +682,14 @@ public class MyScheduler {
             //First post-lecture questionnaire for Programming Fundamentals
             if(userCourses.contains(ProgrammingFundamentals.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Programming Fundamentals (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Programming Fundamentals (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Programming Fundamentals (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Programming Fundamentals (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Programming Fundamentals (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Programming Fundamentals (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Programming Fundamentals (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Programming Fundamentals (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Programming Fundamentals (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Programming Fundamentals (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Programming Fundamentals (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Programming Fundamentals (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
 
                     com.aware.utils.Scheduler.Schedule first_post_lecture3 = new com.aware.utils.Scheduler.Schedule("first_post_lecture3" + UserData.Username);
                     first_post_lecture3.addWeekday(ProgrammingFundamentals.getDay1().Day);
@@ -726,14 +725,14 @@ public class MyScheduler {
             //First post-lecture questionnaire for Cyber Communication
             if(userCourses.contains(CyberCommunication.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Cyber Communication (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Cyber Communication (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Cyber Communication (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Cyber Communication (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Cyber Communication (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Cyber Communication (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Cyber Communication (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Cyber Communication (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Cyber Communication (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Cyber Communication (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Cyber Communication (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Cyber Communication (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
 
                     com.aware.utils.Scheduler.Schedule first_post_lecture6 = new com.aware.utils.Scheduler.Schedule("first_post_lecture6" + UserData.Username);
                     first_post_lecture6.addWeekday(CyberCommunication.getDay1().Day);
@@ -770,14 +769,14 @@ public class MyScheduler {
             //First post-lecture questionnaire for Information Security
             if(userCourses.contains(InformationSecurity.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Information Security (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Information Security (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Information Security (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Information Security (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Information Security (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Information Security (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Information Security (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Information Security (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Information Security (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Information Security (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Information Security (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Information Security (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Information Security (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Information Security (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Information Security (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Information Security (7/7)");
 
                     com.aware.utils.Scheduler.Schedule first_post_lecture9 = new com.aware.utils.Scheduler.Schedule("first_post_lecture9" + UserData.Username);
                     first_post_lecture9.addWeekday(InformationSecurity.getDay1().Day);
@@ -804,14 +803,14 @@ public class MyScheduler {
             //First post-lecture questionnaire for Software Architecture and Design
             if(userCourses.contains(SoftwareArchitecture.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Software Architecture and Design (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Software Architecture and Design (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Software Architecture and Design (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Software Architecture and Design (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Software Architecture and Design (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Software Architecture and Design (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Software Architecture and Design (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Software Architecture and Design (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Software Architecture and Design (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Software Architecture and Design (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Software Architecture and Design (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Software Architecture and Design (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
 
                     com.aware.utils.Scheduler.Schedule first_post_lecture11 = new com.aware.utils.Scheduler.Schedule("first_post_lecture11" + UserData.Username);
                     first_post_lecture11.addWeekday(SoftwareArchitecture.getDay1().Day);
@@ -840,7 +839,6 @@ public class MyScheduler {
                 factory.addESM(esmRadio4);
                 factory.addESM(esmRadio5);
                 factory.addESM(esmRadio6);
-                factory.addESM(esmQuickAnswer);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -856,42 +854,42 @@ public class MyScheduler {
 
             ESM_Radio esmRadio1 = new ESM_Radio();
             esmRadio1.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("I am interested in the topic explained in this lecture.");
+                    .setInstructions("I was happy in this lecture.");
 
 
             ESM_Radio esmRadio2 = new ESM_Radio();
             esmRadio2.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("I felt happy in this lecture.");
+                    .setInstructions("I didn't feel very accomplished in this lecture.");
 
             ESM_Radio esmRadio3 = new ESM_Radio();
             esmRadio3.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("I liked being at this lecture.");
+                    .setInstructions("I felt excited by the work in this lecture.");
 
             ESM_Radio esmRadio4 = new ESM_Radio();
             esmRadio4.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("I didn't feel bored during this lecture.");
+                    .setInstructions("I liked being at this lecture.");
 
             ESM_Radio esmRadio5 = new ESM_Radio();
             esmRadio5.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("I think the teacher was engaged during this lecture.");
+                    .setInstructions("I am interested in the work done in this lecture.");
 
             ESM_Radio esmRadio6 = new ESM_Radio();
             esmRadio6.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("I think the teacher felt confident with the topic he/she explained.");
+                    .setInstructions("My classroom is an interesting place to be.");
 
 
-            ESM_Freetext esmFreeText = new ESM_Freetext();
-            esmFreeText.setNotificationTimeout(60 * 100)            //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("Please describe the moment(s) during which you felt particularly engaged")
-                    .setSubmitButton("Done");
-
-
-            ESM_QuickAnswer esmQuickAnswer = new ESM_QuickAnswer();
-            esmQuickAnswer.addQuickAnswer("Yes")
-                    .addQuickAnswer("No")
-                    .setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
-                    .setInstructions("Did you feel particularly engaged in one or more moments during the lecture?")
-                    .addFlow("Yes", esmFreeText.build());
+//            ESM_Freetext esmFreeText = new ESM_Freetext();
+//            esmFreeText.setNotificationTimeout(60 * 100)            //Timeout should be set so that SecondLectureESM expires at 19:00
+//                    .setInstructions("Please describe the moment(s) during which you felt particularly engaged")
+//                    .setSubmitButton("Done");
+//
+//
+//            ESM_QuickAnswer esmQuickAnswer = new ESM_QuickAnswer();
+//            esmQuickAnswer.addQuickAnswer("Yes")
+//                    .addQuickAnswer("No")
+//                    .setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
+//                    .setInstructions("Did you feel particularly engaged in one or more moments during the lecture?")
+//                    .addFlow("Yes", esmFreeText.build());
 
             ArrayList<ESM_Radio> esms = new ArrayList<>();
             esms.add(esmRadio1);
@@ -915,19 +913,18 @@ public class MyScheduler {
             factory.addESM(esmRadio4);
             factory.addESM(esmRadio5);
             factory.addESM(esmRadio6);
-            factory.addESM(esmQuickAnswer);
 
             //Second post-lecture questionnaire for Linear Algebra
             if(userCourses.contains(LinearAlgebra.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Linear Algebra (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Linear Algebra (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Linear Algebra (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Linear Algebra (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Linear Algebra (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Linear Algebra (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Linear Algebra (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Linear Algebra (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Linear Algebra (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Linear Algebra (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Linear Algebra (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Linear Algebra (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
 
                     com.aware.utils.Scheduler.Schedule second_post_lecture1 = new com.aware.utils.Scheduler.Schedule("second_post_lecture1" + UserData.Username);
                     second_post_lecture1.addWeekday(LinearAlgebra.getDay1().Day);
@@ -954,14 +951,14 @@ public class MyScheduler {
             //Second post-lecture questionnaire for Programming Fundamentals
             if(userCourses.contains(ProgrammingFundamentals.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Programming Fundamentals (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Programming Fundamentals (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Programming Fundamentals (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Programming Fundamentals (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Programming Fundamentals (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Programming Fundamentals (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Programming Fundamentals (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Programming Fundamentals (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Programming Fundamentals (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Programming Fundamentals (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Programming Fundamentals (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Programming Fundamentals (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
 
                     com.aware.utils.Scheduler.Schedule second_post_lecture3 = new com.aware.utils.Scheduler.Schedule("second_post_lecture3" + UserData.Username);
                     second_post_lecture3.addWeekday(ProgrammingFundamentals.getDay1().Day);
@@ -997,14 +994,14 @@ public class MyScheduler {
             //Second post-lecture questionnaire for Cyber Communication
             if(userCourses.contains(CyberCommunication.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Cyber Communication (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Cyber Communication (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Cyber Communication (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Cyber Communication (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Cyber Communication (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Cyber Communication (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Cyber Communication (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Cyber Communication (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Cyber Communication (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Cyber Communication (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Cyber Communication (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Cyber Communication (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
 
                     com.aware.utils.Scheduler.Schedule second_post_lecture6 = new com.aware.utils.Scheduler.Schedule("second_post_lecture6" + UserData.Username);
                     second_post_lecture6.addWeekday(CyberCommunication.getDay1().Day);
@@ -1041,14 +1038,14 @@ public class MyScheduler {
             //Second post-lecture questionnaire for Information Security
             if(userCourses.contains(InformationSecurity.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Information Security (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Information Security (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Information Security (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Information Security (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Information Security (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Information Security (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Information Security (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Information Security (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Information Security (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Information Security (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Information Security (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Information Security (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Information Security (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Information Security (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Information Security (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Information Security (7/7)");
 
                     com.aware.utils.Scheduler.Schedule second_post_lecture9 = new com.aware.utils.Scheduler.Schedule("second_post_lecture9" + UserData.Username);
                     second_post_lecture9.addWeekday(InformationSecurity.getDay1().Day);
@@ -1075,14 +1072,14 @@ public class MyScheduler {
             //Second post-lecture questionnaire for Software Architecture and Design
             if(userCourses.contains(SoftwareArchitecture.getName())) {
                 if (!UserData.Username.equals("/")) {
-                    esmRadio1.setTitle("Survey about the first lecture of Software Architecture and Design (1/7)");
-                    esmRadio2.setTitle("Survey about the first lecture of Software Architecture and Design (2/7)");
-                    esmRadio3.setTitle("Survey about the first lecture of Software Architecture and Design (3/7)");
-                    esmRadio4.setTitle("Survey about the first lecture of Software Architecture and Design (4/7)");
-                    esmRadio5.setTitle("Survey about the first lecture of Software Architecture and Design (5/7)");
-                    esmRadio6.setTitle("Survey about the first lecture of Software Architecture and Design (6/7)");
-                    esmFreeText.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
-                    esmQuickAnswer.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
+                    esmRadio1.setTitle("Survey about the first lecture of Software Architecture and Design (1/6)");
+                    esmRadio2.setTitle("Survey about the first lecture of Software Architecture and Design (2/6)");
+                    esmRadio3.setTitle("Survey about the first lecture of Software Architecture and Design (3/6)");
+                    esmRadio4.setTitle("Survey about the first lecture of Software Architecture and Design (4/6)");
+                    esmRadio5.setTitle("Survey about the first lecture of Software Architecture and Design (5/6)");
+                    esmRadio6.setTitle("Survey about the first lecture of Software Architecture and Design (6/6)");
+//                    esmFreeText.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
+//                    esmQuickAnswer.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
 
                     com.aware.utils.Scheduler.Schedule second_post_lecture11 = new com.aware.utils.Scheduler.Schedule("second_post_lecture11" + UserData.Username);
                     second_post_lecture11.addWeekday(SoftwareArchitecture.getDay1().Day);
@@ -1111,8 +1108,6 @@ public class MyScheduler {
             factory.addESM(esmRadio4);
             factory.addESM(esmRadio5);
             factory.addESM(esmRadio6);
-            factory.addESM(esmQuickAnswer);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

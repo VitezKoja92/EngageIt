@@ -68,11 +68,10 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (1/11)")
+                            .setTitle("General Survey (1/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("This course is interesting to me.")
-                            .setSubmitButton("Next")
-                            .setCancelable(false);
+                            .setInstructions("When I'm studying, I feel mentally strong.")
+                            .setSubmitButton("Next");
 
 
                     ESM_Radio esmRadio2 = new ESM_Radio();
@@ -82,8 +81,8 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
                             .setExpirationThreshold(60*30)
-                            .setTitle("General Survey (2/11)")
-                            .setInstructions("This course is useful for my future life and career.")
+                            .setTitle("General Survey (2/29)")
+                            .setInstructions("I can continue for a very long time when I am studying.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio3 = new ESM_Radio();
@@ -93,8 +92,8 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
                             .setExpirationThreshold(60*30)
-                            .setTitle("General Survey (3/11)")
-                            .setInstructions("I am a careful listener.")
+                            .setTitle("General Survey (3/29)")
+                            .setInstructions("When I study, I feel like I am bursting with energy.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio4 = new ESM_Radio();
@@ -104,8 +103,8 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
                             .setExpirationThreshold(60*30)
-                            .setTitle("General Survey (4/11)")
-                            .setInstructions("I feel happy in this course.")
+                            .setTitle("General Survey (4/29)")
+                            .setInstructions("When studying I feel strong and vigorous.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio5 = new ESM_Radio();
@@ -114,9 +113,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (5/11)")
+                            .setTitle("General Survey (5/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I feel excited by the work done in this course.")
+                            .setInstructions("When I get up in the morning, I feel like going to class.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio6 = new ESM_Radio();
@@ -125,9 +124,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (6/11)")
+                            .setTitle("General Survey (6/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I like being at the lectures of this course.")
+                            .setInstructions("I find my studies to be full of meaning and purpose.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio7 = new ESM_Radio();
@@ -136,9 +135,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (7/11)")
+                            .setTitle("General Survey (7/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I am interested in the work done in this course.")
+                            .setInstructions("My studies inspire me.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio8 = new ESM_Radio();
@@ -147,9 +146,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (8/11)")
+                            .setTitle("General Survey (8/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I study at home for this course even when I don't have a test.")
+                            .setInstructions("I am enthusiastic about my studies.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio9 = new ESM_Radio();
@@ -158,9 +157,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (9/11)")
+                            .setTitle("General Survey (9/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I try to watch videos about things we are doing in this course.")
+                            .setInstructions("I am proud of my studies.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio10 = new ESM_Radio();
@@ -169,9 +168,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (10/11)")
+                            .setTitle("General Survey (10/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I read extra books to learn more about things we do in this course.")
+                            .setInstructions("I find my studies challenging.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio11 = new ESM_Radio();
@@ -180,9 +179,207 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("General Survey (11/11)")
+                            .setTitle("General Survey (11/29)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I don't feel bored in this course.")
+                            .setInstructions("Time flies when I'm studying.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio12 = new ESM_Radio();
+                    esmRadio12.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (12/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("When I am studying, I forget everything else around me.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio13 = new ESM_Radio();
+                    esmRadio13.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (13/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I feel happy when I am studying intensively.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio14 = new ESM_Radio();
+                    esmRadio14.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (14/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I can get carried away by my studies.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio15 = new ESM_Radio();
+                    esmRadio15.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (15/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I pay attention in class.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio16 = new ESM_Radio();
+                    esmRadio16.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (16/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("IWhen I am in class I behave as if it was my job.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio17 = new ESM_Radio();
+                    esmRadio17.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (17/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I follow the school's rules.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio18 = new ESM_Radio();
+                    esmRadio18.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (18/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I have problems with some teachers in school.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio19 = new ESM_Radio();
+                    esmRadio19.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (19/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I feel happy at this school.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio20 = new ESM_Radio();
+                    esmRadio20.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (20/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I don't feel very accomplished at this school.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio21 = new ESM_Radio();
+                    esmRadio21.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (21/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I feel excited by the school work.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio22 = new ESM_Radio();
+                    esmRadio22.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (22/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I like being at school.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio23 = new ESM_Radio();
+                    esmRadio23.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (23/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I am interested in the school work.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio24 = new ESM_Radio();
+                    esmRadio24.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (24/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("My classroom is an interesting place to be.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio25 = new ESM_Radio();
+                    esmRadio25.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (25/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("When I read a book, I question myself to make sure I understand the subject I’m reading about.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio26 = new ESM_Radio();
+                    esmRadio26.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (26/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I study at home even when I do not have assessment tests.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio27 = new ESM_Radio();
+                    esmRadio27.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (27/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I try to watch TV programs on subjects that we are talking about in class.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio28 = new ESM_Radio();
+                    esmRadio28.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (28/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I check my homework to correct for errors.")
+                            .setSubmitButton("Next");
+
+                    ESM_Radio esmRadio29 = new ESM_Radio();
+                    esmRadio29.addRadio("Strongly Agree")
+                            .addRadio("Agree")
+                            .addRadio("Neutral")
+                            .addRadio("Disagree")
+                            .addRadio("Strongly Disagree")
+                            .setTitle("General Survey (29/29)")
+                            .setExpirationThreshold(60*30)
+                            .setInstructions("I read other books or materials to learn more about the subjects we discuss in class.")
                             .setSubmitButton("Done");
 
 
@@ -197,78 +394,30 @@ public class SurveysActivity extends AppCompatActivity {
                     factory1.addESM(esmRadio9);
                     factory1.addESM(esmRadio10);
                     factory1.addESM(esmRadio11);
+                    factory1.addESM(esmRadio12);
+                    factory1.addESM(esmRadio13);
+                    factory1.addESM(esmRadio14);
+                    factory1.addESM(esmRadio15);
+                    factory1.addESM(esmRadio16);
+                    factory1.addESM(esmRadio17);
+                    factory1.addESM(esmRadio18);
+                    factory1.addESM(esmRadio19);
+                    factory1.addESM(esmRadio20);
+                    factory1.addESM(esmRadio21);
+                    factory1.addESM(esmRadio22);
+                    factory1.addESM(esmRadio23);
+                    factory1.addESM(esmRadio24);
+                    factory1.addESM(esmRadio25);
+                    factory1.addESM(esmRadio26);
+                    factory1.addESM(esmRadio27);
+                    factory1.addESM(esmRadio28);
+                    factory1.addESM(esmRadio29);
+
 
                     ESM.queueESM(getApplicationContext(), factory1.build());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                awareIntent = new Intent(getApplicationContext(), Aware.class);
-//                startService(awareIntent);
-//
-//                Aware.setSetting(getApplicationContext(), Aware_Preferences.STATUS_ESM, true);
-//
-//
-//                String generalEsmString = "[{'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'1. This course is interesting to me.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':1, 'esm_scale_max':5, 'esm_scale_start':1, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'1 (strongly disagree)', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'2. This course is useful for my future life and career.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'3. I am a careful listener.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'4. I feel happy in this course.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'5. I feel excited by the work done in this course.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'6. I like being at the lectures of this course.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'7. I am interested in the work done in this course.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'8. I study at home even when I do not have a test.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'9. I watch videos about things we are doing in this course.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'10. I read extra books for this course.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Next', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}," +
-//                        " {'esm': {'esm_type':" + ESM.TYPE_ESM_SCALE + ", 'esm_title':'11. I do not feel bored in this course.', 'esm_instructions':'Slide to the appropriate value on the scale:', 'esm_scale_min':0, 'esm_scale_max':5, 'esm_scale_start':0, 'esm_scale_max_label':'5 (strongly agree)', 'esm_scale_min_label':'0', 'esm_scale_step':1, 'esm_submit':'Done', 'esm_expiration_threshold':120, 'esm_trigger':'AWARE Tester'}}]";
-//
-//                //Queue the ESM to be displayed when possible
-//                Intent esm = new Intent(ESM.ACTION_AWARE_QUEUE_ESM);
-//                esm.putExtra(ESM.EXTRA_ESM, generalEsmString);
-//                sendBroadcast(esm);
-//
-                String[] tableColumns = {"timestamp", "esm_status", "esm_user_answer"};
-                String[] tableArguments = {};
-                Cursor data = getContentResolver().query(ESM_Provider.ESM_Data.CONTENT_URI, tableColumns, "",tableArguments,"");
-//
-//                ArrayList<String> questions = new ArrayList<String>();
-//                while(data.moveToNext()){
-//                    timestampFirst = data.getDouble(data.getColumnIndex("timestamp"));
-//                    System.out.println(timestampFirst);
-//                }
-//
-//                data.moveToLast();
-//
-//                if(data.getCount() != 0){
-//                    for(int i = 1; i<=11; i++){
-//                        questions.add(data.getString(data.getColumnIndex("esm_user_answer")));
-//                        data.moveToPrevious();
-//                    }
-//
-//                    GeneralSurveyClass generalSurvey = new GeneralSurveyClass();
-//                    generalSurvey._timestamp = timestampFirst;
-//                    generalSurvey._android_id = androidID;
-//                    generalSurvey._username = "";
-//                    generalSurvey._question11 = questions.get(0);
-//                    generalSurvey._question10 = questions.get(1);
-//                    generalSurvey._question9 = questions.get(2);
-//                    generalSurvey._question8 = questions.get(3);
-//                    generalSurvey._question7 = questions.get(4);
-//                    generalSurvey._question6 = questions.get(5);
-//                    generalSurvey._question5 = questions.get(6);
-//                    generalSurvey._question4 = questions.get(7);
-//                    generalSurvey._question3 = questions.get(8);
-//                    generalSurvey._question2 = questions.get(9);
-//                    generalSurvey._question1 = questions.get(10);
-//
-//                    dbHandler.addGeneralSurvey(generalSurvey);
-//
-//                }
-//                System.out.println("database");
-//                for(GeneralSurveyClass gen: dbHandler.getAllGeneralSurveys()){
-//                    System.out.println(gen._question1+", "+ gen._question2+", "+gen._question3+", "+gen._question4+", "+
-//                            gen._question5+", "+gen._question6+", "+gen._question7+", "+gen._question8+", "+
-//                            gen._question9+", "+gen._question10+", "+gen._question11);
-//                }
-
             }
         });
 
@@ -308,9 +457,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("Post Lecture Survey (1/7)")
+                            .setTitle("Post Lecture Survey (1/6)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I am interested in the topic explained in this lecture.")
+                            .setInstructions("I was happy in this lecture.")
                             .setSubmitButton("Next");
 
 
@@ -321,8 +470,8 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
                             .setExpirationThreshold(60*30)
-                            .setTitle("Post Lecture Survey (2/7)")
-                            .setInstructions("I felt happy in this lecture.")
+                            .setTitle("Post Lecture Survey (2/6)")
+                            .setInstructions("I didn't feel very accomplished in this lecture.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio3 = new ESM_Radio();
@@ -332,8 +481,8 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
                             .setExpirationThreshold(60*30)
-                            .setTitle("Post Lecture Survey (3/7)")
-                            .setInstructions("I liked being at this lecture.")
+                            .setTitle("Post Lecture Survey (3/6)")
+                            .setInstructions("I felt excited by the vork in this lecture.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio4 = new ESM_Radio();
@@ -343,8 +492,8 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
                             .setExpirationThreshold(60*30)
-                            .setTitle("Post Lecture Survey (4/7)")
-                            .setInstructions("I didn't feel bored during this lecture.")
+                            .setTitle("Post Lecture Survey (4/6)")
+                            .setInstructions("I liked being at this lecture.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio5 = new ESM_Radio();
@@ -353,9 +502,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("Post Lecture Survey (5/7)")
+                            .setTitle("Post Lecture Survey (5/6)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I think the teacher was engaged during this lecture.")
+                            .setInstructions("I am interested in the work done in this lecture.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio6 = new ESM_Radio();
@@ -364,33 +513,33 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Neutral")
                             .addRadio("Disagree")
                             .addRadio("Strongly Disagree")
-                            .setTitle("Post Lecture Survey (6/7)")
+                            .setTitle("Post Lecture Survey (6/6)")
                             .setExpirationThreshold(60*30)
-                            .setInstructions("I think the teacher felt confident with the topic he/she explained.")
-                            .setSubmitButton("Next");
+                            .setInstructions("My classroom is an interesting place to be.")
+                            .setSubmitButton("Done");
 
-                    ESM_QuickAnswer esmQuickAnswerDone = new ESM_QuickAnswer();
-                    esmQuickAnswerDone.addQuickAnswer("Exit")
-                            .setNotificationTimeout(60 * 4)
-                            .setInstructions("Thank you very much for your participation! You earned 7 chocolates");
-
-
-                    ESM_Freetext esmFreeText = new ESM_Freetext();
-                    esmFreeText.setTitle("Post Lecture Survey (7/7)")
-                            .setSubmitButton("Done")
-                            .setExpirationThreshold(60*30)
-                            .setInstructions("Please describe the moment(s) during which you felt particularly engaged")
-                            .addFlow("Cancle", esmQuickAnswerDone.build());
-
-
-                    ESM_QuickAnswer esmQuickAnswer = new ESM_QuickAnswer();
-                    esmQuickAnswer.addQuickAnswer("Yes")
-                            .addQuickAnswer("No")
-                            .setExpirationThreshold(60*30)
-                            .setTitle("Post Lecture Survey (7/7)")
-                            .setInstructions("Did you feel particularly engaged in one or more moments during the lecture?")
-                            .addFlow("Yes", esmFreeText.build())
-                            .addFlow("No", esmQuickAnswerDone.build());
+//                    ESM_QuickAnswer esmQuickAnswerDone = new ESM_QuickAnswer();
+//                    esmQuickAnswerDone.addQuickAnswer("Exit")
+//                            .setNotificationTimeout(60 * 30)
+//                            .setInstructions("Thank you very much for your participation! You earned 7 chocolates");
+//
+//
+//                    ESM_Freetext esmFreeText = new ESM_Freetext();
+//                    esmFreeText.setTitle("Post Lecture Survey (7/7)")
+//                            .setSubmitButton("Done")
+//                            .setExpirationThreshold(60*30)
+//                            .setInstructions("Please describe the moment(s) during which you felt particularly engaged")
+//                            .addFlow("Cancle", esmQuickAnswerDone.build());
+//
+//
+//                    ESM_QuickAnswer esmQuickAnswer = new ESM_QuickAnswer();
+//                    esmQuickAnswer.addQuickAnswer("Yes")
+//                            .addQuickAnswer("No")
+//                            .setExpirationThreshold(60*30)
+//                            .setTitle("Post Lecture Survey (7/7)")
+//                            .setInstructions("Did you feel particularly engaged in one or more moments during the lecture?")
+//                            .addFlow("Yes", esmFreeText.build())
+//                            .addFlow("No", esmQuickAnswerDone.build());
 
                     factory3.addESM(esmRadio1);
                     factory3.addESM(esmRadio2);
@@ -398,8 +547,6 @@ public class SurveysActivity extends AppCompatActivity {
                     factory3.addESM(esmRadio4);
                     factory3.addESM(esmRadio5);
                     factory3.addESM(esmRadio6);
-                    factory3.addESM(esmQuickAnswer);
-
 
                     ESM.queueESM(getApplicationContext(), factory3.build());
                 } catch (JSONException e) {

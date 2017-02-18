@@ -14,10 +14,9 @@ public class ESMObserver extends ContentObserver{
     public ESMObserver(Handler handler) {
         super(handler);
     }
-    
-    public void onCreate(boolean selfChange){
-        this.onChange(selfChange, null);
 
+    public void onChange(boolean selfChange){
+        this.onChange(selfChange, null);
 
     }
 

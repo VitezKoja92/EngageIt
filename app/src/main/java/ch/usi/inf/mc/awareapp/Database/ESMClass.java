@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 public class ESMClass implements Serializable {
     public int _id;
+    public String _username;
     public double _timestamp;
     public String _device_id;
     public String _esm_json;

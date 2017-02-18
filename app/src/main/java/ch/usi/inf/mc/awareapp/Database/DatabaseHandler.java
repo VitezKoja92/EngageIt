@@ -60,6 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     //ESM Table column names
+    //private static final String USERNAME = "Username";
     private static final String TIMESTAMP = "Timestamp";
     private static final String DEVICE_ID = "Device_id";
     private static final String ESM_JSON = "ESM_json";
@@ -103,6 +104,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_ESM_TABLE = "CREATE TABLE "+TABLE_ESM +
                 "(" +
                 _ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                USERNAME + " TEXT," +
                 TIMESTAMP + " REAL," +
                 DEVICE_ID + " TEXT," +
                 ESM_JSON + " TEXT," +
@@ -216,6 +218,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             ContentValues values = new ContentValues();
 
             values.put(_ID, esm._id);
+            values.put(USERNAME, esm._username);
             values.put(TIMESTAMP, esm._timestamp);
             values.put(DEVICE_ID, esm._device_id);
             values.put(ESM_JSON, esm._esm_json);
@@ -324,6 +327,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     ESMClass esm = new ESMClass();
 
                     esm._id= cursor.getInt(cursor.getColumnIndex(_ID));
+                    esm._username = cursor.getString(cursor.getColumnIndex(USERNAME));
                     esm._timestamp= cursor.getDouble(cursor.getColumnIndex(TIMESTAMP));
                     esm._device_id= cursor.getString(cursor.getColumnIndex(DEVICE_ID));
                     esm._esm_json = cursor.getString(cursor.getColumnIndex(ESM_JSON));
@@ -387,7 +391,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     //Method for updating ESM
-    public void updateESM(int id, double timestamp, String device_id, String esm_json, String esm_status, String expiration_threshold,
+    public void updateESM(int id, String username, double timestamp, String device_id, String esm_json, String esm_status, String expiration_threshold,
                           String notification_timeout, double answer_timestamp, String user_answer, String trigger){
 
         SQLiteDatabase db = getWritableDatabase();
@@ -395,7 +399,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         try{
             db.beginTransaction();
             db.execSQL("UPDATE " + TABLE_ESM +
-                    " SET Timestamp='"+ timestamp +"', Device_id='"+device_id+"', ESM_json='"+esm_json+"', ESM_status='"+esm_status+
+                    " SET Timestamp='"+ timestamp +"', Username='"+username+"', Device_id='"+device_id+"', ESM_json='"+esm_json+"', ESM_status='"+esm_status+
                     "', ESM_expiration_threshold='"+expiration_threshold+"', ESM_notification_timeout='"+notification_timeout+
                     "', Double_ESM_user_answer_timestamp='"+answer_timestamp+"', ESM_user_answer='"+user_answer+"', ESM_trigger='"+trigger+
                     "' WHERE _id ='"+id+"';");
