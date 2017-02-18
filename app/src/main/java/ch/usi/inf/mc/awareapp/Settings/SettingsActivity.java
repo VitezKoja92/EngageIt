@@ -165,8 +165,8 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UserData.Username = "/";
-                finish();
-                System.exit(0);
+                Intent i =new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(i);
             }
         });
 

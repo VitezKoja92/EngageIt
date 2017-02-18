@@ -62,9 +62,11 @@
     <string name="logout">Logout</string>
 
     <string-array name="courses">
-        <item>Information Security</item>
+        <item>Linear Algebra</item>
+        <item>Programming Fundamentals</item>
         <item>Cyber Communication</item>
-        <item>Software Architecture</item>
+        <item>Information Security</item>
+        <item>Software Architecture and Design</item>
     </string-array>
 
 </resources>

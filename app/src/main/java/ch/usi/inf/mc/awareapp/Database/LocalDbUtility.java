@@ -9,7 +9,7 @@ import static android.R.attr.data;
  */
 
 public class LocalDbUtility {
-    private final static int DATA_TABLES_COUNT = 8;
+    private final static int DATA_TABLES_COUNT = 1;
 
     public static int getDataTablesCount() {
         return DATA_TABLES_COUNT;

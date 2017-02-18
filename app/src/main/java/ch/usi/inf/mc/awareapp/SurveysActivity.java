@@ -61,6 +61,7 @@ public class SurveysActivity extends AppCompatActivity {
 
                     ESMFactory factory1 = new ESMFactory();
 
+
                     ESM_Radio esmRadio1 = new ESM_Radio();
                     esmRadio1.addRadio("Strongly Agree")
                             .addRadio("Agree")
@@ -70,7 +71,9 @@ public class SurveysActivity extends AppCompatActivity {
                             .setTitle("General Survey (1/11)")
                             .setExpirationThreshold(60*30)
                             .setInstructions("This course is interesting to me.")
-                            .setSubmitButton("Next");
+                            .setSubmitButton("Next")
+                            .setCancelable(false);
+
 
                     ESM_Radio esmRadio2 = new ESM_Radio();
                     esmRadio2.addRadio("Strongly Agree")

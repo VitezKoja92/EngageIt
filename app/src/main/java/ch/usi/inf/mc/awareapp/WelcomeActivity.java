@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -31,7 +32,9 @@ import java.util.Map;
 
 import ch.usi.inf.mc.awareapp.Courses.MyScheduler;
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
+import ch.usi.inf.mc.awareapp.Database.LocalDbUtility;
 import ch.usi.inf.mc.awareapp.Database.LocalStorageController;
+import ch.usi.inf.mc.awareapp.Database.LocalTables;
 import ch.usi.inf.mc.awareapp.Database.RegistrationClass;
 import ch.usi.inf.mc.awareapp.Database.SQLiteController;
 import ch.usi.inf.mc.awareapp.Database.UserData;
@@ -59,7 +62,7 @@ public class WelcomeActivity extends Activity {
     SimpleDateFormat dayFormat;
     String androidID;
     SwitchDriveController switchDriveController;
-    SQLiteController sqLiteController;
+    SQLiteController localController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,24 +74,54 @@ public class WelcomeActivity extends Activity {
 
 
         //Join AWARE and Aware study
-        Intent startAware = new Intent(getApplicationContext(), Aware.class);
-        startService(startAware);
+//        Intent startAware = new Intent(getApplicationContext(), Aware.class);
+//        startService(startAware);
         Aware.startESM(this);
         Aware.startScheduler(this);
 
-        Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
-        Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
-        sendBroadcast(sync);
+//        Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
+//        Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
+//        sendBroadcast(sync);
 
+
+        /* REMOTE STORAGE - BEGIN*/
 
         //Remote storing of the data
         switchDriveController = new SwitchDriveController(getString(R.string.server_address), getString(R.string.token), getString(R.string.password));
-        sqLiteController = new SQLiteController(getApplicationContext());
-
-//        Uploader uploader = new Uploader(androidID, switchDriveController, sqLiteController);
-//        uploader.upload();
+        localController = new SQLiteController(getApplicationContext());
 
 
+        //number of tables
+        int nbTableToClean = LocalTables.values().length;
+        int i = 0;
+        Cursor c;
+        //current table to clean
+        LocalTables currTable;
+        String fileName;
+
+        while(i < nbTableToClean) {
+            currTable = LocalTables.values()[i];
+            //build name of file to upload
+            fileName = buildFileName(currTable);
+
+            //get all data currently in the table
+            c = getRecords(currTable);
+
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+
+                //upload the data to the server
+                int response = switchDriveController.upload(fileName, toCSV(c, currTable));
+
+                //if the file was put, delete records and update the arrays
+                if (response >= 200 && response <= 207) {
+                    //delete from the db the records where id > startId and id <= endId !!!!!!!!!!!
+                } else {
+                    Log.d("DATA UPLOAD SERVICE", "Owncould's response: " + Integer.toString(response));
+                }
+            }
+            i++;
+        }
 
         dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         calendar = Calendar.getInstance();
@@ -101,8 +134,8 @@ public class WelcomeActivity extends Activity {
             scheduler.createFirstPAM(UserData.SelectedCourses, this);
             scheduler.createSecondPAM(UserData.SelectedCourses, this);
             scheduler.createThirdPAM(UserData.SelectedCourses, this);
-//            scheduler.createFirstPostLectureESM(this,UserData.SelectedCourses, weekday);
-//            scheduler.createSecondPostLectureESM(this,UserData.SelectedCourses, weekday);
+            scheduler.createFirstPostLectureESM(this,UserData.SelectedCourses);
+            scheduler.createSecondPostLectureESM(this,UserData.SelectedCourses);
         }
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
@@ -159,6 +192,51 @@ public class WelcomeActivity extends Activity {
                 startActivity(i);
             }
         });
+    }
+
+
+
+    //Methods for making remote storage works
+    private String toCSV(Cursor records, LocalTables table) {
+        String csv = "";
+        String[] columns = LocalDbUtility.getTableColumns(table);
+
+        for(int i = 0; i < columns.length; i++) {
+            csv += columns[i] + ",";
+        }
+        csv = csv.substring(0, csv.length()-1);
+        csv += "\n";
+        do {
+            for(int i = 0; i < columns.length; i++) {
+                csv += records.getString(i) + ",";
+            }
+            csv = csv.substring(0, csv.length()-1);
+            csv += "\n";
+        } while(records.moveToNext());
+        csv = csv.substring(0, csv.length()-1);
+        return csv;
+    }
+
+
+    private String buildFileName(LocalTables table) {
+        //get current date
+        String today = buildDate();
+        return androidID + "_" + today + "_" + LocalDbUtility.getTableName(table) + "_" + UserData.Username + ".csv";
+    }
+
+
+    private String buildDate() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("MM-dd-yyyy");
+        return mdformat.format(calendar.getTime());
+    }
+
+
+
+    private Cursor getRecords(LocalTables table) {
+        String query = "SELECT * FROM " + LocalDbUtility.getTableName(table);
+//                " WHERE " + LocalDbUtility.getTableColumns(table)[0] + " > " + Integer.toString(getRecordId(table));
+        return localController.rawQuery(query, null);
     }
 
 }

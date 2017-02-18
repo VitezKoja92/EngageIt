@@ -31,14 +31,14 @@ public class SwitchDriveController implements RemoteStorageController {
     @Override
     public int upload(String fileName, String data) {
         new DataUploadTask(serverAddress, accessToken).execute(fileName, data);
-
+        doneSignal = new CountDownLatch(1);
         try {
             doneSignal.await();
         } catch (InterruptedException e) {
 //            e.printStackTrace();
             httpResponse = -1;
         }
-        doneSignal = new CountDownLatch(1);
+
         return httpResponse;
     }
 
@@ -80,21 +80,20 @@ public class SwitchDriveController implements RemoteStorageController {
                 conn.getOutputStream().close();
                 httpStatus = conn.getResponseCode();
             } catch (Exception e) {
-
                 httpStatus = -1;
             }
 
+            httpResponse = httpStatus;
+            doneSignal.countDown();
             return httpStatus;
         }
 
         @Override
         protected void onPostExecute(Integer result) {
-            httpResponse = result;
-            doneSignal.countDown();
+
         }
     }
 }
-
 
 
 

@@ -43,8 +43,8 @@ public class AddProfileActivity extends AppCompatActivity {
     RadioGroup genderGroup;
     RadioGroup studyLevelGroup;
     private ProgressDialog progressDialog;
-    String gender;
-    String studyLevel;
+    String gender = "";
+    String studyLevel = "";
     Boolean registrationDone = false;
     String SERIALNumber;
     DatabaseHandler dbHandler;
@@ -52,6 +52,7 @@ public class AddProfileActivity extends AppCompatActivity {
     EditText usernameField;
     ArrayList<Integer> selectedCourses;
     String selectedCoursesString = "";
+    String username;
 
 
 
@@ -73,6 +74,7 @@ public class AddProfileActivity extends AppCompatActivity {
 
             /* Defining Age spinner */
         ArrayList<String> ages = new ArrayList<>();
+        ages.add("");
         ages.add("17 - 25");
         ages.add("26 - 35");
         ages.add("36 - 45");
@@ -86,6 +88,7 @@ public class AddProfileActivity extends AppCompatActivity {
 
             /* Defining Faculty spinner */
         ArrayList<String> faculties = new ArrayList<>();
+        faculties.add("");
         faculties.add("The Academy of Architecture");
         faculties.add("Communication Sciences");
         faculties.add("Economics");
@@ -101,17 +104,20 @@ public class AddProfileActivity extends AppCompatActivity {
 
             /* Defining Course list */
 
-
+        selectedCourses = new ArrayList<Integer>();
         chooseCourse = (Button)findViewById(R.id.courseDialogBtn);
         chooseCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //dialog
-                selectedCourses = new ArrayList<Integer>();
+                final boolean[] checkedCourses = new boolean[5];
+                for(int course: selectedCourses){
+                    checkedCourses[course] = true;
+                }
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(AddProfileActivity.this);
                 builder.setTitle("Choose your courses")
-                        .setMultiChoiceItems(R.array.courses, null, new DialogInterface.OnMultiChoiceClickListener() {
+                        .setMultiChoiceItems(R.array.courses, checkedCourses, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                                 if(isChecked){
@@ -148,6 +154,7 @@ public class AddProfileActivity extends AppCompatActivity {
                 } else if (checkedId == R.id.f_radio_button) {
                     Toast.makeText(getApplicationContext(), "Your choice: Female", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
@@ -178,11 +185,24 @@ public class AddProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //validation
+                username= usernameField.getText().toString();
+                if(username.equals("")){
+                    Toast.makeText(getApplicationContext(), "Enter the username!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 //Gender
                 if (genderGroup.getCheckedRadioButtonId() == R.id.m_radio_button) {
                     gender = "Male";
-                } else {
+                } else if(genderGroup.getCheckedRadioButtonId() == R.id.f_radio_button) {
                     gender = "Female";
+                }
+
+                //Gender validation
+                if(gender.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select your gender!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 //StudyLevel
@@ -196,6 +216,12 @@ public class AddProfileActivity extends AppCompatActivity {
                     studyLevel = "Other";
                 }
 
+                //Study level validation
+                if(studyLevel.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select level of your studies!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 //                registrationDone = true;
 
                 //CurrentDate - Timestamp
@@ -205,33 +231,67 @@ public class AddProfileActivity extends AppCompatActivity {
                 //Other data
                 String age = ageSpinner.getSelectedItem().toString();
                 String faculty = facultySpinner.getSelectedItem().toString();
-                String username =  usernameField.getText().toString();
+
+                //Age validation
+                if(age.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select your age!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Faculties validation
+                if(faculty.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select your faculty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
 
                 for(int course: selectedCourses){
+
                     switch (course){
                         case 0:
                             if(selectedCoursesString.equals("")){
-                                selectedCoursesString += "Information Security";
+                                selectedCoursesString += "Linear Algebra";
                             }else{
-                                selectedCoursesString += ", Information Security";
+                                selectedCoursesString += ", Linear Algebra";
                             }
                             break;
                         case 1:
+                            if(selectedCoursesString.equals("")){
+                                selectedCoursesString += "Programming Fundamentals";
+                            }else{
+                                selectedCoursesString += ", Programming Fundamentals";
+                            }
+                            break;
+                        case 2:
                             if(selectedCoursesString.equals("")){
                                 selectedCoursesString += "Cyber Communication";
                             }else{
                                 selectedCoursesString += ", Cyber Communication";
                             }
                             break;
-                        case 2:
+                        case 3:
                             if(selectedCoursesString.equals("")){
-                                selectedCoursesString += "Software Architecture";
+                                selectedCoursesString += "Information Security";
                             }else{
-                                selectedCoursesString += ", Software Architecture";
+                                selectedCoursesString += ", Information Security";
+                            }
+                            break;
+                        case 4:
+                            if(selectedCoursesString.equals("")){
+                                selectedCoursesString += "Software Architecture and Design";
+                            }else{
+                                selectedCoursesString += ", Software Architecture and Design";
                             }
                             break;
                     }
                 }
+
+                //Courses validation
+                if(selectedCoursesString.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select the courses you are attending!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 System.out.println("Selected courses: " +selectedCoursesString);
 
                 //Get registration with current username
@@ -269,6 +329,7 @@ public class AddProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onResume() {

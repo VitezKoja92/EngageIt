@@ -83,6 +83,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             /* Defining Age spinner */
         ArrayList<String> ages = new ArrayList<>();
+        ages.add("");
         ages.add("17 - 25");
         ages.add("26 - 35");
         ages.add("36 - 45");
@@ -100,6 +101,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
             /* Defining Faculty spinner */
         ArrayList<String> faculties = new ArrayList<>();
+        faculties.add("");
         faculties.add("The Academy of Architecture");
         faculties.add("Communication Sciences");
         faculties.add("Economics");
@@ -118,30 +120,36 @@ public class EditProfileActivity extends AppCompatActivity {
 
         /* Defining Course list */
         selectedCourses = new ArrayList<Integer>();
-        final boolean[] checkedCourses = new boolean[4];
-        if(registration._courses.contains("Mobile Computing")){
+        final boolean[] checkedCourses = new boolean[5];
+        if(registration._courses.contains("Linear Algebra")){
             checkedCourses[0] = true;
             selectedCourses.add(0);
         }else{
             checkedCourses[0] = false;
         }
-        if(registration._courses.contains("Software Quality")){
+        if(registration._courses.contains("Programming Fundamentals")){
             selectedCourses.add(1);
             checkedCourses[1] = true;
         }else{
             checkedCourses[1] = false;
         }
-        if(registration._courses.contains("Data Analytics")){
+        if(registration._courses.contains("Cyber Communication")){
             selectedCourses.add(2);
             checkedCourses[2] = true;
         }else{
             checkedCourses[2] = false;
         }
-        if(registration._courses.contains("Cyber Communication")){
+        if(registration._courses.contains("Information Security")){
             selectedCourses.add(3);
             checkedCourses[3] = true;
         }else{
             checkedCourses[3] = false;
+        }
+        if(registration._courses.contains("Software Architecture and Design")){
+            selectedCourses.add(4);
+            checkedCourses[4] = true;
+        }else{
+            checkedCourses[4] = false;
         }
         System.out.println("Selected courses: "+selectedCourses);
 
@@ -243,8 +251,14 @@ public class EditProfileActivity extends AppCompatActivity {
                 //Gender
                 if (genderGroup.getCheckedRadioButtonId() == R.id.m_radio_button) {
                     gender = "Male";
-                } else {
+                } else if(genderGroup.getCheckedRadioButtonId() == R.id.f_radio_button){
                     gender = "Female";
+                }
+
+                //Gender validation
+                if(gender.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select your gender!", Toast.LENGTH_SHORT).show();
+                    return;
                 }
 
                 //StudyLevel
@@ -258,6 +272,12 @@ public class EditProfileActivity extends AppCompatActivity {
                     studyLevel = "Other";
                 }
 
+                //Study level validation
+                if(studyLevel.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select level of your studies!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
 //                registrationDone = true;
 
                 //CurrentDate - Timestamp
@@ -268,33 +288,64 @@ public class EditProfileActivity extends AppCompatActivity {
                 String age = ageSpinner.getSelectedItem().toString();
                 String faculty = facultySpinner.getSelectedItem().toString();
 
+                //Age validation
+                if(age.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select your age!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Faculties validation
+                if(faculty.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select your faculty!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 for(int course: selectedCourses){
+
                     switch (course){
                         case 0:
                             if(selectedCoursesString.equals("")){
-                                selectedCoursesString += "Information Security";
+                                selectedCoursesString += "Linear Algebra";
                             }else{
-                                selectedCoursesString += ", Information Security";
+                                selectedCoursesString += ", Linear Algebra";
                             }
                             break;
                         case 1:
+                            if(selectedCoursesString.equals("")){
+                                selectedCoursesString += "Programming Fundamentals";
+                            }else{
+                                selectedCoursesString += ", Programming Fundamentals";
+                            }
+                            break;
+                        case 2:
                             if(selectedCoursesString.equals("")){
                                 selectedCoursesString += "Cyber Communication";
                             }else{
                                 selectedCoursesString += ", Cyber Communication";
                             }
                             break;
-                        case 2:
+                        case 3:
                             if(selectedCoursesString.equals("")){
-                                selectedCoursesString += "Software Architecture";
+                                selectedCoursesString += "Information Security";
                             }else{
-                                selectedCoursesString += ", Software Architecture";
+                                selectedCoursesString += ", Information Security";
+                            }
+                            break;
+                        case 4:
+                            if(selectedCoursesString.equals("")){
+                                selectedCoursesString += "Software Architecture and Design";
+                            }else{
+                                selectedCoursesString += ", Software Architecture and Design";
                             }
                             break;
                     }
                 }
                 System.out.println("Selected courses: " +selectedCoursesString);
 
+                //Courses validation
+                if(selectedCoursesString.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select the courses you are attending!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 //Get registration with current username
                 dbHandler.updateRegistration(age,gender, faculty, studyLevel, selectedCoursesString,true, true, UserData.Username,currentDateAndTime);
