@@ -46,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i  = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         //EditYourProfile button is initially disabled
@@ -77,6 +78,7 @@ public class SettingsActivity extends AppCompatActivity {
                         if(enteredPassword.equals(adminPassword)){
                             Intent i = new Intent(getApplicationContext(), ChooseOtherProfilesActivity.class);
                             startActivity(i);
+                            finish();
                         }else{
                             Toast.makeText(getApplicationContext(), "Error - wrong admin password! Try again!", Toast.LENGTH_SHORT).show();
                         };
@@ -119,6 +121,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                                 Intent i = new Intent(getApplicationContext(), AddProfileActivity.class);
                                 startActivity(i);
+                                finish();
                             }else{
                                 Toast.makeText(getApplicationContext(), "Error - wrong admin password! Try again!", Toast.LENGTH_SHORT).show();
                             };
@@ -135,6 +138,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }else{
                     Intent i = new Intent(getApplicationContext(), AddProfileActivity.class);
                     startActivity(i);
+                    finish();
                 }
 
             }
@@ -148,6 +152,7 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), TermsActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
@@ -167,11 +172,18 @@ public class SettingsActivity extends AppCompatActivity {
                 UserData.Username = "/";
                 Intent i =new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
 
 
 
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i =new Intent(getApplicationContext(), WelcomeActivity.class);
+        startActivity(i);
+        finish();
     }
 }

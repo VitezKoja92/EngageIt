@@ -72,7 +72,7 @@ public class TermsActivity extends AppCompatActivity{
 
                 Intent i =new Intent (getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
-                //finish();
+                finish();
             }
         });
 
@@ -108,7 +108,7 @@ public class TermsActivity extends AppCompatActivity{
 
                                 Intent i =new Intent(getApplicationContext(), WelcomeActivity.class);
                                 startActivity(i);
-                                //finish();
+                                finish();
                             }
                         })
                         .setNegativeButton(R.string.refuse_nok, new DialogInterface.OnClickListener() {
@@ -124,6 +124,13 @@ public class TermsActivity extends AppCompatActivity{
                 refuseDialog.show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i =new Intent(getApplicationContext(), WelcomeActivity.class);
+        startActivity(i);
+        finish();
     }
 
     @Override

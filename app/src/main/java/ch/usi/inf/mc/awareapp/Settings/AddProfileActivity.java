@@ -333,10 +333,11 @@ public class AddProfileActivity extends AppCompatActivity {
                 UserData.Username = username;
 
                 //General survey after the registration
-                createGeneralSurvey();
+//                createGeneralSurvey();
 
                 Intent i = new Intent(getApplicationContext(), TermsActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }

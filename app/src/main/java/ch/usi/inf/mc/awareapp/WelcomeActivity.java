@@ -182,6 +182,7 @@ public class WelcomeActivity extends Activity {
                 }else{
                     Intent i =new Intent (getApplicationContext(), SurveysActivity.class);
                     startActivity(i);
+//                    finish();
                 }
 
             }
@@ -197,6 +198,7 @@ public class WelcomeActivity extends Activity {
                 }else{
 //                    Intent i =new Intent (getApplicationContext(), YourDataActivity.class);
 //                    startActivity(i);
+//                    finish();
                 }
             }
         });
@@ -208,12 +210,20 @@ public class WelcomeActivity extends Activity {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
                 startActivity(i);
+                finish();
             }
         });
         /************** DEFINING BUTTONS - END **************/
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+//        System.exit(0);
+        finish();
+//        super.onBackPressed();
+    }
 
     //Methods for making remote storage works
     private String toCSV(Cursor records, LocalTables table) {

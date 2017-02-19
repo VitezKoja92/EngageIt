@@ -371,7 +371,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 //uncomment
                 Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
-//                //finish();
+                finish();
             }
         });
     }

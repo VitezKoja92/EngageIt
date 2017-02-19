@@ -557,5 +557,11 @@ public class SurveysActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i =new Intent(getApplicationContext(), WelcomeActivity.class);
+        startActivity(i);
+        finish();
+    }
 }
 

@@ -74,7 +74,8 @@ public class MyScheduler {
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
-                    .setNotificationTimeout(60*100);              //Timeout should be set so that PAM expires at 19:00
+                    .setNotificationTimeout(60*630);        //Timeout should be set so that PAM expires at 19:00
+                                                            //From 8:30 until 19:00 there is 630 minutes
 
             factory.addESM(q1);
 
@@ -244,7 +245,7 @@ public class MyScheduler {
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
-                    .setNotificationTimeout(60*100);              //Timeout should be set so that PAM expires at 19:00
+                    .setNotificationTimeout(60*630);              //Timeout should be set so that PAM expires at 19:00
             factory.addESM(q1);
 
             //Second PAM for Linear Algebra
@@ -413,7 +414,7 @@ public class MyScheduler {
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
-                    .setNotificationTimeout(60*100);              //Timeout should be set so that PAM expires at 19:00
+                    .setNotificationTimeout(60*630);              //Timeout should be set so that PAM expires at 19:00
             factory.addESM(q1);
 
 
@@ -583,28 +584,28 @@ public class MyScheduler {
             ESMFactory factory = new ESMFactory();
 
             ESM_Radio esmRadio1 = new ESM_Radio();
-            esmRadio1.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
+            esmRadio1.setNotificationTimeout(60 * 630)              //Timeout should be set so that FirstLectureESM expires at 19:00
                     .setInstructions("I was happy in this lecture.");
 
 
             ESM_Radio esmRadio2 = new ESM_Radio();
-            esmRadio2.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
+            esmRadio2.setNotificationTimeout(60 * 630)              //Timeout should be set so that FirstLectureESM expires at 19:00
                     .setInstructions("I didn't feel very accomplished in this lecture.");
 
             ESM_Radio esmRadio3 = new ESM_Radio();
-            esmRadio3.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
+            esmRadio3.setNotificationTimeout(60 * 630)              //Timeout should be set so that FirstLectureESM expires at 19:00
                     .setInstructions("I felt excited by the work in this lecture.");
 
             ESM_Radio esmRadio4 = new ESM_Radio();
-            esmRadio4.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
+            esmRadio4.setNotificationTimeout(60 * 630)              //Timeout should be set so that FirstLectureESM expires at 19:00
                     .setInstructions("I liked being at this lecture.");
 
             ESM_Radio esmRadio5 = new ESM_Radio();
-            esmRadio5.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
+            esmRadio5.setNotificationTimeout(60 * 630)              //Timeout should be set so that FirstLectureESM expires at 19:00
                     .setInstructions("I am interested in the work done in this lecture.");
 
             ESM_Radio esmRadio6 = new ESM_Radio();
-            esmRadio6.setNotificationTimeout(60 * 100)              //Timeout should be set so that FirstLectureESM expires at 19:00
+            esmRadio6.setNotificationTimeout(60 * 630)              //Timeout should be set so that FirstLectureESM expires at 19:00
                     .setInstructions("My classroom is an interesting place to be.");
 
 
@@ -853,28 +854,28 @@ public class MyScheduler {
             ESMFactory factory = new ESMFactory();
 
             ESM_Radio esmRadio1 = new ESM_Radio();
-            esmRadio1.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
+            esmRadio1.setNotificationTimeout(60 * 630)              //Timeout should be set so that SecondLectureESM expires at 19:00
                     .setInstructions("I was happy in this lecture.");
 
 
             ESM_Radio esmRadio2 = new ESM_Radio();
-            esmRadio2.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
+            esmRadio2.setNotificationTimeout(60 * 630)              //Timeout should be set so that SecondLectureESM expires at 19:00
                     .setInstructions("I didn't feel very accomplished in this lecture.");
 
             ESM_Radio esmRadio3 = new ESM_Radio();
-            esmRadio3.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
+            esmRadio3.setNotificationTimeout(60 * 630)              //Timeout should be set so that SecondLectureESM expires at 19:00
                     .setInstructions("I felt excited by the work in this lecture.");
 
             ESM_Radio esmRadio4 = new ESM_Radio();
-            esmRadio4.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
+            esmRadio4.setNotificationTimeout(60 * 630)              //Timeout should be set so that SecondLectureESM expires at 19:00
                     .setInstructions("I liked being at this lecture.");
 
             ESM_Radio esmRadio5 = new ESM_Radio();
-            esmRadio5.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
+            esmRadio5.setNotificationTimeout(60 * 630)              //Timeout should be set so that SecondLectureESM expires at 19:00
                     .setInstructions("I am interested in the work done in this lecture.");
 
             ESM_Radio esmRadio6 = new ESM_Radio();
-            esmRadio6.setNotificationTimeout(60 * 100)              //Timeout should be set so that SecondLectureESM expires at 19:00
+            esmRadio6.setNotificationTimeout(60 * 630)              //Timeout should be set so that SecondLectureESM expires at 19:00
                     .setInstructions("My classroom is an interesting place to be.");
 
 
