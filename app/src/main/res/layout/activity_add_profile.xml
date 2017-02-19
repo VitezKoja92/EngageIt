@@ -244,7 +244,7 @@
         android:id="@+id/separatorSeven"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:background="#ff3366"
         android:layout_below="@id/username"
         android:layout_marginTop="7dp"/>
 
