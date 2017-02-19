@@ -38,12 +38,19 @@
         <activity android:name=".PhotoGrid.PhotoGridActivity" />
 
         <receiver android:name=".PhotoGrid.GridReceiver" />
+        <receiver android:name=".Database.ESMObserver">
+            <intent-filter>
+                <action android:name="ACTION_AWARE_ESM_ANSWERED" />
+            </intent-filter>
+        </receiver>
 
         <activity android:name=".TermsActivity" />
         <activity android:name=".Settings.EditProfileActivity" />
         <activity android:name=".Settings.AddProfileActivity" />
         <activity android:name=".Settings.ChooseOtherProfilesActivity" />
         <activity android:name=".SurveysActivity"></activity>
+
+        <service android:name=".RemoteStorage.ESMUploader" />
     </application>
 
 </manifest>

@@ -1,2 +1,0 @@
-include ':aware-core', ':aware-phone', ':aware-tests'
-
