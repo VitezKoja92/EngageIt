@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class TermsActivity extends AppCompatActivity{
     Boolean termsAccepted =false;
     DatabaseHandler dbHandler;
     List<RegistrationClass> allRegs;
+    ImageButton goToWelcome;
 
 
     @Override
@@ -34,6 +36,20 @@ public class TermsActivity extends AppCompatActivity{
         setContentView(R.layout.activity_terms);
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
+
+        /* DEFINING HOME BUTTON - BEGIN*/
+
+        goToWelcome = (ImageButton)findViewById(R.id.welcome);
+        goToWelcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        /* DEFINING HOME BUTTON - END*/
+
 
         //Username from extras
         final String username = UserData.Username;

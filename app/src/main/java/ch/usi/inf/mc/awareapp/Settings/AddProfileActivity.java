@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -34,6 +35,7 @@ import ch.usi.inf.mc.awareapp.Database.RegistrationClass;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.R;
 import ch.usi.inf.mc.awareapp.TermsActivity;
+import ch.usi.inf.mc.awareapp.WelcomeActivity;
 
 public class AddProfileActivity extends AppCompatActivity {
 
@@ -59,6 +61,7 @@ public class AddProfileActivity extends AppCompatActivity {
     ArrayList<Integer> selectedCourses;
     String selectedCoursesString = "";
     String username;
+    ImageButton goToWelcome;
 
 
 
@@ -71,6 +74,19 @@ public class AddProfileActivity extends AppCompatActivity {
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+
+        /* DEFINING HOME BUTTON - BEGIN*/
+
+        goToWelcome = (ImageButton)findViewById(R.id.welcome);
+        goToWelcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        /* DEFINING HOME BUTTON - END*/
 
 
         /* DEFINING INPUTS - BEGIN*/

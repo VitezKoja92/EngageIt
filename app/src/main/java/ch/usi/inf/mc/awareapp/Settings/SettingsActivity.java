@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
@@ -29,6 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
     Button logoutBtn;
     final Context context = this;
     DatabaseHandler dbHandler;
+    ImageButton goToWelcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,19 @@ public class SettingsActivity extends AppCompatActivity {
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         System.out.println("Number of registrations: "+dbHandler.getAllRegistrations().size());
+
+        /* DEFINING HOME BUTTON - BEGIN*/
+
+        goToWelcome = (ImageButton)findViewById(R.id.welcome);
+        goToWelcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        /* DEFINING HOME BUTTON - END*/
 
 
         //Defining editProfile button

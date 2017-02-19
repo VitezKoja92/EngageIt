@@ -27,6 +27,7 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
     String androidID;
     ArrayList<String> usernameList;
     TextView usernameLabel;
+    ImageButton goToWelcome;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,18 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         usernameLabel = (TextView)findViewById(R.id.username_label);
 
+        /* DEFINING HOME BUTTON - BEGIN*/
+
+        goToWelcome = (ImageButton)findViewById(R.id.welcome);
+        goToWelcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        /* DEFINING HOME BUTTON - END*/
 
 
 

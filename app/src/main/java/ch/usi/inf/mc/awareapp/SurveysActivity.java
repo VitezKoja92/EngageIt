@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.aware.Aware;
 import com.aware.Aware_Preferences;
@@ -34,6 +35,7 @@ public class SurveysActivity extends AppCompatActivity {
     String androidID;
     Double timestampFirst;
     private Button pamBtn;
+    ImageButton goToWelcome;
 
 
     private Intent awareIntent;
@@ -50,6 +52,19 @@ public class SurveysActivity extends AppCompatActivity {
         generalQuestionnaireBtn = (Button) findViewById(R.id.general_survey_btn);
         postLectureBtn = (Button) findViewById(R.id.post_lecture_btn);
         pamBtn = (Button) findViewById(R.id.pam_survey_btn);
+
+        /* DEFINING HOME BUTTON - BEGIN*/
+
+        goToWelcome = (ImageButton)findViewById(R.id.welcome);
+        goToWelcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+        /* DEFINING HOME BUTTON - END*/
 
 
 
