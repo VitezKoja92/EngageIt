@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.os.Handler;
+import android.provider.Settings;
 
 import com.aware.ESM;
 import com.aware.providers.ESM_Provider;

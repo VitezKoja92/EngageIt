@@ -28,6 +28,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,9 +36,8 @@
         <activity android:name=".SurveyDataActivity" />
         <activity android:name=".WearableDataActivity" />
         <activity android:name=".Settings.SettingsActivity" />
-        <activity android:name=".PhotoGrid.PhotoGridActivity" />
 
-        <receiver android:name=".PhotoGrid.GridReceiver" />
+        <receiver android:name=".RemoteStorage.AlarmReceiver"/>
         <receiver android:name=".Database.ESMObserver">
             <intent-filter>
                 <action android:name="ACTION_AWARE_ESM_ANSWERED" />
@@ -51,6 +51,7 @@
         <activity android:name=".SurveysActivity"></activity>
 
         <service android:name=".RemoteStorage.ESMUploader" />
+        <service android:name=".RemoteStorage.AlarmService"/>
     </application>
 
 </manifest>

@@ -38,8 +38,9 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         usernameLabel = (TextView)findViewById(R.id.username_label);
 
-        /* DEFINING HOME BUTTON - BEGIN*/
 
+
+        /********** DEFINING HOME BUTTON **********/
         goToWelcome = (ImageButton)findViewById(R.id.welcome);
         goToWelcome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,12 +50,10 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
                 finish();
             }
         });
-        /* DEFINING HOME BUTTON - END*/
 
 
 
-
-        //Populate clickable list on click of the "Search" button
+        /********** DEFINING LIST OF PROFILES **********/
         profilesList = (ListView)findViewById(R.id.profiles_list);
         profilesList.setClickable(true);
 

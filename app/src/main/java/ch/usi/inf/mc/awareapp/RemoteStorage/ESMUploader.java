@@ -31,9 +31,9 @@ public class ESMUploader extends IntentService {
         String username = UserData.Username;
         String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
-        System.out.println("USERNAME: "+ username);
-        System.out.println("ANDROID_ID: "+ androidID);
-        System.out.println("JSON: "+ esm_JSON);
+//        System.out.println("USERNAME: "+ username);
+//        System.out.println("ANDROID_ID: "+ androidID);
+//        System.out.println("JSON: "+ esm_JSON);
 
         ESMClass esm = new ESMClass();
         esm._username = username;
@@ -41,6 +41,5 @@ public class ESMUploader extends IntentService {
         esm._esm_json = esm_JSON;
 
         dbHandler.addESM(esm);
-        //UPLOAD here
     }
 }

@@ -331,17 +331,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 do{
                     ESMClass esm = new ESMClass();
 
-//                    esm._id= cursor.getInt(cursor.getColumnIndex(_ID));
                     esm._username = cursor.getString(cursor.getColumnIndex(USERNAME));
-//                    esm._timestamp= cursor.getDouble(cursor.getColumnIndex(TIMESTAMP));
                     esm._android_id= cursor.getString(cursor.getColumnIndex(ANDROID_ID));
                     esm._esm_json = cursor.getString(cursor.getColumnIndex(ESM_JSON));
-//                    esm._esm_status= cursor.getInt(cursor.getColumnIndex(ESM_STATUS));
-//                    esm._esm_expiration_threshold= cursor.getInt(cursor.getColumnIndex(ESM_EXPIRATION_THRESHOLD));
-//                    esm._esm_notification_timeout= cursor.getInt(cursor.getColumnIndex(ESM_NOTIFICATION_TIMEOUT));
-//                    esm._double_esm_user_answer_timestamp= cursor.getDouble(cursor.getColumnIndex(DOUBLE_ESM_USER_ANSWER_TIMESTAMP));
-//                    esm._esm_user_answer= cursor.getString(cursor.getColumnIndex(ESM_USER_ANSWER));
-//                    esm._esm_trigger = cursor.getString(cursor.getColumnIndex(ESM_TRIGGER));
 
                     esmsList.add(esm);
                 }while(cursor.moveToNext());
@@ -412,6 +404,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.endTransaction();
         }
 
+    }
+
+    public void deleteESM(){
+        SQLiteDatabase db = getWritableDatabase();
+
+        try{
+            db.beginTransaction();
+            db.execSQL("DELETE FROM "+TABLE_ESM+";");
+            db.setTransactionSuccessful();
+        }catch (SQLException e){
+            Log.d(TAG, "Error while trying to delete record from ESMTable");
+        }finally {
+            db.endTransaction();
+        }
     }
 
     private void insertRecords(SQLiteDatabase db, String tableName, List<ContentValues> records) {

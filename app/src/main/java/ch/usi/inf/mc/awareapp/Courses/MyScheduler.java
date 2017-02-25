@@ -26,37 +26,34 @@ public class MyScheduler {
     DatabaseHandler dbHandler;
 
 
-
-
-
     /* Creation of the courses - BEGIN */
 
 
     //Linear Algebra on Monday and  Wednesday from 8:30 until 10:15
-    public Weekday mondayLA = new Weekday(11, 9, "Saturday");             //Exact schedule should be Monday 8:30
-    public Weekday wednesdayLA = new Weekday(10, 31, "Saturday");       //Exact schedule should be Wednesday 8:30
+    public Weekday mondayLA = new Weekday(8, 30, "Monday");             //Exact schedule should be Monday 8:30
+    public Weekday wednesdayLA = new Weekday(8, 30, "Monday");       //Exact schedule should be Wednesday 8:30
     public Course LinearAlgebra = new Course(mondayLA, wednesdayLA, "Linear Algebra");
 
     //Programming Fundamentals on Monday, Wednesday and Friday from 10:30 until 12:15
-    public Weekday mondayPF = new Weekday(10, 27, "Saturday");            //Exact schedule should be Monday 10:30
-    public Weekday wednesdayPF = new Weekday(10, 32, "Saturday");      //Exact schedule should be Wednesday 10:30
-    public Weekday fridayPF = new Weekday(10, 36, "Saturday");            //Exact schedule should be Friday 10:30
+    public Weekday mondayPF = new Weekday(10, 30, "Monday");            //Exact schedule should be Monday 10:30
+    public Weekday wednesdayPF = new Weekday(10, 30, "Wednesday");      //Exact schedule should be Wednesday 10:30
+    public Weekday fridayPF = new Weekday(10, 30, "Friday");            //Exact schedule should be Friday 10:30
     public Course ProgrammingFundamentals = new Course(mondayPF, wednesdayPF,fridayPF, "Programming Fundamentals");
 
     //Cyber Communication on Tuesday, Wednesday and Thursday from 10:30 until 12:15
-    public Weekday tuesdayCC = new Weekday(10, 28, "Saturday");          //Exact schedule should be Tuesday 10:30
-    public Weekday wednesdayCC = new Weekday(10, 33, "Saturday");      //Exact schedule should be Wednesday 10:30
-    public Weekday thursdayCC = new Weekday(10, 37, "Saturday");        //Exact schedule should be Thursday 10:30
+    public Weekday tuesdayCC = new Weekday(10, 30, "Tuesday");          //Exact schedule should be Tuesday 10:30
+    public Weekday wednesdayCC = new Weekday(10, 30, "Wednesday");      //Exact schedule should be Wednesday 10:30
+    public Weekday thursdayCC = new Weekday(10, 30, "Thursday");        //Exact schedule should be Thursday 10:30
     public Course CyberCommunication = new Course(tuesdayCC, wednesdayCC,thursdayCC, "Cyber Communication");
 
     //Information Security on Monday from 13:30 until 17:15
-    public Weekday mondayInf1 = new Weekday(10, 29, "Saturday");          //Exact schedule should be Monday 13:30
-    public Weekday mondayInf2 = new Weekday(10, 34, "Saturday");          //Exact schedule should be Monday 15:30
+    public Weekday mondayInf1 = new Weekday(13, 30, "Monday");          //Exact schedule should be Monday 13:30
+    public Weekday mondayInf2 = new Weekday(15, 30, "Monday");          //Exact schedule should be Monday 15:30
     public Course InformationSecurity = new Course(mondayInf1, mondayInf2, "Information Security");
 
     //Software Architecture on Tuesday and Thursday from 13:30 until 17:15
-    public Weekday tuesdaySAD = new Weekday(10, 30, "Saturday");         //Exact schedule should be Tuesday 13:30
-    public Weekday thursdaySAD = new Weekday(10, 35, "Saturday");       //Exact schedule should be Thursday 13:30
+    public Weekday tuesdaySAD = new Weekday(13, 30, "Tuesday");         //Exact schedule should be Tuesday 13:30
+    public Weekday thursdaySAD = new Weekday(13, 30, "Thursday");       //Exact schedule should be Thursday 13:30
     public Course SoftwareArchitecture = new Course(tuesdaySAD, thursdaySAD, "Software Architecture and Design");
 
     /* Creation of the courses - END */
@@ -74,8 +71,7 @@ public class MyScheduler {
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
-                    .setNotificationTimeout(60*630);        //Timeout should be set so that PAM expires at 19:00
-                                                            //From 8:30 until 19:00 there is 630 minutes
+                    .setNotificationTimeout(60*20);        //First PAM stays active until 15 min after the beginning of the lecture
 
             factory.addESM(q1);
 
@@ -85,7 +81,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule first_pam1 = new com.aware.utils.Scheduler.Schedule("first_pam1"+UserData.Username);
                     first_pam1.addHour(LinearAlgebra.getDay1().Hour);
-                    first_pam1.addMinute(LinearAlgebra.getDay1().Minute);
+                    first_pam1.addMinute(LinearAlgebra.getDay1().Minute - 5);
                     first_pam1.addWeekday(LinearAlgebra.getDay1().Day);
 
                     first_pam1.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -95,7 +91,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam2 = new com.aware.utils.Scheduler.Schedule("first_pam2"+UserData.Username);
                     first_pam2.addHour(LinearAlgebra.getDay2().Hour);
-                    first_pam2.addMinute(LinearAlgebra.getDay2().Minute);
+                    first_pam2.addMinute(LinearAlgebra.getDay2().Minute - 5);
                     first_pam2.addWeekday(LinearAlgebra.getDay2().Day);
 
                     first_pam2.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -111,7 +107,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule first_pam3 = new com.aware.utils.Scheduler.Schedule("first_pam3"+UserData.Username);
                     first_pam3.addHour(ProgrammingFundamentals.getDay1().Hour);
-                    first_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute);
+                    first_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute - 5);
                     first_pam3.addWeekday(ProgrammingFundamentals.getDay1().Day);
 
                     first_pam3.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -121,7 +117,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam4 = new com.aware.utils.Scheduler.Schedule("first_pam4"+UserData.Username);
                     first_pam4.addHour(ProgrammingFundamentals.getDay2().Hour);
-                    first_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute);
+                    first_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute - 5);
                     first_pam4.addWeekday(ProgrammingFundamentals.getDay2().Day);
 
                     first_pam4.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -131,7 +127,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam5 = new com.aware.utils.Scheduler.Schedule("first_pam5"+UserData.Username);
                     first_pam5.addHour(ProgrammingFundamentals.getDay3().Hour);
-                    first_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute);
+                    first_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute - 5);
                     first_pam5.addWeekday(ProgrammingFundamentals.getDay3().Day);
 
                     first_pam5.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -147,7 +143,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule first_pam6 = new com.aware.utils.Scheduler.Schedule("first_pam6"+UserData.Username);
                     first_pam6.addHour(CyberCommunication.getDay1().Hour);
-                    first_pam6.addMinute(CyberCommunication.getDay1().Minute);
+                    first_pam6.addMinute(CyberCommunication.getDay1().Minute - 5);
                     first_pam6.addWeekday(CyberCommunication.getDay1().Day);
 
                     first_pam6.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -157,7 +153,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam7 = new com.aware.utils.Scheduler.Schedule("first_pam7"+UserData.Username);
                     first_pam7.addHour(CyberCommunication.getDay2().Hour);
-                    first_pam7.addMinute(CyberCommunication.getDay2().Minute);
+                    first_pam7.addMinute(CyberCommunication.getDay2().Minute - 5);
                     first_pam7.addWeekday(CyberCommunication.getDay2().Day);
 
                     first_pam7.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -167,7 +163,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam8 = new com.aware.utils.Scheduler.Schedule("first_pam8"+UserData.Username);
                     first_pam8.addHour(CyberCommunication.getDay3().Hour);
-                    first_pam8.addMinute(CyberCommunication.getDay3().Minute);
+                    first_pam8.addMinute(CyberCommunication.getDay3().Minute - 5);
                     first_pam8.addWeekday(CyberCommunication.getDay3().Day);
 
                     first_pam8.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -183,7 +179,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule first_pam9 = new com.aware.utils.Scheduler.Schedule("first_pam9"+UserData.Username);
                     first_pam9.addHour(InformationSecurity.getDay1().Hour);
-                    first_pam9.addMinute(InformationSecurity.getDay1().Minute);
+                    first_pam9.addMinute(InformationSecurity.getDay1().Minute - 5);
                     first_pam9.addWeekday(InformationSecurity.getDay1().Day);
 
                     first_pam9.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -193,7 +189,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam10 = new com.aware.utils.Scheduler.Schedule("first_pam10"+UserData.Username);
                     first_pam10.addHour(InformationSecurity.getDay2().Hour);
-                    first_pam10.addMinute(InformationSecurity.getDay2().Minute);
+                    first_pam10.addMinute(InformationSecurity.getDay2().Minute - 5);
                     first_pam10.addWeekday(InformationSecurity.getDay2().Day);
 
                     first_pam10.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -210,7 +206,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")) {
                     com.aware.utils.Scheduler.Schedule first_pam11 = new com.aware.utils.Scheduler.Schedule("first_pam11" + UserData.Username);
                     first_pam11.addHour(SoftwareArchitecture.getDay1().Hour);
-                    first_pam11.addMinute(SoftwareArchitecture.getDay1().Minute);
+                    first_pam11.addMinute(SoftwareArchitecture.getDay1().Minute - 5);
                     first_pam11.addWeekday(SoftwareArchitecture.getDay1().Day);
 
                     first_pam11.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -220,7 +216,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam12 = new com.aware.utils.Scheduler.Schedule("first_pam12" + UserData.Username);
                     first_pam12.addHour(SoftwareArchitecture.getDay2().Hour);
-                    first_pam12.addMinute(SoftwareArchitecture.getDay2().Minute);
+                    first_pam12.addMinute(SoftwareArchitecture.getDay2().Minute - 5);
                     first_pam12.addWeekday(SoftwareArchitecture.getDay2().Day);
 
                     first_pam12.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -245,7 +241,7 @@ public class MyScheduler {
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
-                    .setNotificationTimeout(60*630);              //Timeout should be set so that PAM expires at 19:00
+                    .setNotificationTimeout(60*630);              //Second PAM reamins active until 19:00
             factory.addESM(q1);
 
             //Second PAM for Linear Algebra
@@ -254,7 +250,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule second_pam1 = new com.aware.utils.Scheduler.Schedule("second_pam1"+UserData.Username);
                     second_pam1.addHour(LinearAlgebra.getDay1().Hour);
-                    second_pam1.addMinute(LinearAlgebra.getDay1().Minute+1);
+                    second_pam1.addMinute(LinearAlgebra.getDay1().Minute + 35);
                     second_pam1.addWeekday(LinearAlgebra.getDay1().Day);
 
                     second_pam1.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -264,7 +260,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule second_pam2 = new com.aware.utils.Scheduler.Schedule("second_pam2"+UserData.Username);
                     second_pam2.addHour(LinearAlgebra.getDay2().Hour);
-                    second_pam2.addMinute(LinearAlgebra.getDay2().Minute);
+                    second_pam2.addMinute(LinearAlgebra.getDay2().Minute + 35);
                     second_pam2.addWeekday(LinearAlgebra.getDay2().Day);
 
                     second_pam2.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -280,7 +276,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule second_pam3 = new com.aware.utils.Scheduler.Schedule("second_pam3"+UserData.Username);
                     second_pam3.addHour(ProgrammingFundamentals.getDay1().Hour);
-                    second_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute);
+                    second_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute + 35);
                     second_pam3.addWeekday(ProgrammingFundamentals.getDay1().Day);
 
                     second_pam3.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -290,7 +286,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule second_pam4 = new com.aware.utils.Scheduler.Schedule("second_pam4"+UserData.Username);
                     second_pam4.addHour(ProgrammingFundamentals.getDay2().Hour);
-                    second_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute);
+                    second_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute + 35);
                     second_pam4.addWeekday(ProgrammingFundamentals.getDay2().Day);
 
                     second_pam4.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -300,7 +296,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule second_pam5 = new com.aware.utils.Scheduler.Schedule("second_pam5"+UserData.Username);
                     second_pam5.addHour(ProgrammingFundamentals.getDay3().Hour);
-                    second_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute);
+                    second_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute + 35);
                     second_pam5.addWeekday(ProgrammingFundamentals.getDay3().Day);
 
                     second_pam5.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -316,7 +312,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule second_pam6 = new com.aware.utils.Scheduler.Schedule("second_pam6"+UserData.Username);
                     second_pam6.addHour(CyberCommunication.getDay1().Hour);
-                    second_pam6.addMinute(CyberCommunication.getDay1().Minute);
+                    second_pam6.addMinute(CyberCommunication.getDay1().Minute + 35);
                     second_pam6.addWeekday(CyberCommunication.getDay1().Day);
 
                     second_pam6.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -326,7 +322,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule second_pam7 = new com.aware.utils.Scheduler.Schedule("second_pam7"+UserData.Username);
                     second_pam7.addHour(CyberCommunication.getDay2().Hour);
-                    second_pam7.addMinute(CyberCommunication.getDay2().Minute);
+                    second_pam7.addMinute(CyberCommunication.getDay2().Minute + 35);
                     second_pam7.addWeekday(CyberCommunication.getDay2().Day);
 
                     second_pam7.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -336,7 +332,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule second_pam8 = new com.aware.utils.Scheduler.Schedule("second_pam8"+UserData.Username);
                     second_pam8.addHour(CyberCommunication.getDay3().Hour);
-                    second_pam8.addMinute(CyberCommunication.getDay3().Minute);
+                    second_pam8.addMinute(CyberCommunication.getDay3().Minute + 35);
                     second_pam8.addWeekday(CyberCommunication.getDay3().Day);
 
                     second_pam8.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -352,7 +348,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule second_pam9 = new com.aware.utils.Scheduler.Schedule("second_pam9"+UserData.Username);
                     second_pam9.addHour(InformationSecurity.getDay1().Hour);
-                    second_pam9.addMinute(InformationSecurity.getDay1().Minute);
+                    second_pam9.addMinute(InformationSecurity.getDay1().Minute + 35);
                     second_pam9.addWeekday(InformationSecurity.getDay1().Day);
 
                     second_pam9.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -362,7 +358,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule second_pam10 = new com.aware.utils.Scheduler.Schedule("second_pam10"+UserData.Username);
                     second_pam10.addHour(InformationSecurity.getDay2().Hour);
-                    second_pam10.addMinute(InformationSecurity.getDay2().Minute);
+                    second_pam10.addMinute(InformationSecurity.getDay2().Minute + 35);
                     second_pam10.addWeekday(InformationSecurity.getDay2().Day);
 
                     second_pam10.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -379,7 +375,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")) {
                     com.aware.utils.Scheduler.Schedule second_pam11 = new com.aware.utils.Scheduler.Schedule("second_pam11" + UserData.Username);
                     second_pam11.addHour(SoftwareArchitecture.getDay1().Hour);
-                    second_pam11.addMinute(SoftwareArchitecture.getDay1().Minute);
+                    second_pam11.addMinute(SoftwareArchitecture.getDay1().Minute + 35);
                     second_pam11.addWeekday(SoftwareArchitecture.getDay1().Day);
 
                     second_pam11.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -389,7 +385,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule first_pam12 = new com.aware.utils.Scheduler.Schedule("first_pam12" + UserData.Username);
                     first_pam12.addHour(SoftwareArchitecture.getDay2().Hour);
-                    first_pam12.addMinute(SoftwareArchitecture.getDay2().Minute);
+                    first_pam12.addMinute(SoftwareArchitecture.getDay2().Minute + 35);
                     first_pam12.addWeekday(SoftwareArchitecture.getDay2().Day);
 
                     first_pam12.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -414,7 +410,7 @@ public class MyScheduler {
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
-                    .setNotificationTimeout(60*630);              //Timeout should be set so that PAM expires at 19:00
+                    .setNotificationTimeout(60*630);              //Third PAM reamins active until 19:00
             factory.addESM(q1);
 
 
@@ -424,7 +420,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule third_pam1 = new com.aware.utils.Scheduler.Schedule("third_pam1"+UserData.Username);
                     third_pam1.addHour(LinearAlgebra.getDay1().Hour);
-                    third_pam1.addMinute(LinearAlgebra.getDay1().Minute +4);
+                    third_pam1.addMinute(LinearAlgebra.getDay1().Minute + 95);
                     third_pam1.addWeekday(LinearAlgebra.getDay1().Day);
 
                     third_pam1.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -434,7 +430,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule third_pam2 = new com.aware.utils.Scheduler.Schedule("third_pam2"+UserData.Username);
                     third_pam2.addHour(LinearAlgebra.getDay2().Hour);
-                    third_pam2.addMinute(LinearAlgebra.getDay2().Minute);
+                    third_pam2.addMinute(LinearAlgebra.getDay2().Minute + 95);
                     third_pam2.addWeekday(LinearAlgebra.getDay2().Day);
 
                     third_pam2.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -450,7 +446,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule third_pam3 = new com.aware.utils.Scheduler.Schedule("third_pam3"+UserData.Username);
                     third_pam3.addHour(ProgrammingFundamentals.getDay1().Hour);
-                    third_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute);
+                    third_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute + 95);
                     third_pam3.addWeekday(ProgrammingFundamentals.getDay1().Day);
 
                     third_pam3.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -460,7 +456,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule third_pam4 = new com.aware.utils.Scheduler.Schedule("third_pam4"+UserData.Username);
                     third_pam4.addHour(ProgrammingFundamentals.getDay2().Hour);
-                    third_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute);
+                    third_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute + 95);
                     third_pam4.addWeekday(ProgrammingFundamentals.getDay2().Day);
 
                     third_pam4.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -470,7 +466,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule third_pam5 = new com.aware.utils.Scheduler.Schedule("third_pam5"+UserData.Username);
                     third_pam5.addHour(ProgrammingFundamentals.getDay3().Hour);
-                    third_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute);
+                    third_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute + 95);
                     third_pam5.addWeekday(ProgrammingFundamentals.getDay3().Day);
 
                     third_pam5.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -486,7 +482,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule third_pam6 = new com.aware.utils.Scheduler.Schedule("third_pam6"+UserData.Username);
                     third_pam6.addHour(CyberCommunication.getDay1().Hour);
-                    third_pam6.addMinute(CyberCommunication.getDay1().Minute);
+                    third_pam6.addMinute(CyberCommunication.getDay1().Minute + 95);
                     third_pam6.addWeekday(CyberCommunication.getDay1().Day);
 
                     third_pam6.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -496,7 +492,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule third_pam7 = new com.aware.utils.Scheduler.Schedule("third_pam7"+UserData.Username);
                     third_pam7.addHour(CyberCommunication.getDay2().Hour);
-                    third_pam7.addMinute(CyberCommunication.getDay2().Minute);
+                    third_pam7.addMinute(CyberCommunication.getDay2().Minute + 95);
                     third_pam7.addWeekday(CyberCommunication.getDay2().Day);
 
                     third_pam7.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -506,7 +502,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule third_pam8 = new com.aware.utils.Scheduler.Schedule("third_pam8"+UserData.Username);
                     third_pam8.addHour(CyberCommunication.getDay3().Hour);
-                    third_pam8.addMinute(CyberCommunication.getDay3().Minute);
+                    third_pam8.addMinute(CyberCommunication.getDay3().Minute + 95);
                     third_pam8.addWeekday(CyberCommunication.getDay3().Day);
 
                     third_pam8.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -522,7 +518,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")){
                     com.aware.utils.Scheduler.Schedule third_pam9 = new com.aware.utils.Scheduler.Schedule("third_pam9"+UserData.Username);
                     third_pam9.addHour(InformationSecurity.getDay1().Hour);
-                    third_pam9.addMinute(InformationSecurity.getDay1().Minute);
+                    third_pam9.addMinute(InformationSecurity.getDay1().Minute + 95);
                     third_pam9.addWeekday(InformationSecurity.getDay1().Day);
 
                     third_pam9.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -532,7 +528,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule third_pam10 = new com.aware.utils.Scheduler.Schedule("third_pam10"+UserData.Username);
                     third_pam10.addHour(InformationSecurity.getDay2().Hour);
-                    third_pam10.addMinute(InformationSecurity.getDay2().Minute);
+                    third_pam10.addMinute(InformationSecurity.getDay2().Minute + 95);
                     third_pam10.addWeekday(InformationSecurity.getDay2().Day);
 
                     third_pam10.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -549,7 +545,7 @@ public class MyScheduler {
                 if(!UserData.Username.equals("/")) {
                     com.aware.utils.Scheduler.Schedule third_pam11 = new com.aware.utils.Scheduler.Schedule("third_pam11" + UserData.Username);
                     third_pam11.addHour(SoftwareArchitecture.getDay1().Hour);
-                    third_pam11.addMinute(SoftwareArchitecture.getDay1().Minute);
+                    third_pam11.addMinute(SoftwareArchitecture.getDay1().Minute + 95);
                     third_pam11.addWeekday(SoftwareArchitecture.getDay1().Day);
 
                     third_pam11.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -559,7 +555,7 @@ public class MyScheduler {
 
                     com.aware.utils.Scheduler.Schedule third_pam12 = new com.aware.utils.Scheduler.Schedule("third_pam12" + UserData.Username);
                     third_pam12.addHour(SoftwareArchitecture.getDay2().Hour);
-                    third_pam12.addMinute(SoftwareArchitecture.getDay2().Minute);
+                    third_pam12.addMinute(SoftwareArchitecture.getDay2().Minute + 95);
                     third_pam12.addWeekday(SoftwareArchitecture.getDay2().Day);
 
                     third_pam12.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
@@ -661,7 +657,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture1 = new com.aware.utils.Scheduler.Schedule("first_post_lecture1" + UserData.Username);
                     first_post_lecture1.addWeekday(LinearAlgebra.getDay1().Day);
                     first_post_lecture1.addHour(LinearAlgebra.getDay1().Hour);
-                    first_post_lecture1.addMinute(LinearAlgebra.getDay1().Minute + 2);
+                    first_post_lecture1.addMinute(LinearAlgebra.getDay1().Minute + 35);
 
                     first_post_lecture1.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture1.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -671,7 +667,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture2 = new com.aware.utils.Scheduler.Schedule("first_post_lecture2" + UserData.Username);
                     first_post_lecture2.addWeekday(LinearAlgebra.getDay2().Day);
                     first_post_lecture2.addHour(LinearAlgebra.getDay2().Hour);
-                    first_post_lecture2.addMinute(LinearAlgebra.getDay2().Minute);
+                    first_post_lecture2.addMinute(LinearAlgebra.getDay2().Minute + 35);
 
                     first_post_lecture2.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture2.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -695,7 +691,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture3 = new com.aware.utils.Scheduler.Schedule("first_post_lecture3" + UserData.Username);
                     first_post_lecture3.addWeekday(ProgrammingFundamentals.getDay1().Day);
                     first_post_lecture3.addHour(ProgrammingFundamentals.getDay1().Hour);
-                    first_post_lecture3.addMinute(ProgrammingFundamentals.getDay1().Minute);
+                    first_post_lecture3.addMinute(ProgrammingFundamentals.getDay1().Minute + 35);
 
                     first_post_lecture3.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture3.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -705,7 +701,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture4 = new com.aware.utils.Scheduler.Schedule("first_post_lecture4" + UserData.Username);
                     first_post_lecture4.addWeekday(ProgrammingFundamentals.getDay2().Day);
                     first_post_lecture4.addHour(ProgrammingFundamentals.getDay2().Hour);
-                    first_post_lecture4.addMinute(ProgrammingFundamentals.getDay2().Minute);
+                    first_post_lecture4.addMinute(ProgrammingFundamentals.getDay2().Minute + 35);
 
                     first_post_lecture4.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture4.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -715,7 +711,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture5 = new com.aware.utils.Scheduler.Schedule("first_post_lecture5" + UserData.Username);
                     first_post_lecture5.addWeekday(ProgrammingFundamentals.getDay3().Day);
                     first_post_lecture5.addHour(ProgrammingFundamentals.getDay3().Hour);
-                    first_post_lecture5.addMinute(ProgrammingFundamentals.getDay3().Minute);
+                    first_post_lecture5.addMinute(ProgrammingFundamentals.getDay3().Minute + 35);
 
                     first_post_lecture5.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture5.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -738,7 +734,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture6 = new com.aware.utils.Scheduler.Schedule("first_post_lecture6" + UserData.Username);
                     first_post_lecture6.addWeekday(CyberCommunication.getDay1().Day);
                     first_post_lecture6.addHour(CyberCommunication.getDay1().Hour);
-                    first_post_lecture6.addMinute(CyberCommunication.getDay1().Minute);
+                    first_post_lecture6.addMinute(CyberCommunication.getDay1().Minute + 35);
 
                     first_post_lecture6.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture6.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -748,7 +744,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture7 = new com.aware.utils.Scheduler.Schedule("first_post_lecture7" + UserData.Username);
                     first_post_lecture7.addWeekday(CyberCommunication.getDay2().Day);
                     first_post_lecture7.addHour(CyberCommunication.getDay2().Hour);
-                    first_post_lecture7.addMinute(CyberCommunication.getDay2().Minute);
+                    first_post_lecture7.addMinute(CyberCommunication.getDay2().Minute + 35);
 
                     first_post_lecture7.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture7.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -758,7 +754,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture8 = new com.aware.utils.Scheduler.Schedule("first_post_lecture8" + UserData.Username);
                     first_post_lecture8.addWeekday(CyberCommunication.getDay3().Day);
                     first_post_lecture8.addHour(CyberCommunication.getDay3().Hour);
-                    first_post_lecture8.addMinute(CyberCommunication.getDay3().Minute);
+                    first_post_lecture8.addMinute(CyberCommunication.getDay3().Minute + 35);
 
                     first_post_lecture8.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture8.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -782,7 +778,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture9 = new com.aware.utils.Scheduler.Schedule("first_post_lecture9" + UserData.Username);
                     first_post_lecture9.addWeekday(InformationSecurity.getDay1().Day);
                     first_post_lecture9.addHour(InformationSecurity.getDay1().Hour);
-                    first_post_lecture9.addMinute(InformationSecurity.getDay1().Minute);
+                    first_post_lecture9.addMinute(InformationSecurity.getDay1().Minute + 35);
 
                     first_post_lecture9.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture9.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -792,7 +788,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture10 = new com.aware.utils.Scheduler.Schedule("first_post_lecture10" + UserData.Username);
                     first_post_lecture10.addWeekday(InformationSecurity.getDay2().Day);
                     first_post_lecture10.addHour(InformationSecurity.getDay2().Hour);
-                    first_post_lecture10.addMinute(InformationSecurity.getDay2().Minute);
+                    first_post_lecture10.addMinute(InformationSecurity.getDay2().Minute + 35);
 
                     first_post_lecture10.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture10.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -816,7 +812,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture11 = new com.aware.utils.Scheduler.Schedule("first_post_lecture11" + UserData.Username);
                     first_post_lecture11.addWeekday(SoftwareArchitecture.getDay1().Day);
                     first_post_lecture11.addHour(SoftwareArchitecture.getDay1().Hour);
-                    first_post_lecture11.addMinute(SoftwareArchitecture.getDay1().Minute);
+                    first_post_lecture11.addMinute(SoftwareArchitecture.getDay1().Minute + 35);
 
                     first_post_lecture11.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture11.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -826,7 +822,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule first_post_lecture12 = new com.aware.utils.Scheduler.Schedule("first_post_lecture12" + UserData.Username);
                     first_post_lecture12.addWeekday(SoftwareArchitecture.getDay2().Day);
                     first_post_lecture12.addHour(SoftwareArchitecture.getDay2().Hour);
-                    first_post_lecture12.addMinute(SoftwareArchitecture.getDay2().Minute);
+                    first_post_lecture12.addMinute(SoftwareArchitecture.getDay2().Minute + 35);
 
                     first_post_lecture12.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     first_post_lecture12.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -930,7 +926,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture1 = new com.aware.utils.Scheduler.Schedule("second_post_lecture1" + UserData.Username);
                     second_post_lecture1.addWeekday(LinearAlgebra.getDay1().Day);
                     second_post_lecture1.addHour(LinearAlgebra.getDay1().Hour);
-                    second_post_lecture1.addMinute(LinearAlgebra.getDay1().Minute + 4);
+                    second_post_lecture1.addMinute(LinearAlgebra.getDay1().Minute + 95);
 
                     second_post_lecture1.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture1.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -940,7 +936,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture2 = new com.aware.utils.Scheduler.Schedule("second_post_lecture2" + UserData.Username);
                     second_post_lecture2.addWeekday(LinearAlgebra.getDay2().Day);
                     second_post_lecture2.addHour(LinearAlgebra.getDay2().Hour);
-                    second_post_lecture2.addMinute(LinearAlgebra.getDay2().Minute);
+                    second_post_lecture2.addMinute(LinearAlgebra.getDay2().Minute + 95);
 
                     second_post_lecture2.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture2.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -964,7 +960,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture3 = new com.aware.utils.Scheduler.Schedule("second_post_lecture3" + UserData.Username);
                     second_post_lecture3.addWeekday(ProgrammingFundamentals.getDay1().Day);
                     second_post_lecture3.addHour(ProgrammingFundamentals.getDay1().Hour);
-                    second_post_lecture3.addMinute(ProgrammingFundamentals.getDay1().Minute);
+                    second_post_lecture3.addMinute(ProgrammingFundamentals.getDay1().Minute + 95);
 
                     second_post_lecture3.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture3.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -974,7 +970,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture4 = new com.aware.utils.Scheduler.Schedule("second_post_lecture4" + UserData.Username);
                     second_post_lecture4.addWeekday(ProgrammingFundamentals.getDay2().Day);
                     second_post_lecture4.addHour(ProgrammingFundamentals.getDay2().Hour);
-                    second_post_lecture4.addMinute(ProgrammingFundamentals.getDay2().Minute);
+                    second_post_lecture4.addMinute(ProgrammingFundamentals.getDay2().Minute + 95);
 
                     second_post_lecture4.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture4.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -984,7 +980,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture5 = new com.aware.utils.Scheduler.Schedule("second_post_lecture5" + UserData.Username);
                     second_post_lecture5.addWeekday(ProgrammingFundamentals.getDay3().Day);
                     second_post_lecture5.addHour(ProgrammingFundamentals.getDay3().Hour);
-                    second_post_lecture5.addMinute(ProgrammingFundamentals.getDay3().Minute);
+                    second_post_lecture5.addMinute(ProgrammingFundamentals.getDay3().Minute + 95);
 
                     second_post_lecture5.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture5.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -1007,7 +1003,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture6 = new com.aware.utils.Scheduler.Schedule("second_post_lecture6" + UserData.Username);
                     second_post_lecture6.addWeekday(CyberCommunication.getDay1().Day);
                     second_post_lecture6.addHour(CyberCommunication.getDay1().Hour);
-                    second_post_lecture6.addMinute(CyberCommunication.getDay1().Minute);
+                    second_post_lecture6.addMinute(CyberCommunication.getDay1().Minute + 95);
 
                     second_post_lecture6.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture6.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -1017,7 +1013,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture7 = new com.aware.utils.Scheduler.Schedule("second_post_lecture7" + UserData.Username);
                     second_post_lecture7.addWeekday(CyberCommunication.getDay2().Day);
                     second_post_lecture7.addHour(CyberCommunication.getDay2().Hour);
-                    second_post_lecture7.addMinute(CyberCommunication.getDay2().Minute);
+                    second_post_lecture7.addMinute(CyberCommunication.getDay2().Minute + 95);
 
                     second_post_lecture7.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture7.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -1027,7 +1023,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture8 = new com.aware.utils.Scheduler.Schedule("second_post_lecture8" + UserData.Username);
                     second_post_lecture8.addWeekday(CyberCommunication.getDay3().Day);
                     second_post_lecture8.addHour(CyberCommunication.getDay3().Hour);
-                    second_post_lecture8.addMinute(CyberCommunication.getDay3().Minute);
+                    second_post_lecture8.addMinute(CyberCommunication.getDay3().Minute + 95);
 
                     second_post_lecture8.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture8.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -1051,7 +1047,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture9 = new com.aware.utils.Scheduler.Schedule("second_post_lecture9" + UserData.Username);
                     second_post_lecture9.addWeekday(InformationSecurity.getDay1().Day);
                     second_post_lecture9.addHour(InformationSecurity.getDay1().Hour);
-                    second_post_lecture9.addMinute(InformationSecurity.getDay1().Minute);
+                    second_post_lecture9.addMinute(InformationSecurity.getDay1().Minute + 95);
 
                     second_post_lecture9.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture9.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -1061,7 +1057,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture10 = new com.aware.utils.Scheduler.Schedule("second_post_lecture10" + UserData.Username);
                     second_post_lecture10.addWeekday(InformationSecurity.getDay2().Day);
                     second_post_lecture10.addHour(InformationSecurity.getDay2().Hour);
-                    second_post_lecture10.addMinute(InformationSecurity.getDay2().Minute);
+                    second_post_lecture10.addMinute(InformationSecurity.getDay2().Minute + 95);
 
                     second_post_lecture10.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture10.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -1085,7 +1081,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture11 = new com.aware.utils.Scheduler.Schedule("second_post_lecture11" + UserData.Username);
                     second_post_lecture11.addWeekday(SoftwareArchitecture.getDay1().Day);
                     second_post_lecture11.addHour(SoftwareArchitecture.getDay1().Hour);
-                    second_post_lecture11.addMinute(SoftwareArchitecture.getDay1().Minute);
+                    second_post_lecture11.addMinute(SoftwareArchitecture.getDay1().Minute + 95);
 
                     second_post_lecture11.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture11.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
@@ -1095,7 +1091,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.Schedule second_post_lecture12 = new com.aware.utils.Scheduler.Schedule("second_post_lecture12" + UserData.Username);
                     second_post_lecture12.addWeekday(SoftwareArchitecture.getDay2().Day);
                     second_post_lecture12.addHour(SoftwareArchitecture.getDay2().Hour);
-                    second_post_lecture12.addMinute(SoftwareArchitecture.getDay2().Minute);
+                    second_post_lecture12.addMinute(SoftwareArchitecture.getDay2().Minute + 95);
 
                     second_post_lecture12.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
                     second_post_lecture12.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);

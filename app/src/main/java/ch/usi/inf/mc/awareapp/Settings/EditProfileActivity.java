@@ -39,14 +39,11 @@ public class EditProfileActivity extends AppCompatActivity {
     Spinner ageSpinner;
     Spinner facultySpinner;
     Button chooseCourse;
-    Spinner userPhoneSpinner;
     RadioGroup genderGroup;
     RadioGroup studyLevelGroup;
-    private ProgressDialog progressDialog;
     String gender;
     String studyLevel;
     Boolean registrationDone = false;
-    String SERIALNumber;
     DatabaseHandler dbHandler;
     String androidID;
     EditText usernameField;
@@ -67,6 +64,8 @@ public class EditProfileActivity extends AppCompatActivity {
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
+
+        /********** PICK CURRENT REGISTRATION **********/
         RegistrationClass registration = new RegistrationClass();
         for(RegistrationClass reg: dbHandler.getAllRegistrations()){
             if(reg._username.equals(UserData.Username)){
@@ -75,8 +74,9 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         }
 
-        /* DEFINING HOME BUTTON - BEGIN*/
 
+
+        /********** DEFINING HOME BUTTON **********/
         goToWelcome = (ImageButton)findViewById(R.id.welcome);
         goToWelcome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,17 +86,19 @@ public class EditProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
-        /* DEFINING HOME BUTTON - END*/
 
-        /* DEFINING INPUTS - BEGIN*/
 
-            /* Defining Username textfield - it should be disabled as user should not change it*/
+        /********** DEFINING USER INPUTS - BEGIN **********/
+
+        /* Defining Username text field */
         usernameField = (EditText)findViewById(R.id.username_field);
+        //Disabled
         usernameField.setEnabled(false);
         //set initial value of usernameField
         usernameField.setText(registration._username);
 
-            /* Defining Age spinner */
+
+        /*Age spinner */
         ArrayList<String> ages = new ArrayList<>();
         ages.add("");
         ages.add("17 - 25");
@@ -104,17 +106,16 @@ public class EditProfileActivity extends AppCompatActivity {
         ages.add("36 - 45");
         ages.add("46 - 100");
 
-
         ageSpinner = (Spinner) findViewById(R.id.age_spinner);
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, ages);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ageSpinner.setAdapter(adapter1);
-
         //set initial value of ageSpinner
         ageSpinner.setSelection(ages.indexOf(registration._age));
 
-            /* Defining Faculty spinner */
+
+        /* Faculty spinner */
         ArrayList<String> faculties = new ArrayList<>();
         faculties.add("");
         faculties.add("The Academy of Architecture");
@@ -132,8 +133,7 @@ public class EditProfileActivity extends AppCompatActivity {
         facultySpinner.setSelection(faculties.indexOf(registration._faculty));
 
 
-
-        /* Defining Course list */
+        /* Course list */
         selectedCourses = new ArrayList<Integer>();
         final boolean[] checkedCourses = new boolean[5];
         if(registration._courses.contains("Linear Algebra")){
@@ -166,15 +166,11 @@ public class EditProfileActivity extends AppCompatActivity {
         }else{
             checkedCourses[4] = false;
         }
-        System.out.println("Selected courses: "+selectedCourses);
 
         chooseCourse = (Button)findViewById(R.id.courseDialogBtn);
         chooseCourse.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //dialog
-
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
                 builder.setTitle("Choose your courses")
                         .setMultiChoiceItems(R.array.courses, checkedCourses, new DialogInterface.OnMultiChoiceClickListener() {
@@ -190,7 +186,6 @@ public class EditProfileActivity extends AppCompatActivity {
                         }).setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        System.out.println("Selected courses are: "+ selectedCourses);
                         dialog.dismiss();
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -203,8 +198,7 @@ public class EditProfileActivity extends AppCompatActivity {
         });
 
 
-
-            /* Gender RadioGroup */
+        /* Gender RadioGroup */
         genderGroup = (RadioGroup) findViewById(R.id.gender_radio_group);
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -216,16 +210,15 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
         });
-
         //Set initial gender value
         if(registration._gender.equals("Male")){
             genderGroup.check(R.id.m_radio_button);
-        }else{
+        }else if (registration._gender.equals("Female")){
             genderGroup.check(R.id.f_radio_button);
         }
 
 
-            /* StudyLevel RadioGroup */
+        /* StudyLevel RadioGroup */
         studyLevelGroup = (RadioGroup) findViewById(R.id.studies_radio_group);
         studyLevelGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -241,7 +234,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 }
             }
         });
-
         //Set initial level of studies value
         if(registration._levelOfStudies.equals("Bachelor")){
             studyLevelGroup.check(R.id.bach_radio_button);
@@ -249,34 +241,40 @@ public class EditProfileActivity extends AppCompatActivity {
             studyLevelGroup.check(R.id.mast_radio_button);
         }else if(registration._levelOfStudies.equals("Other")){
             studyLevelGroup.check(R.id.other_radio_button);
-        }else{
+        }else if(registration._levelOfStudies.equals("PhD")){
             studyLevelGroup.check(R.id.phd_radio_button);
         }
 
-        /* DEFINING INPUTS - END*/
+        /********** DEFINING USER INPUTS - END **********/
 
 
-        /* Defining "Done" button - By clicking it the form data should be saved, and "TermsActivity" should be presented */
-            /* Collecting data from the form */
+
+        /********** DEFINING DONE BUTTON **********/
         doneBtn = (Button) findViewById(R.id.reg_done_btn);
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                //Gender
+                //Courses validation
+                if(selectedCoursesString.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select the courses you are attending!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //Gender input
                 if (genderGroup.getCheckedRadioButtonId() == R.id.m_radio_button) {
                     gender = "Male";
                 } else if(genderGroup.getCheckedRadioButtonId() == R.id.f_radio_button){
                     gender = "Female";
                 }
 
-                //Gender validation
-                if(gender.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please select your gender!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                //Age input
+                String age = ageSpinner.getSelectedItem().toString();
 
-                //StudyLevel
+                //Faculty input
+                String faculty = facultySpinner.getSelectedItem().toString();
+
+                //StudyLevel input
                 if (studyLevelGroup.getCheckedRadioButtonId() == R.id.bach_radio_button) {
                     studyLevel = "Bachelor";
                 } else if (studyLevelGroup.getCheckedRadioButtonId() == R.id.mast_radio_button) {
@@ -287,35 +285,8 @@ public class EditProfileActivity extends AppCompatActivity {
                     studyLevel = "Other";
                 }
 
-                //Study level validation
-                if(studyLevel.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please select level of your studies!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-//                registrationDone = true;
-
-                //CurrentDate - Timestamp
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                String currentDateAndTime = sdf.format(new Date());
-
-                //Other data
-                String age = ageSpinner.getSelectedItem().toString();
-                String faculty = facultySpinner.getSelectedItem().toString();
-
-                //Age validation
-                if(age.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please select your age!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                //Faculties validation
-                if(faculty.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please select your faculty!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
+                //Courses input
                 for(int course: selectedCourses){
-
                     switch (course){
                         case 0:
                             if(selectedCoursesString.equals("")){
@@ -354,18 +325,17 @@ public class EditProfileActivity extends AppCompatActivity {
                             break;
                     }
                 }
-                System.out.println("Selected courses: " +selectedCoursesString);
+                UserData.SelectedCourses = selectedCoursesString;
 
-                //Courses validation
-                if(selectedCoursesString.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please select the courses you are attending!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+                //CurrentDate - Timestamp
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                String currentDateAndTime = sdf.format(new Date());
+
 
                 //Get registration with current username
                 dbHandler.updateRegistration(age,gender, faculty, studyLevel, selectedCoursesString,true, true, UserData.Username,currentDateAndTime);
 
-                UserData.SelectedCourses = selectedCoursesString;
+
                 //test-remove
                 RegistrationClass registration = new RegistrationClass();
                 for(RegistrationClass reg: dbHandler.getAllRegistrations()){
@@ -380,10 +350,8 @@ public class EditProfileActivity extends AppCompatActivity {
                         ", gender: "+registration._gender+", faculty: "+registration._faculty+", level: "+registration._levelOfStudies+
                         ", courses: "+registration._courses+", currentDateAndTIme: "+registration._currentDateAndTime+", registrationDone: "+registration._registrationDone+", terms:"+registration._termsCompleted);
 
-                System.out.println("EditProfileActivity, going to WelcomeActivity.");
-                Toast.makeText(getApplicationContext(), "Data is successfully stored!", Toast.LENGTH_SHORT).show();
 
-                //uncomment
+                Toast.makeText(getApplicationContext(), "Data is successfully stored!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
                 finish();

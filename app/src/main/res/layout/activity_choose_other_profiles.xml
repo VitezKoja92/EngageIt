@@ -63,7 +63,6 @@
         android:layout_alignParentBottom="true"
         android:gravity="center_horizontal"
         android:textColor="#fafafa"
-        android:layout_marginLeft="20dp"
         />
 
 </RelativeLayout>

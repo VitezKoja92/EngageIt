@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EngageIt</string>
+    <string name="app_name">EngageIt 1.0</string>
     <string name="acceptbtn">Accept</string>
     <string name="refusebtn">Refuse</string>
     <string name="aggrement">The data collected with this app will be used only for the purpose of the University research.
@@ -14,7 +14,7 @@
     <string name="gender_title">Gender</string>
     <string name="faculty_title">Faculty</string>
     <string name="studies_level">Level of studies</string>
-    <string name="course_title">Course</string>
+    <string name="course_title">Attended courses</string>
 
 
     <string name="reg_done_btn">Done</string>
