@@ -17,8 +17,8 @@ public class RegistrationClass implements Serializable{
     public String _faculty;
     public String _levelOfStudies;
     public String _courses;
-    public Boolean _registrationDone;
-    public Boolean _termsCompleted;
+    public String _registrationDone;
+    public String _termsCompleted;
     public String _currentDateAndTime;
 
 }

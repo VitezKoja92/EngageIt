@@ -15,10 +15,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         //Start UploadService
-        System.out.println("I am in AlarmReceiver");
         Intent intent1 = new Intent(context, AlarmService.class);
         context.startService(intent1);
-
-
     }
 }

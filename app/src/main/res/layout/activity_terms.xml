@@ -26,12 +26,29 @@
             />
     </LinearLayout>
     <TextView
+        android:text="@string/terms_title"
+        android:id="@+id/termsTitle"
+        android:textSize="35sp"
+        android:textStyle="bold|italic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="#fafafa"
+        android:paddingBottom="10dp">
+    </TextView>
+    <View
+        android:id="@+id/separatorSix"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/white"/>
+
+    <TextView
         android:id="@+id/terms_and_conditions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/aggrement"
-        android:textSize="24sp"
-        android:paddingTop="30dp"
+        android:textSize="23sp"
+        android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textAlignment="center"
         android:layout_weight="1"

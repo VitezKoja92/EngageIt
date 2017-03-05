@@ -48,8 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/add_your_profile_btn"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="22dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/edit_your_profile_btn"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
@@ -75,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/choose_other_profiles_btn"
-        android:layout_marginBottom="22dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
@@ -84,7 +84,7 @@
 
     </Button>
     <Button
-        android:text="@string/terms_and_conditions"
+        android:text="@string/terms_title"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/terms_btn"
@@ -96,19 +96,19 @@
         android:textColor="@drawable/text_color">
 
     </Button>
-    <!--<Button-->
-        <!--android:text="@string/logout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="55dp"-->
-        <!--android:id="@+id/logout_btn"-->
-        <!--android:layout_marginBottom="15dp"-->
-        <!--android:layout_marginLeft="30dp"-->
-        <!--android:layout_marginRight="30dp"-->
-        <!--android:textSize="16sp"-->
-        <!--android:background="@drawable/btn_radius"-->
-        <!--android:textColor="#fafafa">-->
+    <Button
+        android:text="@string/logout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/logout_btn"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:textSize="16sp"
+        android:background="@drawable/btn_radius"
+        android:textColor="#fafafa">
 
-    <!--</Button>-->
+    </Button>
 
 
 

@@ -5,8 +5,9 @@
     <string name="aggrement">The data collected with this app will be used only for the purpose of the University research.
         The data will be collected in private manner so that it cannot be related to its provider.
     Using the buttons bellow you can either \"Accept\" or \"Refuse\" to allow us to collect your data.</string>
-    <string name="refuse_text">You can be sure that your data won\'t be used for illegal activities. Please help us by providing your data... Would you?</string>
+    <string name="refuse_text">You can be sure that your data won\'t be used for illegal activities. Please help us by providing your data, otherwise your account will be deleted.</string>
     <string name="refuse_ok">Okay, I will!</string>
+    <string name="terms_title">Informed consent</string>
     <string name="refuse_title">Please change your mind...</string>
     <string name="refuse_nok">No, I can\'t...</string>
     <string name="add_profile">Add Your Profile</string>

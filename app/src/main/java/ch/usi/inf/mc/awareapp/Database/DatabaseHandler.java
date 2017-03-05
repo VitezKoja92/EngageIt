@@ -89,8 +89,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 FACULTY + " TEXT," +
                 LEVEL_OF_STUDIES + " TEXT," +
                 COURSES + " TEXT," +
-                REGISTRATION_DONE + " BOOLEAN," +
-                TERMS_COMPLETED + " BOOLEAN," +
+                REGISTRATION_DONE + " TEXT," +
+                TERMS_COMPLETED + " TEXT," +
                 CURRENT_DATE_AND_TIME +" TEXT"+
                 ")";
 
@@ -266,8 +266,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                     registration._levelOfStudies= cursor.getString(cursor.getColumnIndex(LEVEL_OF_STUDIES));
                     registration._username= cursor.getString(cursor.getColumnIndex(USERNAME));
                     registration._courses = cursor.getString(cursor.getColumnIndex(COURSES));
-                    registration._registrationDone= Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(REGISTRATION_DONE)));
-                    registration._termsCompleted= Boolean.parseBoolean(cursor.getString(cursor.getColumnIndex(TERMS_COMPLETED)));
+                    registration._registrationDone= cursor.getString(cursor.getColumnIndex(REGISTRATION_DONE));
+                    registration._termsCompleted= cursor.getString(cursor.getColumnIndex(TERMS_COMPLETED));
                     registration._currentDateAndTime = cursor.getString(cursor.getColumnIndex(CURRENT_DATE_AND_TIME));
 
                     registrationList.add(registration);
@@ -350,7 +350,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 
     //Method for updating registration
-    public void updateRegistration(String age, String gender, String faculty, String level, String courses, Boolean regDone, Boolean terms, String username, String currentTime){
+    public void updateRegistration(String age, String gender, String faculty, String level, String courses, String regDone, String terms, String username, String currentTime){
 
         SQLiteDatabase db = getWritableDatabase();
 
@@ -406,6 +406,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
+    public void deleteRegistration(RegistrationClass registrationClass) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_REGISTRATION, USERNAME + " = ?",
+                new String[] { String.valueOf(registrationClass._username) });
+        db.close();
+    }
+
+
     public void deleteESM(){
         SQLiteDatabase db = getWritableDatabase();
 
@@ -414,7 +422,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             db.execSQL("DELETE FROM "+TABLE_ESM+";");
             db.setTransactionSuccessful();
         }catch (SQLException e){
-            Log.d(TAG, "Error while trying to delete record from ESMTable");
+            Log.d(TAG, "Error while trying to delete records from ESMTable");
         }finally {
             db.endTransaction();
         }

@@ -31,7 +31,7 @@ public class MyScheduler {
 
     //Linear Algebra on Monday and  Wednesday from 8:30 until 10:15
     public Weekday mondayLA = new Weekday(8, 30, "Monday");             //Exact schedule should be Monday 8:30
-    public Weekday wednesdayLA = new Weekday(8, 30, "Monday");       //Exact schedule should be Wednesday 8:30
+    public Weekday wednesdayLA = new Weekday(8, 30, "Wednesday");       //Exact schedule should be Wednesday 8:30
     public Course LinearAlgebra = new Course(mondayLA, wednesdayLA, "Linear Algebra");
 
     //Programming Fundamentals on Monday, Wednesday and Friday from 10:30 until 12:15
@@ -71,7 +71,7 @@ public class MyScheduler {
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
-                    .setNotificationTimeout(60*20);        //First PAM stays active until 15 min after the beginning of the lecture
+                    .setNotificationTimeout(60*30);        //First PAM stays active until 25 min after the beginning of the lecture
 
             factory.addESM(q1);
 
@@ -225,6 +225,7 @@ public class MyScheduler {
                     com.aware.utils.Scheduler.saveSchedule(context, first_pam12);
                 }
             }
+
             factory.addESM(q1);
 
         } catch (JSONException e) {
