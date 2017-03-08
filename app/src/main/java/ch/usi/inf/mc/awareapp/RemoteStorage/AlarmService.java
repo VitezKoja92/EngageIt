@@ -41,6 +41,7 @@ public class AlarmService extends IntentService {
     String weekday;
     NetworkInfo mWifi;
     Timer timer;
+    int[] res = new int[2];
 
     public AlarmService() {
         super("UploadService");
@@ -84,22 +85,83 @@ public class AlarmService extends IntentService {
                 String time = sdf.format(new Date());
                 //System.out.println(time +":In timer");
 
-                //cancel if it is after 21:00
-                Calendar cal = Calendar.getInstance();
-                cal.set(Calendar.HOUR_OF_DAY, 21);
-                cal.set(Calendar.MINUTE, 0);
-                cal.set(Calendar.SECOND, 0);
-                if(System.currentTimeMillis() > cal.getTimeInMillis()){
+                Calendar nine = Calendar.getInstance();
+                nine.set(Calendar.HOUR_OF_DAY, 21);
+                nine.set(Calendar.MINUTE, 0);
+                nine.set(Calendar.SECOND, 0);
+
+                Calendar ten = Calendar.getInstance();
+                ten.set(Calendar.HOUR_OF_DAY, 22);
+                ten.set(Calendar.MINUTE, 0);
+                ten.set(Calendar.SECOND, 0);
+
+                if(System.currentTimeMillis() <= nine.getTimeInMillis()){
                     //System.out.println("Timer in canceled");
                     //timer.cancel();
                     //timer.purge();
-                }
 
-                if ((month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31) || (month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31)) { //check time interval
 
-                    if (mWifi.isConnected()) { //check wi-fi connection
-                        //System.out.println("I am in AlarmService, WiFi is connected");
+                    if ((month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31) || (month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31)) { //check time interval
 
+                        if (mWifi.isConnected()) { //check wi-fi connection
+                            //System.out.println("I am in AlarmService, WiFi is connected");
+
+                            //number of tables
+                            int nbTableToClean = LocalTables.values().length; //2
+                            int i = 0;
+                            Cursor c;
+                            //current table to clean
+                            LocalTables currTable;
+                            String fileName;
+
+                            while(i < nbTableToClean) {
+                                currTable = LocalTables.values()[i]; //ESMTable and RegistrationTable
+                                //build name of file to upload
+                                fileName = buildFileName(currTable);
+
+                                //get all data currently in the table
+                                c = getRecords(currTable);
+
+                                if (c.getCount() >= 1) {
+                                    c.moveToFirst();
+                                    //upload the data to the server
+                                    int response = switchDriveController.upload(fileName, toCSV(c, currTable));
+
+                                    //if the file was put, delete records and update the arrays
+                                    if (response < 200 || response > 207) {
+                                        res[i]=404;
+                                        Log.d("DATA UPLOAD SERVICE", "Owncould's response: " + Integer.toString(response));
+                                    }else{
+                                        System.out.println("Data uploaded. Timer is canceled");
+                                        res[i]=200;
+                                    }
+                                }
+                                i++;
+                            }
+                            if(res[0]== 200 && res[1]==200){
+                                dbHandler.deleteESM();
+                                res[0]=0;
+                                res[1]=0;
+                                timer.cancel();
+                                timer.purge();
+                            }
+
+//                        for(ESMClass esm: dbHandler.getAllESMs()){
+//                            System.out.println("ESM database before deletion: android_id: "+esm._android_id+", username: "+esm._username+", json: "+esm._esm_json);
+//                        }
+//
+//                        //dbHandler.deleteESM();
+//
+//                        //test
+//                        for(ESMClass esm: dbHandler.getAllESMs()){
+//                            System.out.println("ESM database after deletion: android_id: "+esm._android_id+", username: "+esm._username+", json: "+esm._esm_json);
+//                        }
+                        }else{
+                            System.out.println("No Wi-Fi");
+                        }
+                    }
+                }else if(System.currentTimeMillis()<=ten.getTimeInMillis()){ //try to upload without asking for wifi
+                    if ((month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31) || (month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31)) { //check time interval
                         //number of tables
                         int nbTableToClean = LocalTables.values().length; //2
                         int i = 0;
@@ -124,13 +186,20 @@ public class AlarmService extends IntentService {
                                 //if the file was put, delete records and update the arrays
                                 if (response < 200 || response > 207) {
                                     Log.d("DATA UPLOAD SERVICE", "Owncould's response: " + Integer.toString(response));
+                                    res[i]=404;
                                 }else{
-                                    System.out.println("Data uploaded. Timer is canceled");
-                                    timer.cancel();
-                                    timer.purge();
+                                    System.out.println("Data uploaded. Timer is canceled. Data deleted.");
+                                    res[i]=200;
                                 }
                             }
                             i++;
+                        }
+                        if(res[0]== 200 && res[1]==200){
+                            dbHandler.deleteESM();
+                            res[0]=0;
+                            res[1]=0;
+                            timer.cancel();
+                            timer.purge();
                         }
 //                        for(ESMClass esm: dbHandler.getAllESMs()){
 //                            System.out.println("ESM database before deletion: android_id: "+esm._android_id+", username: "+esm._username+", json: "+esm._esm_json);
@@ -142,10 +211,10 @@ public class AlarmService extends IntentService {
 //                        for(ESMClass esm: dbHandler.getAllESMs()){
 //                            System.out.println("ESM database after deletion: android_id: "+esm._android_id+", username: "+esm._username+", json: "+esm._esm_json);
 //                        }
-                    }else{
-                        System.out.println("No Wi-Fi");
                     }
                 }
+
+
             }
         }, 0, 1000*60*10); //check everything every 10 minutes. Purge and cancel in case it is uploaded successfully
 

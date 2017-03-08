@@ -59,18 +59,18 @@
         android:textColor="#fafafa">
 
     </Button>
-    <!--<ImageButton-->
-        <!--android:id="@+id/settings_btn"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/settings_50"-->
-        <!--android:layout_below="@id/surveys_btn"-->
-        <!--android:background="#45bfa5"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginBottom="-40dp">-->
+    <ImageButton
+        android:id="@+id/settings_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/settings_50"
+        android:layout_below="@id/surveys_btn"
+        android:background="#45bfa5"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-40dp">
 
-    <!--</ImageButton>-->
+    </ImageButton>
     <TextView
         android:id="@+id/username_label"
         android:text="@string/username_label"

@@ -100,6 +100,7 @@ public class WelcomeActivity extends ActionBarActivity {
     int month;
     int dayOfMonth;
     final Context context = this;
+    String courses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -189,15 +190,15 @@ public class WelcomeActivity extends ActionBarActivity {
         });
 
         /*Defining "Settings" button*/
-//        settingsBtn = (ImageButton)findViewById(R.id.settings_btn);
-//        settingsBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-//                startActivity(i);
-//                finish();
-//            }
-//        });
+        settingsBtn = (ImageButton)findViewById(R.id.settings_btn);
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
         /************** DEFINING BUTTONS - END **************/
     }
 
@@ -210,15 +211,21 @@ public class WelcomeActivity extends ActionBarActivity {
         month = calendar.get(Calendar.MONTH) + 1;
         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
+        for(RegistrationClass reg: dbHandler.getAllRegistrations()){
+            if(reg._username.equals(UserData.Username)){
+                courses = reg._courses;
+            }
+        }
+
         //Trigger schedulers only in period between February 20th and March 12th
         if((month == 3 && dayOfMonth >=1 && dayOfMonth <= 31) || (month == 3 && dayOfMonth >=1 && dayOfMonth <= 31)){
             //Triggering schedulers
             if(!UserData.Username.equals("/")){
-                scheduler.createFirstPAM(UserData.SelectedCourses, this);
-                scheduler.createSecondPAM(UserData.SelectedCourses, this);
-                scheduler.createThirdPAM(UserData.SelectedCourses, this);
-                scheduler.createFirstPostLectureESM(this,UserData.SelectedCourses);
-                scheduler.createSecondPostLectureESM(this,UserData.SelectedCourses);
+                scheduler.createFirstPAM(courses, this);
+//                scheduler.createSecondPAM(courses, this);
+//                scheduler.createThirdPAM(courses, this);
+//                scheduler.createFirstPostLectureESM(this,courses);
+//                scheduler.createSecondPostLectureESM(this,courses);
             }
         }
     }
@@ -239,17 +246,17 @@ public class WelcomeActivity extends ActionBarActivity {
             cal.set(Calendar.SECOND, 0);
 
             if(cal.getTimeInMillis() > System.currentTimeMillis()){
-//                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-//                String time = sdf.format(new Date());
-//                System.out.println(time+": Alarm should fire in the future");
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                String time = sdf.format(new Date());
+                System.out.println(time+": Alarm should fire in the future");
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
                 UserData.AlarmTriggered = true;
             }else{
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-//                String time = sdf.format(new Date());
-//                System.out.println(time+": Alarm in the past");
-//                cal.add(Calendar.DAY_OF_MONTH, 1);
+                String time = sdf.format(new Date());
+                System.out.println(time+": Alarm in the past");
+                cal.add(Calendar.DAY_OF_MONTH, 1);
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
                 UserData.AlarmTriggered = true;
