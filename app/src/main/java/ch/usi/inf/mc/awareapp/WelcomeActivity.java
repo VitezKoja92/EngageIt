@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aware.Aware;
+import com.aware.Aware_Preferences;
 import com.aware.ESM;
 import com.aware.ui.esms.ESMFactory;
 import com.aware.ui.esms.ESM_Freetext;
@@ -111,27 +112,32 @@ public class WelcomeActivity extends ActionBarActivity {
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         username = UserData.Username;
 
-
         /************** CHECKING PERMISSIONS **************/
         checkForPermissions();
 
         if ((ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
                 && (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
-                && (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)){
+                && (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)) {
 
             /************** JOIN AWARE AND AWARE'S STUDY **************/
             Intent startAware = new Intent(getApplicationContext(), Aware.class);
             startService(startAware);
-            Aware.startESM(this);
-            Aware.startScheduler(this);
+
+          
 //          Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
 //          Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
 //          sendBroadcast(sync);
 
+            Aware.setSetting(this, Aware_Preferences.STATUS_ESM, true);
+
+
+            if (!Aware.isStudy(context)) {
+                //this will reset and apply the server side settings. It will also trigger the first sync and set the sync schedule etc.
+                Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
+            }
 
             //Trigger schedulers
             triggerSchedulers();
-
 
             //Trigger alarm
             triggerAlarm();
@@ -139,18 +145,18 @@ public class WelcomeActivity extends ActionBarActivity {
 
 
         /************** TEST - BEGIN **************/
-        usernameLabel = (TextView)findViewById(R.id.username_label);
-        usernameLabel.setText("User: "+ username);
+        usernameLabel = (TextView) findViewById(R.id.username_label);
+        usernameLabel.setText("User: " + username);
 
         System.out.println("Registration data:");
-        for(RegistrationClass reg: dbHandler.getAllRegistrations()){
-            System.out.println("android_id: "+reg._android_id+", username: "+reg._username+", age: "+reg._age+
-                    ", gender: "+reg._gender+", faculty: "+reg._faculty+", level: "+reg._levelOfStudies+
-                    ", course: "+reg._courses+", registrationDone: "+reg._registrationDone+", terms:"+reg._termsCompleted+", currentTimeAndDate:"+reg._currentDateAndTime);
+        for (RegistrationClass reg : dbHandler.getAllRegistrations()) {
+            System.out.println("android_id: " + reg._android_id + ", username: " + reg._username + ", age: " + reg._age +
+                    ", gender: " + reg._gender + ", faculty: " + reg._faculty + ", level: " + reg._levelOfStudies +
+                    ", course: " + reg._courses + ", registrationDone: " + reg._registrationDone + ", terms:" + reg._termsCompleted + ", currentTimeAndDate:" + reg._currentDateAndTime);
         }
         System.out.println("ESM data:");
-        for(ESMClass esm: dbHandler.getAllESMs()){
-            System.out.println("android_id: "+esm._android_id+", username: "+esm._username+", json: "+esm._esm_json);
+        for (ESMClass esm : dbHandler.getAllESMs()) {
+            System.out.println("android_id: " + esm._android_id + ", username: " + esm._username + ", json: " + esm._esm_json);
         }
         /************** TEST - END **************/
 
@@ -158,14 +164,14 @@ public class WelcomeActivity extends ActionBarActivity {
         /************** DEFINING BUTTONS - BEGIN **************/
 
         /* Defining "Surveys" button - By clicking it it should lead us to "SurveysActivity" */
-        surveysBtn = (Button)findViewById(R.id.surveys_btn);
+        surveysBtn = (Button) findViewById(R.id.surveys_btn);
         surveysBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.equals("/")){
+                if (username.equals("/")) {
                     Toast.makeText(getApplicationContext(), "No profile is selected. Please choose your profile to access surveys.", Toast.LENGTH_LONG).show();
-                }else{
-                    Intent i =new Intent (getApplicationContext(), SurveysActivity.class);
+                } else {
+                    Intent i = new Intent(getApplicationContext(), SurveysActivity.class);
                     startActivity(i);
 //                    finish();
                 }
@@ -174,13 +180,13 @@ public class WelcomeActivity extends ActionBarActivity {
         });
 
         /* Defining "YourData" button */
-        yourDataBtn = (Button)findViewById(R.id.your_data_btn);
+        yourDataBtn = (Button) findViewById(R.id.your_data_btn);
         yourDataBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(username.equals("/")){
+                if (username.equals("/")) {
                     Toast.makeText(getApplicationContext(), "No profile is selected. Please choose your profile to access your data.", Toast.LENGTH_LONG).show();
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "This feature will be implemented in next version.", Toast.LENGTH_LONG).show();
 //                    Intent i =new Intent (getApplicationContext(), YourDataActivity.class);
 //                    startActivity(i);
@@ -190,7 +196,7 @@ public class WelcomeActivity extends ActionBarActivity {
         });
 
         /*Defining "Settings" button*/
-        settingsBtn = (ImageButton)findViewById(R.id.settings_btn);
+        settingsBtn = (ImageButton) findViewById(R.id.settings_btn);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +208,7 @@ public class WelcomeActivity extends ActionBarActivity {
         /************** DEFINING BUTTONS - END **************/
     }
 
-    public void triggerSchedulers(){
+    public void triggerSchedulers() {
         /************** TRIGGER SCHEDULERS **************/
         dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         calendar = Calendar.getInstance();
@@ -211,16 +217,16 @@ public class WelcomeActivity extends ActionBarActivity {
         month = calendar.get(Calendar.MONTH) + 1;
         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
-        for(RegistrationClass reg: dbHandler.getAllRegistrations()){
-            if(reg._username.equals(UserData.Username)){
+        for (RegistrationClass reg : dbHandler.getAllRegistrations()) {
+            if (reg._username.equals(UserData.Username)) {
                 courses = reg._courses;
             }
         }
 
         //Trigger schedulers only in period between February 20th and March 12th
-        if((month == 3 && dayOfMonth >=1 && dayOfMonth <= 31) || (month == 3 && dayOfMonth >=1 && dayOfMonth <= 31)){
+        if ((month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31) || (month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31)) {
             //Triggering schedulers
-            if(!UserData.Username.equals("/")){
+            if (!UserData.Username.equals("/")) {
                 scheduler.createFirstPAM(courses, this);
 //                scheduler.createSecondPAM(courses, this);
 //                scheduler.createThirdPAM(courses, this);
@@ -230,35 +236,35 @@ public class WelcomeActivity extends ActionBarActivity {
         }
     }
 
-    public void triggerAlarm(){
+    public void triggerAlarm() {
         /************** TRIGGER AlarmReceiver AT SPECIFIED TIME **************/
 
-        if(!UserData.AlarmTriggered){
+        if (!UserData.AlarmTriggered) {
             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
             AlarmManager alarmManager = (AlarmManager) getSystemService(getApplicationContext().ALARM_SERVICE);
 
             Calendar cal = Calendar.getInstance();
             int hour = 19;
-            int minute = getRandomNumberInInterval(1,59);
+            int minute = getRandomNumberInInterval(1, 59);
 
             cal.set(Calendar.HOUR_OF_DAY, hour);
             cal.set(Calendar.MINUTE, minute);
             cal.set(Calendar.SECOND, 0);
 
-            if(cal.getTimeInMillis() > System.currentTimeMillis()){
+            if (cal.getTimeInMillis() > System.currentTimeMillis()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 String time = sdf.format(new Date());
-                System.out.println(time+": Alarm should fire in the future");
+                System.out.println(time + ": Alarm should fire in the future");
 
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
                 UserData.AlarmTriggered = true;
-            }else{
+            } else {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 String time = sdf.format(new Date());
-                System.out.println(time+": Alarm in the past");
+                System.out.println(time + ": Alarm in the past");
                 cal.add(Calendar.DAY_OF_MONTH, 1);
 
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intent, PendingIntent.FLAG_UPDATE_CURRENT));
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
                 UserData.AlarmTriggered = true;
             }
         }
@@ -280,11 +286,11 @@ public class WelcomeActivity extends ActionBarActivity {
         terms.setVisible(true);
         logout.setVisible(true);
 
-        if(UserData.Username.equals("/")){
+        if (UserData.Username.equals("/")) {
             terms.setEnabled(false);
             edit_profile.setEnabled(false);
             logout.setEnabled(false);
-        }else{
+        } else {
             terms.setEnabled(true);
             edit_profile.setEnabled(true);
             logout.setEnabled(true);
@@ -298,13 +304,13 @@ public class WelcomeActivity extends ActionBarActivity {
 
         Intent intent;
 
-        switch(item.getItemId()){
+        switch (item.getItemId()) {
 
             //Add button
             case R.id.addProfileMenu:
 
-                if(UserData.Username =="/"){
-                    if(dbHandler.getAllRegistrations().size() > 0){ // check the database
+                if (UserData.Username == "/") {
+                    if (dbHandler.getAllRegistrations().size() > 0) { // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
 
@@ -318,14 +324,15 @@ public class WelcomeActivity extends ActionBarActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 String enteredPassword = passwordField.getText().toString();
                                 String adminPassword = "123";
-                                if(enteredPassword.equals(adminPassword)){
+                                if (enteredPassword.equals(adminPassword)) {
 
                                     Intent i = new Intent(getApplicationContext(), TermsActivity.class);
                                     startActivity(i);
                                     finish();
-                                }else{
+                                } else {
                                     Toast.makeText(getApplicationContext(), "Error - wrong admin password! Try again!", Toast.LENGTH_SHORT).show();
-                                };
+                                }
+                                ;
                             }
                         }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
@@ -336,12 +343,12 @@ public class WelcomeActivity extends ActionBarActivity {
                         AlertDialog passwordDialog = builder.create();
                         passwordDialog.setTitle("Password check");
                         passwordDialog.show();
-                    }else{
+                    } else {
                         Intent i = new Intent(getApplicationContext(), TermsActivity.class);
                         startActivity(i);
                         finish();
                     }
-                }else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Please, first logout in order to add new profile!", Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -349,7 +356,7 @@ public class WelcomeActivity extends ActionBarActivity {
 
             //Edit button
             case R.id.editProfileMenu:
-                Intent i  = new Intent(getApplicationContext(), EditProfileActivity.class);
+                Intent i = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(i);
                 finish();
 
@@ -370,13 +377,14 @@ public class WelcomeActivity extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         String enteredPassword = passwordField.getText().toString();
                         String adminPassword = "123";
-                        if(enteredPassword.equals(adminPassword)){
+                        if (enteredPassword.equals(adminPassword)) {
                             Intent i = new Intent(getApplicationContext(), ChooseOtherProfilesActivity.class);
                             startActivity(i);
                             finish();
-                        }else{
+                        } else {
                             Toast.makeText(getApplicationContext(), "Error - wrong admin password! Try again!", Toast.LENGTH_SHORT).show();
-                        };
+                        }
+                        ;
                     }
                 }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
@@ -413,14 +421,23 @@ public class WelcomeActivity extends ActionBarActivity {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Intent aware = new Intent(this, Aware.class);
+        startService(aware);
+        Aware.startAWARE(this); //keep everything running on the background
+    }
+
     private void checkForPermissions() {
         // Android 6 (API level 23) now require ACCESS_COARSE_LOCATION permission to use BLE
         if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)) {
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.ACCESS_FINE_LOCATION }, MY_PERMISSIONS_ACCESS_FINE_LOCATION);
-        }else if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_EXTERNAL_STORAGE }, MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
-        }else if(ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, MY_PERMISSIONS_ACCESS_FINE_LOCATION);
+        } else if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_READ_EXTERNAL_STORAGE);
+        } else if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_WRITE_EXTERNAL_STORAGE);
         }
     }
 
@@ -573,9 +590,9 @@ public class WelcomeActivity extends ActionBarActivity {
         }
     }
 
-    private int getRandomNumberInInterval(int min, int max){
+    private int getRandomNumberInInterval(int min, int max) {
         Random r = new Random();
-        int ran = r.nextInt(max - min +1) + min;
+        int ran = r.nextInt(max - min + 1) + min;
         return ran;
     }
 
