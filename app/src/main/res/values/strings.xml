@@ -1,12 +1,13 @@
 <resources>
-    <string name="app_name">EngageIt</string>
+    <string name="app_name">EngageIt 1.0</string>
     <string name="acceptbtn">Accept</string>
     <string name="refusebtn">Refuse</string>
     <string name="aggrement">The data collected with this app will be used only for the purpose of the University research.
         The data will be collected in private manner so that it cannot be related to its provider.
     Using the buttons bellow you can either \"Accept\" or \"Refuse\" to allow us to collect your data.</string>
-    <string name="refuse_text">You can be sure that your data won\'t be used for illegal activities. Please help us by providing your data... Would you?</string>
+    <string name="refuse_text">You can be sure that your data won\'t be used for illegal activities. Please help us by providing your data, otherwise your account will be deleted.</string>
     <string name="refuse_ok">Okay, I will!</string>
+    <string name="terms_title">Informed consent</string>
     <string name="refuse_title">Please change your mind...</string>
     <string name="refuse_nok">No, I can\'t...</string>
     <string name="add_profile">Add Your Profile</string>
@@ -14,7 +15,7 @@
     <string name="gender_title">Gender</string>
     <string name="faculty_title">Faculty</string>
     <string name="studies_level">Level of studies</string>
-    <string name="course_title">Course</string>
+    <string name="course_title">Attended courses</string>
 
 
     <string name="reg_done_btn">Done</string>

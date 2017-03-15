@@ -3,30 +3,37 @@
     android:id="@+id/activity_settings"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
+    android:paddingTop="5dp"
     android:paddingRight="25dp"
     android:paddingLeft="25dp"
+    android:paddingBottom="5dp"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center_horizontal"
     android:background="#45bfa5">
-    <!--Back button-->
-    <!--<ImageButton-->
-        <!--android:id="@+id/back_btn2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/left_filled_50"-->
-        <!--android:background="#fafafa"-->
-        <!--android:layout_marginBottom="80dp"/>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomeImg"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageButton
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rsz_1rsz_3logo1_70"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
     <TextView
         android:text="@string/settings_title"
         android:id="@+id/settings_title"
         android:textSize="35sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="50dp"
+        android:paddingBottom="10dp"
         android:textAlignment="center"
-        android:textColor="#fafafa"
+        android:textColor="#ffffff"
         android:textStyle="bold|italic">
 
     </TextView>
@@ -34,15 +41,15 @@
         android:id="@+id/separatorSix"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"/>
+        android:background="#ffffff"/>
 
     <Button
         android:text="@string/add_your_profile_btn"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/add_your_profile_btn"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
@@ -55,12 +62,12 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/edit_your_profile_btn"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
         android:background="@drawable/btn_radius"
-        android:textColor="#fafafa">
+        android:textColor="@drawable/text_color">
 
     </Button>
     <Button
@@ -68,7 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/choose_other_profiles_btn"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
@@ -77,16 +84,16 @@
 
     </Button>
     <Button
-        android:text="@string/terms_and_conditions"
+        android:text="@string/terms_title"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:id="@+id/terms_btn"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:textSize="16sp"
         android:background="@drawable/btn_radius"
-        android:textColor="#fafafa">
+        android:textColor="@drawable/text_color">
 
     </Button>
     <Button

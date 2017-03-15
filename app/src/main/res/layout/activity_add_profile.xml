@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_add_profile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
+    android:paddingTop="5dp"
     android:paddingRight="25dp"
     android:paddingLeft="25dp"
-    android:paddingBottom="10dp"
+    android:paddingBottom="5dp"
     android:orientation="vertical"
     android:background="#45bfa5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomeImg"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageButton
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rsz_1rsz_3logo1_70"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/add_profile_title"
         android:layout_width="match_parent"
@@ -18,7 +31,8 @@
         android:gravity="center_horizontal"
         android:text="@string/add_profile"
         android:textSize="35sp"
-        android:paddingBottom="30dp"
+        android:layout_below="@id/welcomeImg"
+        android:paddingBottom="8dp"
         android:textColor="#fafafa"
         android:textStyle="bold|italic">
     </TextView>
@@ -46,13 +60,13 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/age_title"
         android:layout_below="@id/separatorFive"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:layout_marginLeft="20dp" />
     <View
         android:id="@+id/separatorOne"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:background="#fafafa"
         android:layout_below="@id/age_title"/>
     <TextView
         android:text="@string/gender_title"
@@ -60,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:paddingTop="15dp"
+        android:paddingTop="12dp"
         android:paddingBottom="5dp"
         android:layout_below="@id/separatorOne"
         android:textColor="#fafafa">
@@ -73,7 +87,7 @@
         android:layout_below="@id/separatorOne"
         android:orientation="horizontal"
         android:layout_marginLeft="20dp"
-        android:paddingTop="13dp">
+        android:paddingTop="12dp">
         <RadioButton
             android:text="M"
             android:layout_width="wrap_content"
@@ -81,7 +95,7 @@
             android:id="@+id/m_radio_button"
             android:textColor="#fafafa"
             android:textColorLink="#fafafa"
-            tools:textColorLink="#fafafa"
+
             android:textColorHint="#fafafa"
             android:textColorHighlight="#fafafa">
 
@@ -100,7 +114,7 @@
         android:id="@+id/separatorTwo"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:background="#fafafa"
         android:layout_below="@id/gender_title"/>
     <TextView
         android:text="@string/faculty_title"
@@ -108,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:paddingTop="15dp"
+        android:paddingTop="10dp"
         android:paddingBottom="5dp"
         android:layout_below="@id/separatorTwo"
         android:textColor="#fafafa">
@@ -119,13 +133,13 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/faculty_title"
         android:layout_below="@id/separatorTwo"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         android:layout_marginLeft="20dp"/>
     <View
         android:id="@+id/separatorThree"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:background="#fafafa"
         android:layout_below="@id/faculty_title"/>
     <TextView
         android:text="@string/studies_level"
@@ -133,7 +147,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:paddingTop="15dp"
+        android:paddingTop="12dp"
         android:paddingBottom="5dp"
         android:layout_below="@id/separatorThree"
         android:textColor="#fafafa">
@@ -152,7 +166,10 @@
             android:layout_height="match_parent"
             android:id="@+id/bach_radio_button"
             android:layout_marginRight="5dp"
-            android:textColor="#fafafa">
+            android:textColor="#fafafa"
+            android:textColorLink="#fafafa"
+            android:textColorHint="#fafafa"
+            android:textColorHighlight="#fafafa">
 
         </RadioButton>
         <RadioButton
@@ -161,7 +178,10 @@
             android:layout_height="match_parent"
             android:id="@+id/mast_radio_button"
             android:layout_marginRight="5dp"
-            android:textColor="#fafafa">
+            android:textColor="#fafafa"
+            android:textColorLink="#fafafa"
+            android:textColorHint="#fafafa"
+            android:textColorHighlight="#fafafa">
 
         </RadioButton>
         <RadioButton
@@ -170,7 +190,10 @@
             android:layout_height="match_parent"
             android:id="@+id/phd_radio_button"
             android:layout_marginRight="5dp"
-            android:textColor="#fafafa">
+            android:textColor="#fafafa"
+            android:textColorLink="#fafafa"
+            android:textColorHint="#fafafa"
+            android:textColorHighlight="#fafafa">
 
         </RadioButton>
         <RadioButton
@@ -178,14 +201,17 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:id="@+id/other_radio_button"
-            android:textColor="#fafafa">
+            android:textColor="#fafafa"
+            android:textColorLink="#fafafa"
+            android:textColorHint="#fafafa"
+            android:textColorHighlight="#fafafa">
         </RadioButton>
     </RadioGroup>
     <View
         android:id="@+id/separatorFour"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:background="#fafafa"
         android:layout_below="@id/studies_radio_group"/>
     <TextView
         android:text="@string/course_title"
@@ -193,7 +219,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:paddingTop="15dp"
+        android:paddingTop="12dp"
         android:paddingBottom="5dp"
         android:layout_below="@id/separatorFour"
         android:textColor="#fafafa">
@@ -202,21 +228,21 @@
         android:id="@+id/courseDialogBtn"
         android:text="@string/courseDialogBtn"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="45dp"
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/course_title"
         android:layout_below="@+id/separatorFour"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="5dp"
         android:textColor="#fafafa"
         android:background="@drawable/btn_radius">
-    </Button>>
+    </Button>
     <View
         android:id="@+id/separatorSix"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:background="#fafafa"
         android:layout_below="@id/course_title"
         android:layout_marginTop="7dp"/>
     <TextView
@@ -225,7 +251,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
-        android:paddingTop="15dp"
+        android:paddingTop="12dp"
         android:paddingBottom="5dp"
         android:layout_below="@id/separatorSix"
         android:textColor="#fafafa">
@@ -236,15 +262,14 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/username"
         android:layout_below="@id/separatorSix"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="20dp"
-        android:textColor="#fafafa"
-        />
+        android:textColor="#fafafa" />
     <View
         android:id="@+id/separatorSeven"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/white"
+        android:background="#fafafa"
         android:layout_below="@id/username"
         android:layout_marginTop="7dp"/>
 
@@ -259,7 +284,7 @@
         <Button
             android:id="@+id/reg_done_btn"
             android:text="@string/reg_done_btn"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_width="130dp"
             android:textSize="25sp"
             android:layout_gravity="bottom"

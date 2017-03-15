@@ -3,11 +3,26 @@
     android:id="@+id/activity_choose_other_profiles"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
+    android:paddingTop="5dp"
     android:paddingRight="25dp"
     android:paddingLeft="25dp"
-    android:paddingBottom="10dp"
-    android:orientation="vertical">
+    android:paddingBottom="5dp"
+    android:orientation="vertical"
+    android:background="#45bfa5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomeImg"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageButton
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rsz_1rsz_3logo1_70"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
     <TextView
         android:id="@+id/choose_profile_title"
         android:layout_width="match_parent"
@@ -15,7 +30,8 @@
         android:gravity="center_horizontal"
         android:text="@string/choose_profiles_title"
         android:textSize="35sp"
-        android:paddingBottom="30dp"
+        android:layout_below="@id/welcomeImg"
+        android:paddingBottom="10dp"
         android:textColor="#fafafa"
         android:textStyle="bold|italic">
     </TextView>
@@ -23,7 +39,7 @@
         android:id="@+id/separatorFive"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
+        android:background="#fafafa"
         android:layout_below="@id/choose_profile_title" />
 
     <!--List of profiles-->
@@ -32,13 +48,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_below="@id/separatorFive"/>
+        android:layout_below="@id/separatorFive" />
+    <View
+        android:id="@+id/separatorSix"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#fafafa"
+        android:layout_below="@id/profiles_list" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/choose_profile_hint"
         android:textSize="15sp"
         android:layout_alignParentBottom="true"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:textColor="#fafafa"
+        />
 
 </RelativeLayout>
