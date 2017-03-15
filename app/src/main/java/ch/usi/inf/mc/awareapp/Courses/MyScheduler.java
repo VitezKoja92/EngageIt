@@ -84,11 +84,12 @@ public class MyScheduler{
                     .setSubmitButton("Done")
                     .setNotificationTimeout(60*630);        //First PAM stays active until 25 min after the beginning of the lecture
 
-            factory.addESM(q1);
-
             //First PAM for Linear Algebra
             if (userCourses.contains(LinearAlgebra.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + LinearAlgebra.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                     com.aware.utils.Scheduler.Schedule first_pam1 = new com.aware.utils.Scheduler.Schedule("first_pam1"+UserData.Username);
@@ -117,6 +118,9 @@ public class MyScheduler{
             //First PAM for Programming Fundamentals
             if (userCourses.contains(ProgrammingFundamentals.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + ProgrammingFundamentals.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                     com.aware.utils.Scheduler.Schedule first_pam3 = new com.aware.utils.Scheduler.Schedule("first_pam3"+UserData.Username);
@@ -156,6 +160,9 @@ public class MyScheduler{
             //First PAM for Cyber Communication
             if (userCourses.contains(CyberCommunication.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + CyberCommunication.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                     com.aware.utils.Scheduler.Schedule first_pam6 = new com.aware.utils.Scheduler.Schedule("first_pam6"+UserData.Username);
@@ -196,6 +203,9 @@ public class MyScheduler{
             //First PAM for Information Security
             if (userCourses.contains(InformationSecurity.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + InformationSecurity.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                     com.aware.utils.Scheduler.Schedule first_pam9 = new com.aware.utils.Scheduler.Schedule("first_pam9"+UserData.Username);
@@ -225,6 +235,8 @@ public class MyScheduler{
             if (userCourses.contains(SoftwareArchitecture.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + SoftwareArchitecture.getName() + "!");
 
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")) {
 
                     com.aware.utils.Scheduler.Schedule first_pam11 = new com.aware.utils.Scheduler.Schedule("first_pam11" + UserData.Username);
@@ -251,8 +263,6 @@ public class MyScheduler{
                 }
             }
 
-            factory.addESM(q1);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -268,11 +278,13 @@ public class MyScheduler{
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
                     .setNotificationTimeout(60*630);              //Second PAM reamins active until 19:00
-            factory.addESM(q1);
 
             //Second PAM for Linear Algebra
             if (userCourses.contains(LinearAlgebra.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the first part of " + LinearAlgebra.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule second_pam1 = new com.aware.utils.Scheduler.Schedule("second_pam1"+UserData.Username);
@@ -302,6 +314,9 @@ public class MyScheduler{
             //Second PAM for Programming Fundamentals
             if (userCourses.contains(ProgrammingFundamentals.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the first part of " + ProgrammingFundamentals.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule second_pam3 = new com.aware.utils.Scheduler.Schedule("second_pam3"+UserData.Username);
@@ -342,6 +357,9 @@ public class MyScheduler{
             //Second PAM for Cyber Communication
             if (userCourses.contains(CyberCommunication.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the first part of " + CyberCommunication.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule second_pam6 = new com.aware.utils.Scheduler.Schedule("second_pam6"+UserData.Username);
@@ -382,6 +400,9 @@ public class MyScheduler{
             //Second PAM for Information Security
             if (userCourses.contains(InformationSecurity.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the first part of " + InformationSecurity.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule second_pam9 = new com.aware.utils.Scheduler.Schedule("second_pam9"+UserData.Username);
@@ -412,6 +433,8 @@ public class MyScheduler{
             if (userCourses.contains(SoftwareArchitecture.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the first part of " + SoftwareArchitecture.getName() + "!");
 
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")) {
 
                         com.aware.utils.Scheduler.Schedule second_pam11 = new com.aware.utils.Scheduler.Schedule("second_pam11" + UserData.Username);
@@ -437,7 +460,6 @@ public class MyScheduler{
 
                 }
             }
-                factory.addESM(q1);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -454,12 +476,13 @@ public class MyScheduler{
             q1.setTitle("PAM")
                     .setSubmitButton("Done")
                     .setNotificationTimeout(60*630);              //Third PAM reamins active until 19:00
-            factory.addESM(q1);
-
 
             //Third PAM for Linear Algebra
             if (userCourses.contains(LinearAlgebra.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the second part of " + LinearAlgebra.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule third_pam1 = new com.aware.utils.Scheduler.Schedule("third_pam1"+UserData.Username);
@@ -488,6 +511,9 @@ public class MyScheduler{
             //Third PAM for Programming Fundamentals
             if (userCourses.contains(ProgrammingFundamentals.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the second part of " + ProgrammingFundamentals.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule third_pam3 = new com.aware.utils.Scheduler.Schedule("third_pam3"+UserData.Username);
@@ -528,6 +554,9 @@ public class MyScheduler{
             //Third PAM for Cyber Communication
             if (userCourses.contains(CyberCommunication.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the second part of " + CyberCommunication.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule third_pam6 = new com.aware.utils.Scheduler.Schedule("third_pam6"+UserData.Username);
@@ -568,6 +597,9 @@ public class MyScheduler{
             //Third PAM for Information Security
             if (userCourses.contains(InformationSecurity.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the second part of " + InformationSecurity.getName() + "!");
+
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")){
 
                         com.aware.utils.Scheduler.Schedule third_pam9 = new com.aware.utils.Scheduler.Schedule("third_pam9"+UserData.Username);
@@ -598,6 +630,8 @@ public class MyScheduler{
             if (userCourses.contains(SoftwareArchitecture.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now after the second part of " + SoftwareArchitecture.getName() + "!");
 
+                factory.addESM(q1);
+
                 if(!UserData.Username.equals("/")) {
 
                         com.aware.utils.Scheduler.Schedule third_pam11 = new com.aware.utils.Scheduler.Schedule("third_pam11" + UserData.Username);
@@ -623,7 +657,6 @@ public class MyScheduler{
 
                 }
             }
-            factory.addESM(q1);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -693,13 +726,6 @@ public class MyScheduler{
                         .addRadio("Strongly Disagree")
                         .setSubmitButton("Next");
             }
-            factory.addESM(esmRadio1);
-            factory.addESM(esmRadio2);
-            factory.addESM(esmRadio3);
-            factory.addESM(esmRadio4);
-            factory.addESM(esmRadio5);
-            factory.addESM(esmRadio6);
-
 
             //First post-lecture questionnaire for Linear Algebra
             if(userCourses.contains(LinearAlgebra.getName())) {
@@ -710,6 +736,14 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the first part of Linear Algebra (4/6)");
                     esmRadio5.setTitle("Survey about the first part of Linear Algebra (5/6)");
                     esmRadio6.setTitle("Survey about the first part of Linear Algebra (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
+
 //                    esmFreeText.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
 
@@ -746,6 +780,14 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the first part of Programming Fundamentals (4/6)");
                     esmRadio5.setTitle("Survey about the first part of Programming Fundamentals (5/6)");
                     esmRadio6.setTitle("Survey about the first part of Programming Fundamentals (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
+
 //                    esmFreeText.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
 
@@ -793,6 +835,14 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the first part of Cyber Communication (4/6)");
                     esmRadio5.setTitle("Survey about the first part of Cyber Communication (5/6)");
                     esmRadio6.setTitle("Survey about the first part of Cyber Communication (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
+
 //                    esmFreeText.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
 
@@ -841,6 +891,14 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the first part of Information Security (4/6)");
                     esmRadio5.setTitle("Survey about the first part of Information Security (5/6)");
                     esmRadio6.setTitle("Survey about the first part of Information Security (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
+
 //                    esmFreeText.setTitle("Survey about the first lecture of Information Security (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Information Security (7/7)");
 
@@ -877,6 +935,14 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the first part of Software Architecture and Design (4/6)");
                     esmRadio5.setTitle("Survey about the first part of Software Architecture and Design (5/6)");
                     esmRadio6.setTitle("Survey about the first part of Software Architecture and Design (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
+
 //                    esmFreeText.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
 
@@ -904,13 +970,6 @@ public class MyScheduler{
 
                 }
             }
-                factory.addESM(esmRadio1);
-                factory.addESM(esmRadio2);
-                factory.addESM(esmRadio3);
-                factory.addESM(esmRadio4);
-                factory.addESM(esmRadio5);
-                factory.addESM(esmRadio6);
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -978,12 +1037,6 @@ public class MyScheduler{
                         .addRadio("Strongly Disagree")
                         .setSubmitButton("Next");
             }
-            factory.addESM(esmRadio1);
-            factory.addESM(esmRadio2);
-            factory.addESM(esmRadio3);
-            factory.addESM(esmRadio4);
-            factory.addESM(esmRadio5);
-            factory.addESM(esmRadio6);
 
             //Second post-lecture questionnaire for Linear Algebra
             if(userCourses.contains(LinearAlgebra.getName())) {
@@ -994,6 +1047,14 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the second part of Linear Algebra (4/6)");
                     esmRadio5.setTitle("Survey about the second part of Linear Algebra (5/6)");
                     esmRadio6.setTitle("Survey about the second part of Linear Algebra (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
+
 //                    esmFreeText.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Linear Algebra (7/7)");
 
@@ -1031,6 +1092,13 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the second part of Programming Fundamentals (4/6)");
                     esmRadio5.setTitle("Survey about the second part of Programming Fundamentals (5/6)");
                     esmRadio6.setTitle("Survey about the second part of Programming Fundamentals (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
 //                    esmFreeText.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Programming Fundamentals (7/7)");
 
@@ -1078,6 +1146,13 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the second part of Cyber Communication (4/6)");
                     esmRadio5.setTitle("Survey about the second part of Cyber Communication (5/6)");
                     esmRadio6.setTitle("Survey about the second part of Cyber Communication (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
 //                    esmFreeText.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Cyber Communication (7/7)");
 
@@ -1126,6 +1201,13 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the second part of Information Security (4/6)");
                     esmRadio5.setTitle("Survey about the second part of Information Security (5/6)");
                     esmRadio6.setTitle("Survey about the second part of Information Security (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
 //                    esmFreeText.setTitle("Survey about the first lecture of Information Security (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Information Security (7/7)");
 
@@ -1163,6 +1245,13 @@ public class MyScheduler{
                     esmRadio4.setTitle("Survey about the second part of Software Architecture and Design (4/6)");
                     esmRadio5.setTitle("Survey about the second part of Software Architecture and Design (5/6)");
                     esmRadio6.setTitle("Survey about the second part of Software Architecture and Design (6/6)");
+
+                    factory.addESM(esmRadio1);
+                    factory.addESM(esmRadio2);
+                    factory.addESM(esmRadio3);
+                    factory.addESM(esmRadio4);
+                    factory.addESM(esmRadio5);
+                    factory.addESM(esmRadio6);
 //                    esmFreeText.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
 //                    esmQuickAnswer.setTitle("Survey about the first lecture of Software Architecture and Design (7/7)");
 
@@ -1190,12 +1279,6 @@ public class MyScheduler{
 
                 }
             }
-            factory.addESM(esmRadio1);
-            factory.addESM(esmRadio2);
-            factory.addESM(esmRadio3);
-            factory.addESM(esmRadio4);
-            factory.addESM(esmRadio5);
-            factory.addESM(esmRadio6);
         } catch (JSONException e) {
             e.printStackTrace();
         }
