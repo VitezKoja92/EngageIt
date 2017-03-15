@@ -3,6 +3,7 @@ package ch.usi.inf.mc.awareapp.Courses;
 import android.app.Activity;
 import android.content.Context;
 
+import com.aware.Aware;
 import com.aware.ESM;
 import com.aware.ui.esms.ESMFactory;
 import com.aware.ui.esms.ESM_Freetext;
@@ -37,22 +38,23 @@ public class MyScheduler{
 
 
 
+
     /* Creation of the courses - BEGIN */
 
 
     //Linear Algebra on Monday and  Wednesday from 8:30 until 10:15
-    public Weekday mondayLA = new Weekday(9, 35, "Wednesday");             //Exact schedule should be Monday 8:30
-    public Weekday wednesdayLA = new Weekday(9, 36, "Wednesday");       //Exact schedule should be Wednesday 8:30
+    public Weekday mondayLA = new Weekday(9, 36, "Wednesday");             //Exact schedule should be Monday 8:30
+    public Weekday wednesdayLA = new Weekday(9, 10, "Tuesday");       //Exact schedule should be Wednesday 8:30
     public Course LinearAlgebra = new Course(mondayLA, wednesdayLA, "Linear Algebra");
 
     //Programming Fundamentals on Monday, Wednesday and Friday from 10:30 until 12:15
-    public Weekday mondayPF = new Weekday(14, 30, "Tuesday");            //Exact schedule should be Monday 10:30
-    public Weekday wednesdayPF = new Weekday(14, 48, "Tuesday");      //Exact schedule should be Wednesday 10:30
+    public Weekday mondayPF = new Weekday(9, 37, "Wednesday");            //Exact schedule should be Monday 10:30
+    public Weekday wednesdayPF = new Weekday(17, 63, "Saturday");      //Exact schedule should be Wednesday 10:30
     public Weekday fridayPF = new Weekday(14, 49, "Tuesday");            //Exact schedule should be Friday 10:30
     public Course ProgrammingFundamentals = new Course(mondayPF, wednesdayPF,fridayPF, "Programming Fundamentals");
 
     //Cyber Communication on Tuesday, Wednesday and Thursday from 10:30 until 12:15
-    public Weekday tuesdayCC = new Weekday(14, 50, "Tuesday");          //Exact schedule should be Tuesday 10:30
+    public Weekday tuesdayCC = new Weekday(9, 38, "Wednesday");          //Exact schedule should be Tuesday 10:30
     public Weekday wednesdayCC = new Weekday(13, 51, "Tuesday");      //Exact schedule should be Wednesday 10:30
     public Weekday thursdayCC = new Weekday(13, 52, "Tuesday");        //Exact schedule should be Thursday 10:30
     public Course CyberCommunication = new Course(tuesdayCC, wednesdayCC,thursdayCC, "Cyber Communication");
@@ -149,6 +151,8 @@ public class MyScheduler{
                     first_pam5.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
                     first_pam5.addActionExtra(ESM.EXTRA_ESM, factory.build());
                     com.aware.utils.Scheduler.saveSchedule(context, first_pam5);
+
+
 
                 }
             }
@@ -252,6 +256,7 @@ public class MyScheduler{
             }
 
             factory.addESM(q1);
+
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -437,7 +442,8 @@ public class MyScheduler{
 
                 }
             }
-                factory.addESM(q1);
+            factory.addESM(q1);
+
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -120,8 +120,8 @@ public class WelcomeActivity extends ActionBarActivity {
                 && (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)){
 
             /************** JOIN AWARE AND AWARE'S STUDY **************/
-//          Intent startAware = new Intent(getApplicationContext(), Aware.class);
-//          startService(startAware);
+            Intent startAware = new Intent(getApplicationContext(), Aware.class);
+            startService(startAware);
             Aware.startESM(this);
             Aware.startScheduler(this);
 //          Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");

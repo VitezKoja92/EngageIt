@@ -505,7 +505,7 @@ public class SurveysActivity extends AppCompatActivity {
                             .addRadio("Strongly Disagree")
                             .setExpirationThreshold(60*30)
                             .setTitle("Post Lecture Survey (3/6)")
-                            .setInstructions("I felt excited by the vork in this lecture.")
+                            .setInstructions("I felt excited by the work in this lecture.")
                             .setSubmitButton("Next");
 
                     ESM_Radio esmRadio4 = new ESM_Radio();
