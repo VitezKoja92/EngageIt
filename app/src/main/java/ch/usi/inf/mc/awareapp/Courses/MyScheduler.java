@@ -11,6 +11,7 @@ import com.aware.ui.esms.ESM_Likert;
 import com.aware.ui.esms.ESM_PAM;
 import com.aware.ui.esms.ESM_QuickAnswer;
 import com.aware.ui.esms.ESM_Radio;
+import com.aware.utils.Scheduler;
 
 import org.json.JSONException;
 
@@ -43,30 +44,30 @@ public class MyScheduler{
 
 
     //Linear Algebra on Monday and  Wednesday from 8:30 until 10:15
-    public Weekday mondayLA = new Weekday(9, 36, "Wednesday");             //Exact schedule should be Monday 8:30
-    public Weekday wednesdayLA = new Weekday(9, 10, "Tuesday");       //Exact schedule should be Wednesday 8:30
+    public Weekday mondayLA = new Weekday(9, 8, "Thursday");             //Exact schedule should be Monday 8:30
+    public Weekday wednesdayLA = new Weekday(23, 59, "Wednesday");       //Exact schedule should be Wednesday 8:30
     public Course LinearAlgebra = new Course(mondayLA, wednesdayLA, "Linear Algebra");
 
     //Programming Fundamentals on Monday, Wednesday and Friday from 10:30 until 12:15
-    public Weekday mondayPF = new Weekday(9, 37, "Wednesday");            //Exact schedule should be Monday 10:30
-    public Weekday wednesdayPF = new Weekday(17, 63, "Saturday");      //Exact schedule should be Wednesday 10:30
-    public Weekday fridayPF = new Weekday(14, 49, "Tuesday");            //Exact schedule should be Friday 10:30
+    public Weekday mondayPF = new Weekday(23, 16, "Wednesday");            //Exact schedule should be Monday 10:30
+    public Weekday wednesdayPF = new Weekday(21, 10, "Wednesday");      //Exact schedule should be Wednesday 10:30
+    public Weekday fridayPF = new Weekday(21, 10, "Wednesday");            //Exact schedule should be Friday 10:30
     public Course ProgrammingFundamentals = new Course(mondayPF, wednesdayPF,fridayPF, "Programming Fundamentals");
 
     //Cyber Communication on Tuesday, Wednesday and Thursday from 10:30 until 12:15
-    public Weekday tuesdayCC = new Weekday(9, 38, "Wednesday");          //Exact schedule should be Tuesday 10:30
-    public Weekday wednesdayCC = new Weekday(13, 51, "Tuesday");      //Exact schedule should be Wednesday 10:30
-    public Weekday thursdayCC = new Weekday(13, 52, "Tuesday");        //Exact schedule should be Thursday 10:30
+    public Weekday tuesdayCC = new Weekday(21, 49, "Wednesday");          //Exact schedule should be Tuesday 10:30
+    public Weekday wednesdayCC = new Weekday(21, 10, "Wednesday");      //Exact schedule should be Wednesday 10:30
+    public Weekday thursdayCC = new Weekday(21, 10, "Wednesday");        //Exact schedule should be Thursday 10:30
     public Course CyberCommunication = new Course(tuesdayCC, wednesdayCC,thursdayCC, "Cyber Communication");
 
     //Information Security on Monday from 13:30 until 17:15
-    public Weekday mondayInf1 = new Weekday(13, 53, "Tuesday");          //Exact schedule should be Monday 13:30
-    public Weekday mondayInf2 = new Weekday(13, 54, "Tuesday");          //Exact schedule should be Monday 15:30
+    public Weekday mondayInf1 = new Weekday(21, 50, "Wednesday");          //Exact schedule should be Monday 13:30
+    public Weekday mondayInf2 = new Weekday(21, 10, "Wednesday");          //Exact schedule should be Monday 15:30
     public Course InformationSecurity = new Course(mondayInf1, mondayInf2, "Information Security");
 
     //Software Architecture on Tuesday and Thursday from 13:30 until 17:15
-    public Weekday tuesdaySAD = new Weekday(13, 55, "Tuesday");         //Exact schedule should be Tuesday 13:30
-    public Weekday thursdaySAD = new Weekday(13, 56, "Tuesday");       //Exact schedule should be Thursday 13:30
+    public Weekday tuesdaySAD = new Weekday(21, 51, "Wednesday");         //Exact schedule should be Tuesday 13:30
+    public Weekday thursdaySAD = new Weekday(21, 10, "Wednesday");       //Exact schedule should be Thursday 13:30
     public Course SoftwareArchitecture = new Course(tuesdaySAD, thursdaySAD, "Software Architecture and Design");
 
     /* Creation of the courses - END */
@@ -86,33 +87,45 @@ public class MyScheduler{
                     .setSubmitButton("Done")
                     .setNotificationTimeout(60*630);        //First PAM stays active until 25 min after the beginning of the lecture
 
+            factory.addESM(q1);
             //First PAM for Linear Algebra
             if (userCourses.contains(LinearAlgebra.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + LinearAlgebra.getName() + "!");
 
-                factory.addESM(q1);
+
 
                 if(!UserData.Username.equals("/")){
 
-                    com.aware.utils.Scheduler.Schedule first_pam1 = new com.aware.utils.Scheduler.Schedule("first_pam1"+UserData.Username);
-                    first_pam1.addHour(LinearAlgebra.getDay1().Hour);
-                    first_pam1.addMinute(LinearAlgebra.getDay1().Minute - 5); //8:25 Monday
-                    first_pam1.addWeekday(LinearAlgebra.getDay1().Day);
+                    if(Scheduler.getSchedule(context, "first_pam1"+UserData.Username) == null){
 
-                    first_pam1.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam1.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam1.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam1);
 
-                    com.aware.utils.Scheduler.Schedule first_pam2 = new com.aware.utils.Scheduler.Schedule("first_pam2"+UserData.Username);
-                    first_pam2.addHour(LinearAlgebra.getDay2().Hour);
-                    first_pam2.addMinute(LinearAlgebra.getDay2().Minute - 5); //8:25 Wednesday
-                    first_pam2.addWeekday(LinearAlgebra.getDay2().Day);
+                        com.aware.utils.Scheduler.Schedule first_pam1 = new com.aware.utils.Scheduler.Schedule("first_pam1"+UserData.Username);
+                        first_pam1.addHour(LinearAlgebra.getDay1().Hour);
+                        first_pam1.addMinute(LinearAlgebra.getDay1().Minute - 5); //8:25 Monday
+                        first_pam1.addWeekday(LinearAlgebra.getDay1().Day);
 
-                    first_pam2.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam2.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam2.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam2);
+                        first_pam1.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam1.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam1.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam1);
+
+                        System.out.println("DENZIL: " + first_pam1.build().toString());
+                    }
+
+
+                    if(Scheduler.getSchedule(context, "first_pam2"+UserData.Username) == null){
+
+
+                        com.aware.utils.Scheduler.Schedule first_pam2 = new com.aware.utils.Scheduler.Schedule("first_pam2"+UserData.Username);
+                        first_pam2.addHour(LinearAlgebra.getDay2().Hour);
+                        first_pam2.addMinute(LinearAlgebra.getDay2().Minute - 5); //8:25 Wednesday
+                        first_pam2.addWeekday(LinearAlgebra.getDay2().Day);
+
+                        first_pam2.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam2.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam2.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam2);
+                    }
 
                 }
             }
@@ -121,42 +134,54 @@ public class MyScheduler{
             if (userCourses.contains(ProgrammingFundamentals.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + ProgrammingFundamentals.getName() + "!");
 
-                factory.addESM(q1);
+
+
 
                 if(!UserData.Username.equals("/")){
 
-                    com.aware.utils.Scheduler.Schedule first_pam3 = new com.aware.utils.Scheduler.Schedule("first_pam3"+UserData.Username);
-                    first_pam3.addHour(ProgrammingFundamentals.getDay1().Hour);
-                    first_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute - 5); //10:25 Monday -good
-                    first_pam3.addWeekday(ProgrammingFundamentals.getDay1().Day);
-
-                    first_pam3.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam3.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam3.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam3);
-
-                    com.aware.utils.Scheduler.Schedule first_pam4 = new com.aware.utils.Scheduler.Schedule("first_pam4"+UserData.Username);
-                    first_pam4.addHour(ProgrammingFundamentals.getDay2().Hour);
-                    first_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute - 5); //10:25 Wednesday
-                    first_pam4.addWeekday(ProgrammingFundamentals.getDay2().Day);
-
-                    first_pam4.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam4.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam4.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam4);
+                    if(Scheduler.getSchedule(context, "first_pam3"+UserData.Username) == null){
 
 
-                    com.aware.utils.Scheduler.Schedule first_pam5 = new com.aware.utils.Scheduler.Schedule("first_pam5"+UserData.Username);
-                    first_pam5.addHour(ProgrammingFundamentals.getDay3().Hour);
-                    first_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute - 5); //10:25 Friday
-                    first_pam5.addWeekday(ProgrammingFundamentals.getDay3().Day);
+                        com.aware.utils.Scheduler.Schedule first_pam3 = new com.aware.utils.Scheduler.Schedule("first_pam3"+UserData.Username);
+                        first_pam3.addHour(ProgrammingFundamentals.getDay1().Hour);
+                        first_pam3.addMinute(ProgrammingFundamentals.getDay1().Minute - 5); //10:25 Monday -good
+                        first_pam3.addWeekday(ProgrammingFundamentals.getDay1().Day);
 
-                    first_pam5.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam5.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam5.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam5);
+                        first_pam3.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam3.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam3.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam3);
+                    }
 
 
+                    if(Scheduler.getSchedule(context, "first_pam4"+UserData.Username) == null){
+
+
+                        com.aware.utils.Scheduler.Schedule first_pam4 = new com.aware.utils.Scheduler.Schedule("first_pam4"+UserData.Username);
+                        first_pam4.addHour(ProgrammingFundamentals.getDay2().Hour);
+                        first_pam4.addMinute(ProgrammingFundamentals.getDay2().Minute - 5); //10:25 Wednesday
+                        first_pam4.addWeekday(ProgrammingFundamentals.getDay2().Day);
+
+                        first_pam4.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam4.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam4.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam4);
+                    }
+
+
+                    if(Scheduler.getSchedule(context, "first_pam5"+UserData.Username) == null){
+
+
+                        com.aware.utils.Scheduler.Schedule first_pam5 = new com.aware.utils.Scheduler.Schedule("first_pam5"+UserData.Username);
+                        first_pam5.addHour(ProgrammingFundamentals.getDay3().Hour);
+                        first_pam5.addMinute(ProgrammingFundamentals.getDay3().Minute - 5); //10:25 Friday
+                        first_pam5.addWeekday(ProgrammingFundamentals.getDay3().Day);
+
+                        first_pam5.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam5.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam5.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam5);
+                    }
 
                 }
             }
@@ -165,41 +190,52 @@ public class MyScheduler{
             if (userCourses.contains(CyberCommunication.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + CyberCommunication.getName() + "!");
 
-                factory.addESM(q1);
 
                 if(!UserData.Username.equals("/")){
-
-                    com.aware.utils.Scheduler.Schedule first_pam6 = new com.aware.utils.Scheduler.Schedule("first_pam6"+UserData.Username);
-                    first_pam6.addHour(CyberCommunication.getDay1().Hour);
-                    first_pam6.addMinute(CyberCommunication.getDay1().Minute - 5); //10:25 Tuesday
-                    first_pam6.addWeekday(CyberCommunication.getDay1().Day);
-
-                    first_pam6.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam6.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam6.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam6);
+                    if(Scheduler.getSchedule(context, "first_pam6"+UserData.Username) == null){
 
 
-                    com.aware.utils.Scheduler.Schedule first_pam7 = new com.aware.utils.Scheduler.Schedule("first_pam7"+UserData.Username);
-                    first_pam7.addHour(CyberCommunication.getDay2().Hour);
-                    first_pam7.addMinute(CyberCommunication.getDay2().Minute - 5); //10:25 Wednesday
-                    first_pam7.addWeekday(CyberCommunication.getDay2().Day);
+                        com.aware.utils.Scheduler.Schedule first_pam6 = new com.aware.utils.Scheduler.Schedule("first_pam6"+UserData.Username);
+                        first_pam6.addHour(CyberCommunication.getDay1().Hour);
+                        first_pam6.addMinute(CyberCommunication.getDay1().Minute - 5); //10:25 Tuesday
+                        first_pam6.addWeekday(CyberCommunication.getDay1().Day);
 
-                    first_pam7.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam7.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam7.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam7);
+                        first_pam6.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam6.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam6.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam6);
+                    }
 
 
-                    com.aware.utils.Scheduler.Schedule first_pam8 = new com.aware.utils.Scheduler.Schedule("first_pam8"+UserData.Username);
-                    first_pam8.addHour(CyberCommunication.getDay3().Hour);
-                    first_pam8.addMinute(CyberCommunication.getDay3().Minute - 5); //10:25 Thursday
-                    first_pam8.addWeekday(CyberCommunication.getDay3().Day);
+                    if(Scheduler.getSchedule(context, "first_pam7"+UserData.Username) == null){
 
-                    first_pam8.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam8.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam8.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam8);
+
+                        com.aware.utils.Scheduler.Schedule first_pam7 = new com.aware.utils.Scheduler.Schedule("first_pam7"+UserData.Username);
+                        first_pam7.addHour(CyberCommunication.getDay2().Hour);
+                        first_pam7.addMinute(CyberCommunication.getDay2().Minute - 5); //10:25 Wednesday
+                        first_pam7.addWeekday(CyberCommunication.getDay2().Day);
+
+                        first_pam7.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam7.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam7.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam7);
+                    }
+
+
+                    if(Scheduler.getSchedule(context, "first_pam8"+UserData.Username) == null){
+
+
+                        com.aware.utils.Scheduler.Schedule first_pam8 = new com.aware.utils.Scheduler.Schedule("first_pam8"+UserData.Username);
+                        first_pam8.addHour(CyberCommunication.getDay3().Hour);
+                        first_pam8.addMinute(CyberCommunication.getDay3().Minute - 5); //10:25 Thursday
+                        first_pam8.addWeekday(CyberCommunication.getDay3().Day);
+
+                        first_pam8.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam8.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam8.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam8);
+                    }
+
 
                 }
             }
@@ -208,30 +244,37 @@ public class MyScheduler{
             if (userCourses.contains(InformationSecurity.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + InformationSecurity.getName() + "!");
 
-                factory.addESM(q1);
 
                 if(!UserData.Username.equals("/")){
 
-                    com.aware.utils.Scheduler.Schedule first_pam9 = new com.aware.utils.Scheduler.Schedule("first_pam9"+UserData.Username);
-                    first_pam9.addHour(InformationSecurity.getDay1().Hour);
-                    first_pam9.addMinute(InformationSecurity.getDay1().Minute - 5); //13:25 Monday - good
-                    first_pam9.addWeekday(InformationSecurity.getDay1().Day);
+                    if(Scheduler.getSchedule(context, "first_pam9"+UserData.Username) == null){
 
-                    first_pam9.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam9.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam9.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam9);
 
-                    com.aware.utils.Scheduler.Schedule first_pam10 = new com.aware.utils.Scheduler.Schedule("first_pam10"+UserData.Username);
-                    first_pam10.addHour(InformationSecurity.getDay2().Hour);
-                    first_pam10.addMinute(InformationSecurity.getDay2().Minute - 5); //15:25 Monday - BAD!!!!!!!!
-                    first_pam10.addWeekday(InformationSecurity.getDay2().Day);
+                        com.aware.utils.Scheduler.Schedule first_pam9 = new com.aware.utils.Scheduler.Schedule("first_pam9"+UserData.Username);
+                        first_pam9.addHour(InformationSecurity.getDay1().Hour);
+                        first_pam9.addMinute(InformationSecurity.getDay1().Minute - 5); //13:25 Monday - good
+                        first_pam9.addWeekday(InformationSecurity.getDay1().Day);
 
-                    first_pam10.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam10.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam10.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam10);
+                        first_pam9.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam9.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam9.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam9);
+                    }
 
+
+                    if(Scheduler.getSchedule(context, "first_pam10"+UserData.Username) == null){
+
+
+                        com.aware.utils.Scheduler.Schedule first_pam10 = new com.aware.utils.Scheduler.Schedule("first_pam10"+UserData.Username);
+                        first_pam10.addHour(InformationSecurity.getDay2().Hour);
+                        first_pam10.addMinute(InformationSecurity.getDay2().Minute - 5); //15:25 Monday - BAD!!!!!!!!
+                        first_pam10.addWeekday(InformationSecurity.getDay2().Day);
+
+                        first_pam10.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam10.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam10.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam10);
+                    }
                 }
             }
 
@@ -239,30 +282,40 @@ public class MyScheduler{
             if (userCourses.contains(SoftwareArchitecture.getName())) {
                 q1.setInstructions("Pick the closest to how you feel now before " + SoftwareArchitecture.getName() + "!");
 
-                factory.addESM(q1);
+
 
                 if(!UserData.Username.equals("/")) {
 
-                    com.aware.utils.Scheduler.Schedule first_pam11 = new com.aware.utils.Scheduler.Schedule("first_pam11" + UserData.Username);
-                    first_pam11.addHour(SoftwareArchitecture.getDay1().Hour);
-                    first_pam11.addMinute(SoftwareArchitecture.getDay1().Minute - 5); //13:25 Tuesday
-                    first_pam11.addWeekday(SoftwareArchitecture.getDay1().Day);
-
-                    first_pam11.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam11.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam11.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam11);
+                    if(Scheduler.getSchedule(context, "first_pam11"+UserData.Username) == null){
 
 
-                    com.aware.utils.Scheduler.Schedule first_pam12 = new com.aware.utils.Scheduler.Schedule("first_pam12" + UserData.Username);
-                    first_pam12.addHour(SoftwareArchitecture.getDay2().Hour);
-                    first_pam12.addMinute(SoftwareArchitecture.getDay2().Minute - 5); //13:25 Thursday
-                    first_pam12.addWeekday(SoftwareArchitecture.getDay2().Day);
+                        com.aware.utils.Scheduler.Schedule first_pam11 = new com.aware.utils.Scheduler.Schedule("first_pam11" + UserData.Username);
+                        first_pam11.addHour(SoftwareArchitecture.getDay1().Hour);
+                        first_pam11.addMinute(SoftwareArchitecture.getDay1().Minute - 5); //13:25 Tuesday
+                        first_pam11.addWeekday(SoftwareArchitecture.getDay1().Day);
 
-                    first_pam12.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
-                    first_pam12.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
-                    first_pam12.addActionExtra(ESM.EXTRA_ESM, factory.build());
-                    com.aware.utils.Scheduler.saveSchedule(context, first_pam12);
+                        first_pam11.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam11.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam11.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam11);
+                    }
+
+
+
+                    if(Scheduler.getSchedule(context, "first_pam12"+UserData.Username) == null){
+
+
+                        com.aware.utils.Scheduler.Schedule first_pam12 = new com.aware.utils.Scheduler.Schedule("first_pam12" + UserData.Username);
+                        first_pam12.addHour(SoftwareArchitecture.getDay2().Hour);
+                        first_pam12.addMinute(SoftwareArchitecture.getDay2().Minute - 5); //13:25 Thursday
+                        first_pam12.addWeekday(SoftwareArchitecture.getDay2().Day);
+
+                        first_pam12.setActionType(com.aware.utils.Scheduler.ACTION_TYPE_BROADCAST);
+                        first_pam12.setActionIntentAction(ESM.ACTION_AWARE_QUEUE_ESM);
+                        first_pam12.addActionExtra(ESM.EXTRA_ESM, factory.build());
+                        com.aware.utils.Scheduler.saveSchedule(context, first_pam12);
+                    }
+
 
                 }
             }

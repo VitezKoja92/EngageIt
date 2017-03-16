@@ -421,14 +421,14 @@ public class WelcomeActivity extends ActionBarActivity {
         finish();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        Intent aware = new Intent(this, Aware.class);
-        startService(aware);
-        Aware.startAWARE(this); //keep everything running on the background
-    }
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//
+//        Intent aware = new Intent(this, Aware.class);
+//        startService(aware);
+//        Aware.startAWARE(this); //keep everything running on the background
+//    }
 
     private void checkForPermissions() {
         // Android 6 (API level 23) now require ACCESS_COARSE_LOCATION permission to use BLE
