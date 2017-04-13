@@ -27,6 +27,7 @@
         <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -35,7 +36,8 @@
         <activity android:name=".WearableDataActivity" />
         <activity android:name=".Settings.SettingsActivity" />
 
-        <receiver android:name=".RemoteStorage.AlarmReceiver"/>
+        <receiver android:name=".RemoteStorage.AlarmReceiver" />
+        <receiver android:name=".Courses.AlarmNotificationReceiver" />
         <receiver android:name=".Database.ESMObserver">
             <intent-filter>
                 <action android:name="ACTION_AWARE_ESM_ANSWERED" />
@@ -46,10 +48,12 @@
         <activity android:name=".Settings.EditProfileActivity" />
         <activity android:name=".Settings.AddProfileActivity" />
         <activity android:name=".Settings.ChooseOtherProfilesActivity" />
-        <activity android:name=".SurveysActivity"></activity>
+        <activity android:name=".SurveysActivity" />
 
         <service android:name=".RemoteStorage.ESMUploader" />
-        <service android:name=".RemoteStorage.AlarmService"/>
+        <service android:name=".RemoteStorage.AlarmService" />
+
+        <activity android:name=".Courses.QuestionnaireActivity"></activity>
     </application>
 
 </manifest>

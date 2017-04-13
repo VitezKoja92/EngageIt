@@ -15,7 +15,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ch.usi.inf.mc.awareapp.Courses.MyScheduler;
+//import ch.usi.inf.mc.awareapp.Courses.MyScheduler;
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
 import ch.usi.inf.mc.awareapp.Database.ESMClass;
 import ch.usi.inf.mc.awareapp.Database.LocalDbUtility;

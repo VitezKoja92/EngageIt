@@ -315,12 +315,15 @@ public class AddProfileActivity extends AppCompatActivity {
                 //createGeneralSurvey();
 
 
+
                 Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
                 finish();
             }
         });
     }
+
+
 
     @Override
     protected void onResume() {

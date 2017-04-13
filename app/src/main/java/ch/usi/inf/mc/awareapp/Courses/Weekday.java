@@ -8,9 +8,9 @@ public class Weekday {
 
     public int Hour;
     public int Minute;
-    public String Day;
+    public int Day;
 
-    public Weekday(int h, int m, String d){
+    public Weekday(int h, int m, int d){
         setHour(h);
         setMinute(m);
         setDay(d);
@@ -23,7 +23,7 @@ public class Weekday {
     public void setMinute(int minute){
         this.Minute = minute;
     }
-    public void setDay(String day){
+    public void setDay(int day){
         this.Day = day;
     }
 
@@ -33,7 +33,7 @@ public class Weekday {
     public int getMinute(){
         return this.Minute;
     }
-    public String getDay(){
+    public int getDay(){
         return this.Day;
     }
 

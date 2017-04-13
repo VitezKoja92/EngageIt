@@ -53,7 +53,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import ch.usi.inf.mc.awareapp.Courses.MyScheduler;
+//import ch.usi.inf.mc.awareapp.Courses.MyScheduler;
+import ch.usi.inf.mc.awareapp.Courses.NewScheduler;
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
 import ch.usi.inf.mc.awareapp.Database.ESMClass;
 import ch.usi.inf.mc.awareapp.Database.LocalDbUtility;
@@ -86,7 +87,7 @@ public class WelcomeActivity extends ActionBarActivity {
     ImageButton settingsBtn;
     DatabaseHandler dbHandler;
     TextView usernameLabel;
-    MyScheduler scheduler;
+    NewScheduler scheduler;
 
     String course;
     int minutes;
@@ -102,6 +103,7 @@ public class WelcomeActivity extends ActionBarActivity {
     int dayOfMonth;
     final Context context = this;
     String courses;
+    NewScheduler newScheduler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,11 +126,11 @@ public class WelcomeActivity extends ActionBarActivity {
             startService(startAware);
 
           
-//          Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
-//          Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
-//          sendBroadcast(sync);
+          Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
+          Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
+          sendBroadcast(sync);
 
-            Aware.setSetting(this, Aware_Preferences.STATUS_ESM, true);
+            //Aware.setSetting(this, Aware_Preferences.STATUS_ESM, true);
 
 
             if (!Aware.isStudy(context)) {
@@ -139,12 +141,12 @@ public class WelcomeActivity extends ActionBarActivity {
             //Trigger schedulers
             triggerSchedulers();
 
-            //Trigger alarm
+            //Trigger alarm for remote data storing
             triggerAlarm();
         }
 
 
-        /************** TEST - BEGIN **************/
+        /************** TEST **************/
         usernameLabel = (TextView) findViewById(R.id.username_label);
         usernameLabel.setText("User: " + username);
 
@@ -158,10 +160,9 @@ public class WelcomeActivity extends ActionBarActivity {
         for (ESMClass esm : dbHandler.getAllESMs()) {
             System.out.println("android_id: " + esm._android_id + ", username: " + esm._username + ", json: " + esm._esm_json);
         }
-        /************** TEST - END **************/
 
 
-        /************** DEFINING BUTTONS - BEGIN **************/
+        /************** DEFINING BUTTONS **************/
 
         /* Defining "Surveys" button - By clicking it it should lead us to "SurveysActivity" */
         surveysBtn = (Button) findViewById(R.id.surveys_btn);
@@ -213,7 +214,7 @@ public class WelcomeActivity extends ActionBarActivity {
         dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         calendar = Calendar.getInstance();
         weekday = dayFormat.format(calendar.getTime());
-        scheduler = new MyScheduler();
+        newScheduler = new NewScheduler();
         month = calendar.get(Calendar.MONTH) + 1;
         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -224,14 +225,14 @@ public class WelcomeActivity extends ActionBarActivity {
         }
 
         //Trigger schedulers only in period between February 20th and March 12th
-        if ((month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31) || (month == 3 && dayOfMonth >= 1 && dayOfMonth <= 31)) {
+        if ((month == 4 && dayOfMonth >= 1 && dayOfMonth <= 31)) {
             //Triggering schedulers
             if (!UserData.Username.equals("/")) {
-                scheduler.createFirstPAM(courses, this);
-//                scheduler.createSecondPAM(courses, this);
-//                scheduler.createThirdPAM(courses, this);
-//                scheduler.createFirstPostLectureESM(this,courses);
-//                scheduler.createSecondPostLectureESM(this,courses);
+                //newScheduler.createFirstPAM(getApplicationContext(), courses);
+                //newScheduler.createSecondPAM(getApplicationContext(), courses);
+                //newScheduler.createThirdPAM(getApplicationContext(), courses);
+                newScheduler.createFirstPostlecture(getApplicationContext(), courses);
+                //newScheduler.createSecondPostlecture(getApplicationContext(), courses);
             }
         }
     }
@@ -254,14 +255,14 @@ public class WelcomeActivity extends ActionBarActivity {
             if (cal.getTimeInMillis() > System.currentTimeMillis()) {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 String time = sdf.format(new Date());
-                System.out.println(time + ": Alarm should fire in the future");
+                //System.out.println(time + ": Alarm should fire in the future");
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
                 UserData.AlarmTriggered = true;
             } else {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 String time = sdf.format(new Date());
-                System.out.println(time + ": Alarm in the past");
+                //System.out.println(time + ": Alarm in the past");
                 cal.add(Calendar.DAY_OF_MONTH, 1);
 
                 alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
@@ -421,14 +422,14 @@ public class WelcomeActivity extends ActionBarActivity {
         finish();
     }
 
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//
-//        Intent aware = new Intent(this, Aware.class);
-//        startService(aware);
-//        Aware.startAWARE(this); //keep everything running on the background
-//    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        Intent aware = new Intent(this, Aware.class);
+        startService(aware);
+        Aware.startAWARE(this); //keep everything running on the background
+    }
 
     private void checkForPermissions() {
         // Android 6 (API level 23) now require ACCESS_COARSE_LOCATION permission to use BLE

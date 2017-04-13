@@ -69,6 +69,7 @@
         <item>Information Security</item>
         <item>Software Architecture and Design</item>
     </string-array>
+    <string name="title_activity_questionnaires">QuestionnairesActivity</string>
 
 </resources>
 
