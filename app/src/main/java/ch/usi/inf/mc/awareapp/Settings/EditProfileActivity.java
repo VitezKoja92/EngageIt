@@ -260,11 +260,7 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //Courses validation
-                if(selectedCoursesString.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please select the courses you are attending!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
 
                 //Gender input
                 if (genderGroup.getCheckedRadioButtonId() == R.id.m_radio_button) {
@@ -330,6 +326,13 @@ public class EditProfileActivity extends AppCompatActivity {
                             break;
                     }
                 }
+
+                //Courses validation
+                if(selectedCoursesString.equals("")){
+                    Toast.makeText(getApplicationContext(), "Please select the courses you are attending!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 UserData.SelectedCourses = selectedCoursesString;
 
                 //CurrentDate - Timestamp

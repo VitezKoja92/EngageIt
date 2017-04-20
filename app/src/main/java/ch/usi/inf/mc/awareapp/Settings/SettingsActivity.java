@@ -76,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String enteredPassword = passwordField.getText().toString();
-                                String adminPassword = "123";
+                                String adminPassword = "engageit2017";
                                 if(enteredPassword.equals(adminPassword)){
 
                                     Intent i = new Intent(getApplicationContext(), TermsActivity.class);
@@ -145,7 +145,7 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String enteredPassword = passwordField.getText().toString();
-                        String adminPassword = "123";
+                        String adminPassword = "engageit2017";
                         if(enteredPassword.equals(adminPassword)){
                             Intent i = new Intent(getApplicationContext(), ChooseOtherProfilesActivity.class);
                             startActivity(i);
@@ -257,7 +257,7 @@ public class SettingsActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String enteredPassword = passwordField.getText().toString();
-                                String adminPassword = "123";
+                                String adminPassword = "engageit2017";
                                 if(enteredPassword.equals(adminPassword)){
 
                                     Intent i = new Intent(getApplicationContext(), TermsActivity.class);
@@ -309,7 +309,7 @@ public class SettingsActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String enteredPassword = passwordField.getText().toString();
-                        String adminPassword = "123";
+                        String adminPassword = "engageit2017";
                         if(enteredPassword.equals(adminPassword)){
                             Intent i = new Intent(getApplicationContext(), ChooseOtherProfilesActivity.class);
                             startActivity(i);

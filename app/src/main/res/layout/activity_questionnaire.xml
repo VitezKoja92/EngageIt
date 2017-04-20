@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_questionnaire"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ch.usi.inf.mc.awareapp.Courses.QuestionnaireActivity">
+    android:paddingTop="5dp"
+    android:paddingRight="25dp"
+    android:paddingLeft="25dp"
+    android:paddingBottom="5dp"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:background="#45bfa5">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/welcomeImg"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <ImageButton
+            android:id="@+id/welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rsz_1rsz_3logo1_70"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+    <TextView
+        android:text="@string/questionnaireTitle"
+        android:id="@+id/questionnaire_title"
+        android:textSize="35sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="80dp"
+        android:textAlignment="center"
+        android:textColor="#ffffff"
+        android:textStyle="bold|italic">
+    </TextView>
+    <Button
+        android:text="@string/goHome"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:id="@+id/goHome"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textSize="16sp"
+        android:background="@drawable/btn_radius"
+        android:textColor="#fafafa">
 
-</android.support.constraint.ConstraintLayout>
+    </Button>
+
+</LinearLayout>

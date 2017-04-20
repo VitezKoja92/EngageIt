@@ -16,6 +16,8 @@
     <string name="faculty_title">Faculty</string>
     <string name="studies_level">Level of studies</string>
     <string name="course_title">Attended courses</string>
+    <string name="questionnaireTitle">Thank you for completing the questionnaire!</string>
+    <string name="goHome">Go back to Home page</string>
 
 
     <string name="reg_done_btn">Done</string>

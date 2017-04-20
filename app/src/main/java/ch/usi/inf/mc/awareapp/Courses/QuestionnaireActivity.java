@@ -15,6 +15,7 @@ import com.aware.ui.esms.ESM_Radio;
 import org.json.JSONException;
 
 import ch.usi.inf.mc.awareapp.R;
+import ch.usi.inf.mc.awareapp.WelcomeActivity;
 
 public class QuestionnaireActivity extends AppCompatActivity {
     Intent intent;
@@ -27,6 +28,18 @@ public class QuestionnaireActivity extends AppCompatActivity {
         setContentView(R.layout.activity_questionnaire);
 
 
+        //Define home button
+        Button goHome = (Button)findViewById(R.id.goHome);
+        goHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
+                startActivity(i);
+                finish();
+            }
+        });
+
+        //Take extras from notification's pending intent
         intent = getIntent();
         course = intent.getExtras().getString("course");
         questionnaire = intent.getExtras().getString("questionnaire");
@@ -92,7 +105,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
             }
         }
 
-        if(course.equals("MondayInf1") || course.equals("MondayInf1")){
+        if(course.equals("MondayInf1") || course.equals("MondayInf2")){
             if(questionnaire.equals("FirstPAM")){
                 createPAM("before", "Information Security","Pre-lecture PAM", 40);
             }
@@ -112,6 +125,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
         if(course.equals("TuesdaySAD") || course.equals("ThursdaySAD")){
             if(questionnaire.equals("FirstPAM")){
+                System.out.println("in SAD");
                 createPAM("before", "Software Architecture and Design","Pre-lecture PAM", 40);
             }
             if(questionnaire.equals("SecondPAM")){
@@ -231,5 +245,11 @@ public class QuestionnaireActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i =new Intent(getApplicationContext(), WelcomeActivity.class);
+        startActivity(i);
+        finish();
     }
 }

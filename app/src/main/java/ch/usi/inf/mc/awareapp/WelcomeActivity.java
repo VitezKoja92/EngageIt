@@ -125,10 +125,9 @@ public class WelcomeActivity extends ActionBarActivity {
             Intent startAware = new Intent(getApplicationContext(), Aware.class);
             startService(startAware);
 
-          
-          Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
-          Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
-          sendBroadcast(sync);
+            Aware.joinStudy(getApplicationContext(), "https://api.awareframework.com/index.php/webservice/index/1096/zZfIitzO9Wb5");
+            Intent sync = new Intent(Aware.ACTION_AWARE_SYNC_DATA);
+            sendBroadcast(sync);
 
             //Aware.setSetting(this, Aware_Preferences.STATUS_ESM, true);
 
@@ -196,21 +195,20 @@ public class WelcomeActivity extends ActionBarActivity {
             }
         });
 
-        /*Defining "Settings" button*/
-        settingsBtn = (ImageButton) findViewById(R.id.settings_btn);
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
-                startActivity(i);
-                finish();
-            }
-        });
-        /************** DEFINING BUTTONS - END **************/
+//        /*Defining "Settings" button*/
+//        settingsBtn = (ImageButton) findViewById(R.id.settings_btn);
+//        settingsBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+//                startActivity(i);
+//                finish();
+//            }
+//        });
     }
 
     public void triggerSchedulers() {
-        /************** TRIGGER SCHEDULERS **************/
+
         dayFormat = new SimpleDateFormat("EEEE", Locale.US);
         calendar = Calendar.getInstance();
         weekday = dayFormat.format(calendar.getTime());
@@ -218,55 +216,56 @@ public class WelcomeActivity extends ActionBarActivity {
         month = calendar.get(Calendar.MONTH) + 1;
         dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 
+        //Take courses that user choose
         for (RegistrationClass reg : dbHandler.getAllRegistrations()) {
             if (reg._username.equals(UserData.Username)) {
                 courses = reg._courses;
             }
         }
 
-        //Trigger schedulers only in period between February 20th and March 12th
-        if ((month == 4 && dayOfMonth >= 1 && dayOfMonth <= 31)) {
-            //Triggering schedulers
-            if (!UserData.Username.equals("/")) {
-                //newScheduler.createFirstPAM(getApplicationContext(), courses);
-                //newScheduler.createSecondPAM(getApplicationContext(), courses);
-                //newScheduler.createThirdPAM(getApplicationContext(), courses);
+        //Trigger schedulers only in period between April 10th and May 31th
+        if ((month == 4 && dayOfMonth >= 10 && dayOfMonth <= 30) || (month == 5 && dayOfMonth >= 1 && dayOfMonth <= 31)) {
+
+            if (!UserData.Username.equals("/")) { //Check if user is logged in
+                newScheduler.createFirstPAM(getApplicationContext(), courses);
+                newScheduler.createSecondPAM(getApplicationContext(), courses);
+                newScheduler.createThirdPAM(getApplicationContext(), courses);
                 newScheduler.createFirstPostlecture(getApplicationContext(), courses);
-                //newScheduler.createSecondPostlecture(getApplicationContext(), courses);
+                newScheduler.createSecondPostlecture(getApplicationContext(), courses);
             }
         }
     }
 
     public void triggerAlarm() {
-        /************** TRIGGER AlarmReceiver AT SPECIFIED TIME **************/
-
-        if (!UserData.AlarmTriggered) {
+        //Method for triggering alarms at specified time, so that uploading of the data
+        //to remote storage can start
+        if (!UserData.AlarmForUploadTriggered) {
             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
             AlarmManager alarmManager = (AlarmManager) getSystemService(getApplicationContext().ALARM_SERVICE);
 
             Calendar cal = Calendar.getInstance();
-            int hour = 19;
+            int hour = 19; //19
             int minute = getRandomNumberInInterval(1, 59);
 
             cal.set(Calendar.HOUR_OF_DAY, hour);
-            cal.set(Calendar.MINUTE, minute);
+            cal.set(Calendar.MINUTE, minute); //minute
             cal.set(Calendar.SECOND, 0);
 
-            if (cal.getTimeInMillis() > System.currentTimeMillis()) {
+            if (cal.getTimeInMillis() > System.currentTimeMillis()) { //if it is more than 19:00 o'clock, trigger it tomorrow
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 String time = sdf.format(new Date());
-                //System.out.println(time + ": Alarm should fire in the future");
+                System.out.println(time + ": Alarm should fire in the future");
 
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
-                UserData.AlarmTriggered = true;
+                alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT));
+                UserData.AlarmForUploadTriggered = true;
             } else {
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 String time = sdf.format(new Date());
-                //System.out.println(time + ": Alarm in the past");
-                cal.add(Calendar.DAY_OF_MONTH, 1);
+                System.out.println(time + ": Alarm in the past");
+                cal.add(Calendar.DAY_OF_MONTH, 1); //trigger alarm tomorrow
 
-                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT));
-                UserData.AlarmTriggered = true;
+                alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT));
+                UserData.AlarmForUploadTriggered = true;
             }
         }
     }
