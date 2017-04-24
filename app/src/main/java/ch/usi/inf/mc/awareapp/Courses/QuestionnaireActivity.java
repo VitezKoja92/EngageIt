@@ -52,106 +52,75 @@ public class QuestionnaireActivity extends AppCompatActivity {
 
 
         if(course.equals("MondayLA") || course.equals("WednesdayLA")){
-            if(questionnaire.equals("FirstPAM")){
+            if(questionnaire.equals("PAM")){
                 createPAM("before", "Linear Algebra","Pre-lecture PAM", 40);
             }
-            if(questionnaire.equals("SecondPAM")){
-                createPAM("after the first part of", "Linear Algebra","Post-lecture PAM", 40);
-            }
-            if(questionnaire.equals("ThirdPAM")){
-                createPAM("after the second part of", "Linear Algebra","Post-lecture PAM", 40);
-            }
             if(questionnaire.equals("FirstPostlecture")){
-                createPostLecture("first part", "Linear Algebra", 40);
+                createPostLecture("first part","after", "Linear Algebra","Post-lecture PAM", 40);
             }
             if(questionnaire.equals("SecondPostlecture")){
-                createPostLecture("second part", "Linear Algebra", 40);
+                createPostLecture("second part","after", "Linear Algebra","Post-lecture PAM", 40);
             }
         }
 
         if(course.equals("MondayPF") || course.equals("WednesdayPF") || course.equals("FridayPF")){
-            if(questionnaire.equals("FirstPAM")){
+            if(questionnaire.equals("PAM")){
                 createPAM("before", "Programming Fundamentals 2","Pre-lecture PAM", 40);
             }
-            if(questionnaire.equals("SecondPAM")){
-                createPAM("after the first part of", "Programming Fundamentals 2","Post-lecture PAM", 40);
-            }
-            if(questionnaire.equals("ThirdPAM")){
-                createPAM("after the second part of", "Programming Fundamentals 2","Post-lecture PAM", 40);
-            }
             if(questionnaire.equals("FirstPostlecture")){
-                createPostLecture("first part", "Programming Fundamentals 2", 40);
+                createPostLecture("first part", "after","Programming Fundamentals 2","Post-lecture PAM", 40);
             }
             if(questionnaire.equals("SecondPostlecture")){
-                createPostLecture("second part", "Programming Fundamentals 2", 40);
+                createPostLecture("second part","after" , "Programming Fundamentals 2","Post-lecture PAM", 40);
             }
         }
 
         if(course.equals("TuesdayCC") || course.equals("WednesdayCC") || course.equals("ThursdayCC")){
-            if(questionnaire.equals("FirstPAM")){
+            if(questionnaire.equals("PAM")){
                 createPAM("before", "Cyber Communication","Pre-lecture PAM", 40);
             }
-            if(questionnaire.equals("SecondPAM")){
-                createPAM("after the first part of", "Cyber Communication","Post-lecture PAM", 40);
-            }
-            if(questionnaire.equals("ThirdPAM")){
-                createPAM("after the second part of", "Cyber Communication","Post-lecture PAM", 40);
-            }
             if(questionnaire.equals("FirstPostlecture")){
-                createPostLecture("first part", "Cyber Communication", 40);
+                createPostLecture("first part","after", "Cyber Communication","Post-lecture PAM", 40);
             }
             if(questionnaire.equals("SecondPostlecture")){
-                createPostLecture("second part", "Cyber Communication", 40);
+                createPostLecture("second part","after", "Cyber Communication","Post-lecture PAM", 40);
             }
         }
 
         if(course.equals("MondayInf1") || course.equals("MondayInf2")){
-            if(questionnaire.equals("FirstPAM")){
+            if(questionnaire.equals("PAM")){
                 createPAM("before", "Information Security","Pre-lecture PAM", 40);
             }
-            if(questionnaire.equals("SecondPAM")){
-                createPAM("after the first part of", "Information Security","Post-lecture PAM", 40);
-            }
-            if(questionnaire.equals("ThirdPAM")){
-                createPAM("after the second part of", "Information Security","Post-lecture PAM", 40);
-            }
             if(questionnaire.equals("FirstPostlecture")){
-                createPostLecture("first part", "Information Security", 40);
+                createPostLecture("first part","after", "Information Security","Post-lecture PAM", 40);
             }
             if(questionnaire.equals("SecondPostlecture")){
-                createPostLecture("second part", "Information Security", 40);
+                createPostLecture("second part","after", "Information Security","Post-lecture PAM", 40);
             }
         }
 
         if(course.equals("TuesdaySAD") || course.equals("ThursdaySAD")){
-            if(questionnaire.equals("FirstPAM")){
-                System.out.println("in SAD");
+            if(questionnaire.equals("PAM")){
                 createPAM("before", "Software Architecture and Design","Pre-lecture PAM", 40);
             }
-            if(questionnaire.equals("SecondPAM")){
-                createPAM("after the first part of", "Software Architecture and Design","Post-lecture PAM", 40);
-            }
-            if(questionnaire.equals("ThirdPAM")){
-                createPAM("after the second part of", "Software Architecture and Design","Post-lecture PAM", 40);
-            }
             if(questionnaire.equals("FirstPostlecture")){
-                createPostLecture("first part", "Software Architecture and Design", 40);
+                createPostLecture("first part","after", "Software Architecture and Design","Post-lecture PAM", 40);
             }
             if(questionnaire.equals("SecondPostlecture")){
-                createPostLecture("second part", "Software Architecture and Design", 40);
+                createPostLecture("second part","after", "Software Architecture and Design","Post-lecture PAM", 40);
             }
         }
     }
 
 
 
-    public void createPAM(String moment, String course,String title, int expirationThreshold){
+    public void createPAM(String moment, String course, String title, int expirationThreshold){
         try {
             ESMFactory factory = new ESMFactory();
 
             ESM_PAM q1 = new ESM_PAM();
             q1.setTitle(title)
-                    .setInstructions("Pick the closest to how you feel now "+moment+" " + course + "!")
+                    .setInstructions("Pick the closest to how you feel now, "+moment+" " + course + "!")
                     .setSubmitButton("Done")
                     .setExpirationThreshold(60*expirationThreshold); //setNotificationRetry(3) - number of times to retry notification if it expires
 
@@ -164,9 +133,16 @@ public class QuestionnaireActivity extends AppCompatActivity {
     }
 
 
-    public void createPostLecture(String moment, String course, int expirationThreshold){
+    public void createPostLecture(String moment, String momentPAM, String course, String title, int expirationThreshold){
         try {
             ESMFactory factory = new ESMFactory();
+
+            ESM_PAM q1 = new ESM_PAM();
+            q1.setTitle(title)
+                    .setInstructions("Pick the closest to how you feel now, "+momentPAM+" the "+moment+" of "+ course + "! (1/7)")
+                    .setSubmitButton("Next")
+                    .setExpirationThreshold(60*expirationThreshold); //setNotificationRetry(3) - number of times to retry notification if it expires
+
 
             ESM_Radio esmRadio1 = new ESM_Radio();
             esmRadio1.addRadio("Strongly Agree")
@@ -174,7 +150,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     .addRadio("Neutral")
                     .addRadio("Disagree")
                     .addRadio("Strongly Disagree")
-                    .setTitle("Survey about the "+moment+" of "+course+" (1/6)") // moment - "first part"; course - "Linear Algebra"
+                    .setTitle("Survey about the "+moment+" of "+course+" (2/7)") // moment - "first part"; course - "Linear Algebra"
                     .setExpirationThreshold(60*expirationThreshold)
                     .setInstructions("I was happy in this lecture.")
                     .setSubmitButton("Next");
@@ -186,7 +162,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     .addRadio("Disagree")
                     .addRadio("Strongly Disagree")
                     .setExpirationThreshold(60*expirationThreshold)
-                    .setTitle("Survey about the "+moment+" of "+course+" (2/6)")
+                    .setTitle("Survey about the "+moment+" of "+course+" (3/7)")
                     .setInstructions("I didn't feel very accomplished in this lecture.")
                     .setSubmitButton("Next");
 
@@ -197,7 +173,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     .addRadio("Disagree")
                     .addRadio("Strongly Disagree")
                     .setExpirationThreshold(60*expirationThreshold)
-                    .setTitle("Survey about the "+moment+" of "+course+" (3/6)")
+                    .setTitle("Survey about the "+moment+" of "+course+" (4/7)")
                     .setInstructions("I felt excited by the work in this lecture.")
                     .setSubmitButton("Next");
 
@@ -208,7 +184,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     .addRadio("Disagree")
                     .addRadio("Strongly Disagree")
                     .setExpirationThreshold(60*expirationThreshold)
-                    .setTitle("Survey about the "+moment+" of "+course+" (4/6)")
+                    .setTitle("Survey about the "+moment+" of "+course+" (5/7)")
                     .setInstructions("I liked being at this lecture.")
                     .setSubmitButton("Next");
 
@@ -218,7 +194,7 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     .addRadio("Neutral")
                     .addRadio("Disagree")
                     .addRadio("Strongly Disagree")
-                    .setTitle("Survey about the "+moment+" of "+course+" (5/6)")
+                    .setTitle("Survey about the "+moment+" of "+course+" (6/7)")
                     .setExpirationThreshold(60*expirationThreshold)
                     .setInstructions("I am interested in the work done in this lecture.")
                     .setSubmitButton("Next");
@@ -229,11 +205,12 @@ public class QuestionnaireActivity extends AppCompatActivity {
                     .addRadio("Neutral")
                     .addRadio("Disagree")
                     .addRadio("Strongly Disagree")
-                    .setTitle("Survey about the "+moment+" of "+course+" (6/6)")
+                    .setTitle("Survey about the "+moment+" of "+course+" (7/7)")
                     .setExpirationThreshold(60*expirationThreshold)
                     .setInstructions("My classroom is an interesting place to be.")
                     .setSubmitButton("Done");
 
+            factory.addESM(q1);
             factory.addESM(esmRadio1);
             factory.addESM(esmRadio2);
             factory.addESM(esmRadio3);

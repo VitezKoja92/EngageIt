@@ -57,107 +57,34 @@ public class NewScheduler {
 
         /*LINEAR ALGEBRA*/
         if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayLA", "FirstPAM", 1, mondayLA, 0, 0);
-            setAlarm(context, "WednesdayLA", "FirstPAM", 2, wednesdayLA, 0, 0);
+            setAlarm(context, "MondayLA", "PAM", 1, mondayLA, 0, 0);
+            setAlarm(context, "WednesdayLA", "PAM", 2, wednesdayLA, 0, 0);
         }
 
         /*PROGRAMMING FUNDAMENTALS 2*/
         if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayPF", "FirstPAM", 3, mondayPF, 0, 0);
-            setAlarm(context, "WednesdayPF", "FirstPAM", 4, wednesdayPF, 0, 0);
-            setAlarm(context, "FridayPF", "FirstPAM", 5, fridayPF, 0, 0);
+            setAlarm(context, "MondayPF", "PAM", 3, mondayPF, 0, 0);
+            setAlarm(context, "WednesdayPF", "PAM", 4, wednesdayPF, 0, 0);
+            setAlarm(context, "FridayPF", "PAM", 5, fridayPF, 0, 0);
         }
 
         /*CYBER COMMUNICATION*/
         if (courses.contains(CyberCommunication.getName())&& !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdayCC", "FirstPAM", 6, tuesdayCC, 0, 0);
-            setAlarm(context, "WednesdayCC", "FirstPAM", 7, wednesdayCC, 0, 0);
-            setAlarm(context, "ThursdayCC", "FirstPAM", 8, thursdayCC, 0, 0);
+            setAlarm(context, "TuesdayCC", "PAM", 6, tuesdayCC, 0, 0);
+            setAlarm(context, "WednesdayCC", "PAM", 7, wednesdayCC, 0, 0);
+            setAlarm(context, "ThursdayCC", "PAM", 8, thursdayCC, 0, 0);
         }
 
         /*INFORMATION SECURITY*/
         if (courses.contains(InformationSecurity.getName())&& !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayInf1", "FirstPAM", 9, mondayInf1, 0, 0);
-            setAlarm(context, "MondayInf2", "FirstPAM", 10, mondayInf2, 0, 0);
+            setAlarm(context, "MondayInf1", "PAM", 9, mondayInf1, 0, 0);
+            setAlarm(context, "MondayInf2", "PAM", 10, mondayInf2, 0, 0);
         }
 
         /*SOFTWARE ARCHITECTURE AND DESIGN*/
         if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdaySAD", "FirstPAM", 11, tuesdaySAD, 0, 0);
-            setAlarm(context, "ThursdaySAD", "FirstPAM", 12, thursdaySAD, 0, 0);
-        }
-    }
-
-    /********** SECOND PAM **********/
-    public void createSecondPAM(Context context, String courses) {
-
-        /*LINEAR ALGEBRA*/
-        if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayLA", "SecondPAM", 13, mondayLA, 1, -15);  //hour and time addition 1 and 15
-            setAlarm(context, "WednesdayLA", "SecondPAM", 14, wednesdayLA, 1, -15);
-        }
-
-        /*PROGRAMMING FUNDAMENTALS 2*/
-        if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayPF", "SecondPAM", 15, mondayPF, 1, -15);
-            setAlarm(context, "WednesdayPF", "SecondPAM", 16, wednesdayPF, 1, -15);
-            setAlarm(context, "FridayPF", "SecondPAM", 17, fridayPF, 1, -15);
-        }
-
-        /*CYBER COMMUNICATION*/
-        if (courses.contains(CyberCommunication.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdayCC", "SecondPAM", 18, tuesdayCC, 1, -15);
-            setAlarm(context, "WednesdayCC", "SecondPAM", 19, wednesdayCC, 1, -15);
-            setAlarm(context, "ThursdayCC", "SecondPAM", 20, thursdayCC, 1, -15);
-        }
-
-        /*INFORMATION SECURITY*/
-        if (courses.contains(InformationSecurity.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayInf1", "SecondPAM", 21, mondayInf1, 1, -15);
-            setAlarm(context, "MondayInf2", "SecondPAM", 22, mondayInf2, 1, -15);
-        }
-
-        /*SOFTWARE ARCHITECTURE AND DESIGN*/
-        if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdaySAD", "SecondPAM", 23, tuesdaySAD, 1, -15);
-            setAlarm(context, "ThursdaySAD", "SecondPAM", 24, thursdaySAD, 1, -15);
-        }
-    }
-
-    /********** THIRD PAM **********/
-    public void createThirdPAM(Context context, String courses) {
-
-        /*LINEAR ALGEBRA*/
-        if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayLA", "ThirdPAM", 25, mondayLA, 2, -15);  //hour and time addition 2 and 15
-            setAlarm(context, "WednesdayLA", "ThirdPAM", 26, wednesdayLA, 2, -15);
-        }
-
-        /*PROGRAMMING FUNDAMENTALS 2*/
-        if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayPF", "ThirdPAM", 27, mondayPF, 2, -15);
-            setAlarm(context, "WednesdayPF", "ThirdPAM", 28, wednesdayPF, 2, -15);
-            setAlarm(context, "FridayPF", "ThirdPAM", 29, fridayPF, 2, -15);
-        }
-
-        /*CYBER COMMUNICATION*/
-        if (courses.contains(CyberCommunication.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdayCC", "ThirdPAM", 30, tuesdayCC, 2, -15);
-            setAlarm(context, "WednesdayCC", "ThirdPAM", 31, wednesdayCC, 2, -15);
-            setAlarm(context, "ThursdayCC", "ThirdPAM", 32, thursdayCC, 2, -15);
-        }
-
-        /*INFORMATION SECURITY*/
-        if (courses.contains(InformationSecurity.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayInf1", "ThirdPAM", 33, mondayInf1, 2, -15);
-            setAlarm(context, "MondayInf2", "ThirdPAM", 34, mondayInf2, 2, -15);
-        }
-
-        /*SOFTWARE ARCHITECTURE AND DESIGN*/
-        if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
-            System.out.println("SoftwareArchitecture.getName(): "+SoftwareArchitecture.getName());
-            setAlarm(context, "TuesdaySAD", "ThirdPAM", 35, tuesdaySAD, 2, -15);
-            setAlarm(context, "ThursdaySAD", "ThirdPAM", 36, thursdaySAD, 2, -15);
+            setAlarm(context, "TuesdaySAD", "PAM", 11, tuesdaySAD, 0, 0);
+            setAlarm(context, "ThursdaySAD", "PAM", 12, thursdaySAD, 0, 0);
         }
     }
 
@@ -166,34 +93,34 @@ public class NewScheduler {
 
         /*LINEAR ALGEBRA*/
         if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayLA", "FirstPostlecture", 37, mondayLA, 1, -15);  //hour and time addition 1 and 15
-            setAlarm(context, "WednesdayLA", "FirstPostlecture", 38, wednesdayLA, 1, -15);
+            setAlarm(context, "MondayLA", "FirstPostlecture", 13, mondayLA, 1, -15);  //hour and time addition 1 and 15
+            setAlarm(context, "WednesdayLA", "FirstPostlecture", 14, wednesdayLA, 1, -15);
         }
 
         /*PROGRAMMING FUNDAMENTALS 2*/
         if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayPF", "FirstPostlecture", 39, mondayPF, 1, -15);
-            setAlarm(context, "WednesdayPF", "FirstPostlecture", 40, wednesdayPF, 1, -15);
-            setAlarm(context, "FridayPF", "FirstPostlecture", 41, fridayPF, 1, -15);
+            setAlarm(context, "MondayPF", "FirstPostlecture", 15, mondayPF, 1, -15);
+            setAlarm(context, "WednesdayPF", "FirstPostlecture", 16, wednesdayPF, 1, -15);
+            setAlarm(context, "FridayPF", "FirstPostlecture", 17, fridayPF, 1, -15);
         }
 
         /*CYBER COMMUNICATION*/
         if (courses.contains(CyberCommunication.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdayCC", "FirstPostlecture", 42, tuesdayCC, 1, -15);
-            setAlarm(context, "WednesdayCC", "FirstPostlecture", 43, wednesdayCC, 1, -15);
-            setAlarm(context, "ThursdayCC", "FirstPostlecture", 44, thursdayCC, 1, -15);
+            setAlarm(context, "TuesdayCC", "FirstPostlecture", 18, tuesdayCC, 1, -15);
+            setAlarm(context, "WednesdayCC", "FirstPostlecture", 19, wednesdayCC, 1, -15);
+            setAlarm(context, "ThursdayCC", "FirstPostlecture", 20, thursdayCC, 1, -15);
         }
 
         /*INFORMATION SECURITY*/
         if (courses.contains(InformationSecurity.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayInf1", "FirstPostlecture", 45, mondayInf1, 1, -15);
-            setAlarm(context, "MondayInf2", "FirstPostlecture", 46, mondayInf2, 1, -15);
+            setAlarm(context, "MondayInf1", "FirstPostlecture", 21, mondayInf1, 1, -15);
+            setAlarm(context, "MondayInf2", "FirstPostlecture", 22, mondayInf2, 1, -15);
         }
 
         /*SOFTWARE ARCHITECTURE AND DESIGN*/
         if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdaySAD", "FirstPostlecture", 47, tuesdaySAD, 1, -15);
-            setAlarm(context, "ThursdaySAD", "FirstPostlecture", 48, thursdaySAD, 1, -15);
+            setAlarm(context, "TuesdaySAD", "FirstPostlecture", 23, tuesdaySAD, 1, -15);
+            setAlarm(context, "ThursdaySAD", "FirstPostlecture", 24, thursdaySAD, 1, -15);
         }
     }
 
@@ -202,34 +129,34 @@ public class NewScheduler {
 
         /*LINEAR ALGEBRA*/
         if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")){
-            setAlarm(context, "MondayLA", "SecondPostlecture", 49, mondayLA, 2, -15);  //hour and time addition 2 and 15
-            setAlarm(context, "WednesdayLA", "SecondPostlecture", 50, wednesdayLA, 2, -15);
+            setAlarm(context, "MondayLA", "SecondPostlecture", 25, mondayLA, 2, -15);  //hour and time addition 2 and 15
+            setAlarm(context, "WednesdayLA", "SecondPostlecture", 26, wednesdayLA, 2, -15);
         }
 
         /*PROGRAMMING FUNDAMENTALS 2*/
         if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayPF", "SecondPostlecture", 51, mondayPF, 2, -15);
-            setAlarm(context, "WednesdayPF", "SecondPostlecture", 52, wednesdayPF, 2, -15);
-            setAlarm(context, "FridayPF", "SecondPostlecture", 53, fridayPF, 2, -15);
+            setAlarm(context, "MondayPF", "SecondPostlecture", 27, mondayPF, 2, -15);
+            setAlarm(context, "WednesdayPF", "SecondPostlecture", 28, wednesdayPF, 2, -15);
+            setAlarm(context, "FridayPF", "SecondPostlecture", 29, fridayPF, 2, -15);
         }
 
         /*CYBER COMMUNICATION*/
         if (courses.contains(CyberCommunication.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdayCC", "SecondPostlecture", 54, tuesdayCC, 2, -15);
-            setAlarm(context, "WednesdayCC", "SecondPostlecture", 55, wednesdayCC, 2, -15);
-            setAlarm(context, "ThursdayCC", "SecondPostlecture", 56, thursdayCC, 2, -15);
+            setAlarm(context, "TuesdayCC", "SecondPostlecture", 30, tuesdayCC, 2, -15);
+            setAlarm(context, "WednesdayCC", "SecondPostlecture", 31, wednesdayCC, 2, -15);
+            setAlarm(context, "ThursdayCC", "SecondPostlecture", 32, thursdayCC, 2, -15);
         }
 
         /*INFORMATION SECURITY*/
         if (courses.contains(InformationSecurity.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "MondayInf1", "SecondPostlecture", 57, mondayInf1, 2, -15);
-            setAlarm(context, "MondayInf2", "SecondPostlecture", 58, mondayInf2, 2, -15);
+            setAlarm(context, "MondayInf1", "SecondPostlecture", 33, mondayInf1, 2, -15);
+            setAlarm(context, "MondayInf2", "SecondPostlecture", 34, mondayInf2, 2, -15);
         }
 
         /*SOFTWARE ARCHITECTURE AND DESIGN*/
         if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
-            setAlarm(context, "TuesdaySAD", "SecondPostlecture", 59, tuesdaySAD, 2, -15);
-            setAlarm(context, "ThursdaySAD", "SecondPostlecture", 60, thursdaySAD, 2, -15);
+            setAlarm(context, "TuesdaySAD", "SecondPostlecture", 35, tuesdaySAD, 2, -15);
+            setAlarm(context, "ThursdaySAD", "SecondPostlecture", 36, thursdaySAD, 2, -15);
         }
     }
 

@@ -228,8 +228,6 @@ public class WelcomeActivity extends ActionBarActivity {
 
             if (!UserData.Username.equals("/")) { //Check if user is logged in
                 newScheduler.createFirstPAM(getApplicationContext(), courses);
-                newScheduler.createSecondPAM(getApplicationContext(), courses);
-                newScheduler.createThirdPAM(getApplicationContext(), courses);
                 newScheduler.createFirstPostlecture(getApplicationContext(), courses);
                 newScheduler.createSecondPostlecture(getApplicationContext(), courses);
             }
@@ -246,6 +244,7 @@ public class WelcomeActivity extends ActionBarActivity {
             Calendar cal = Calendar.getInstance();
             int hour = 19; //19
             int minute = getRandomNumberInInterval(1, 59);
+            System.out.println("Time of data uploading begin: Hour "+hour+", Minute "+minute );
 
             cal.set(Calendar.HOUR_OF_DAY, hour);
             cal.set(Calendar.MINUTE, minute); //minute
@@ -323,7 +322,7 @@ public class WelcomeActivity extends ActionBarActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String enteredPassword = passwordField.getText().toString();
-                                String adminPassword = "123";
+                                String adminPassword = "engageit2017";
                                 if (enteredPassword.equals(adminPassword)) {
 
                                     Intent i = new Intent(getApplicationContext(), TermsActivity.class);
@@ -376,7 +375,7 @@ public class WelcomeActivity extends ActionBarActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         String enteredPassword = passwordField.getText().toString();
-                        String adminPassword = "123";
+                        String adminPassword = "engageit2017";
                         if (enteredPassword.equals(adminPassword)) {
                             Intent i = new Intent(getApplicationContext(), ChooseOtherProfilesActivity.class);
                             startActivity(i);
