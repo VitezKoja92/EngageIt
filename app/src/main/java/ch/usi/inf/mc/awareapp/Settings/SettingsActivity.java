@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.R;
 import ch.usi.inf.mc.awareapp.TermsActivity;
@@ -33,6 +34,8 @@ public class SettingsActivity extends AppCompatActivity {
     final Context context = this;
     DatabaseHandler dbHandler;
     ImageButton goToWelcome;
+    SaveSharedPreference saveSharedPreference;
+    String usernameShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         System.out.println("Number of registrations: "+dbHandler.getAllRegistrations().size());
+        saveSharedPreference= new SaveSharedPreference(context);
+        usernameShared = saveSharedPreference.getUsername();
 
 
 
@@ -62,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
         addYourProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UserData.Username =="/"){
+                if(usernameShared.equals("/")){
                     if(dbHandler.getAllRegistrations().size() > 0){ // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
@@ -121,7 +126,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
         //EditYourProfile button is initially disabled
-        if(UserData.Username.equals("/")){
+        if(usernameShared.equals("/")){
             editYourProfile.setEnabled(false);
         }else{
             editYourProfile.setEnabled(true);
@@ -179,7 +184,7 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
         //TermsAndConditions button is initially disabled
-        if(UserData.Username.equals("/")){
+        if(usernameShared.equals("/")){
             termsBtn.setEnabled(false);
         }else{
             termsBtn.setEnabled(true);
@@ -189,7 +194,7 @@ public class SettingsActivity extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                UserData.Username = "/";
+                saveSharedPreference.setUsername("/");
                 Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
                 finish();
@@ -220,7 +225,7 @@ public class SettingsActivity extends AppCompatActivity {
         terms.setVisible(true);
         logout.setVisible(true);
 
-        if(UserData.Username.equals("/")){
+        if(usernameShared.equals("/")){
             terms.setEnabled(false);
             edit_profile.setEnabled(false);
             logout.setEnabled(false);
@@ -243,7 +248,7 @@ public class SettingsActivity extends AppCompatActivity {
             //Add button
             case R.id.addProfileMenu:
 
-                if(UserData.Username =="/"){
+                if(usernameShared.equals("/")){
                     if(dbHandler.getAllRegistrations().size() > 0){ // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
@@ -338,7 +343,7 @@ public class SettingsActivity extends AppCompatActivity {
                 return true;
 
             case R.id.logoutMenu:
-                UserData.Username = "/";
+                saveSharedPreference.setUsername("/");
                 Intent intent3 = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent3);
                 finish();

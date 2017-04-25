@@ -62,6 +62,7 @@ import ch.usi.inf.mc.awareapp.Database.LocalStorageController;
 import ch.usi.inf.mc.awareapp.Database.LocalTables;
 import ch.usi.inf.mc.awareapp.Database.RegistrationClass;
 import ch.usi.inf.mc.awareapp.Database.SQLiteController;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.RemoteStorage.AlarmReceiver;
 import ch.usi.inf.mc.awareapp.RemoteStorage.RemoteStorageController;
@@ -84,6 +85,7 @@ public class WelcomeActivity extends ActionBarActivity {
 
     Button surveysBtn;
     Button yourDataBtn;
+    TextView hint;
     ImageButton settingsBtn;
     DatabaseHandler dbHandler;
     TextView usernameLabel;
@@ -104,15 +106,17 @@ public class WelcomeActivity extends ActionBarActivity {
     final Context context = this;
     String courses;
     NewScheduler newScheduler;
+    SaveSharedPreference saveSharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
 
+        saveSharedPreference = new SaveSharedPreference(WelcomeActivity.this);
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
-        username = UserData.Username;
+        username = saveSharedPreference.getUsername();
 
         /************** CHECKING PERMISSIONS **************/
         checkForPermissions();
@@ -146,8 +150,6 @@ public class WelcomeActivity extends ActionBarActivity {
 
 
         /************** TEST **************/
-        usernameLabel = (TextView) findViewById(R.id.username_label);
-        usernameLabel.setText("User: " + username);
 
         System.out.println("Registration data:");
         for (RegistrationClass reg : dbHandler.getAllRegistrations()) {
@@ -205,6 +207,21 @@ public class WelcomeActivity extends ActionBarActivity {
 //                finish();
 //            }
 //        });
+
+
+        System.out.println("Username: "+saveSharedPreference.getUsername());
+
+        //Hide Log in hint if user is logged in
+        if(!username.equals("/")){
+           hint = (TextView)findViewById(R.id.loginHint);
+            hint.setVisibility(View.INVISIBLE);
+        }
+        //set username label (invisible when user is logged out)
+        usernameLabel = (TextView) findViewById(R.id.username_label);
+        usernameLabel.setText("User: " + username);
+        if(username.equals("/")){
+            usernameLabel.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void triggerSchedulers() {
@@ -218,7 +235,7 @@ public class WelcomeActivity extends ActionBarActivity {
 
         //Take courses that user choose
         for (RegistrationClass reg : dbHandler.getAllRegistrations()) {
-            if (reg._username.equals(UserData.Username)) {
+            if (reg._username.equals(username)) { //UserData.Username
                 courses = reg._courses;
             }
         }
@@ -226,7 +243,7 @@ public class WelcomeActivity extends ActionBarActivity {
         //Trigger schedulers only in period between April 10th and May 31th
         if ((month == 4 && dayOfMonth >= 10 && dayOfMonth <= 30) || (month == 5 && dayOfMonth >= 1 && dayOfMonth <= 31)) {
 
-            if (!UserData.Username.equals("/")) { //Check if user is logged in
+            if (!username.equals("/")) { //Check if user is logged in
                 newScheduler.createFirstPAM(getApplicationContext(), courses);
                 newScheduler.createFirstPostlecture(getApplicationContext(), courses);
                 newScheduler.createSecondPostlecture(getApplicationContext(), courses);
@@ -237,35 +254,32 @@ public class WelcomeActivity extends ActionBarActivity {
     public void triggerAlarm() {
         //Method for triggering alarms at specified time, so that uploading of the data
         //to remote storage can start
-        if (!UserData.AlarmForUploadTriggered) {
-            Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
-            AlarmManager alarmManager = (AlarmManager) getSystemService(getApplicationContext().ALARM_SERVICE);
 
-            Calendar cal = Calendar.getInstance();
-            int hour = 19; //19
-            int minute = getRandomNumberInInterval(1, 59);
-            System.out.println("Time of data uploading begin: Hour "+hour+", Minute "+minute );
+        Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(getApplicationContext().ALARM_SERVICE);
 
-            cal.set(Calendar.HOUR_OF_DAY, hour);
-            cal.set(Calendar.MINUTE, minute); //minute
-            cal.set(Calendar.SECOND, 0);
+        Calendar cal = Calendar.getInstance();
+        int hour = 19; //19
+        int minute = getRandomNumberInInterval(1, 59);
+        System.out.println("Time of data uploading begin: Hour "+hour+", Minute "+minute );
 
-            if (cal.getTimeInMillis() > System.currentTimeMillis()) { //if it is more than 19:00 o'clock, trigger it tomorrow
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                String time = sdf.format(new Date());
-                System.out.println(time + ": Alarm should fire in the future");
+        cal.set(Calendar.HOUR_OF_DAY, hour);
+        cal.set(Calendar.MINUTE, minute); //minute
+        cal.set(Calendar.SECOND, 0);
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT));
-                UserData.AlarmForUploadTriggered = true;
-            } else {
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                String time = sdf.format(new Date());
-                System.out.println(time + ": Alarm in the past");
-                cal.add(Calendar.DAY_OF_MONTH, 1); //trigger alarm tomorrow
+        if (cal.getTimeInMillis() > System.currentTimeMillis()) { //if it is more than 19:00 o'clock, trigger it tomorrow
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            String time = sdf.format(new Date());
+            System.out.println(time + ": Alarm should fire in the future");
 
-                alarmManager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT));
-                UserData.AlarmForUploadTriggered = true;
-            }
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT));
+        } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            String time = sdf.format(new Date());
+            System.out.println(time + ": Alarm in the past");
+            cal.add(Calendar.DAY_OF_MONTH, 1); //trigger alarm tomorrow
+
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_ONE_SHOT));
         }
     }
 
@@ -285,7 +299,7 @@ public class WelcomeActivity extends ActionBarActivity {
         terms.setVisible(true);
         logout.setVisible(true);
 
-        if (UserData.Username.equals("/")) {
+        if (username.equals("/")) {
             terms.setEnabled(false);
             edit_profile.setEnabled(false);
             logout.setEnabled(false);
@@ -308,7 +322,7 @@ public class WelcomeActivity extends ActionBarActivity {
             //Add button
             case R.id.addProfileMenu:
 
-                if (UserData.Username == "/") {
+                if (username.equals("/")) {
                     if (dbHandler.getAllRegistrations().size() > 0) { // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
@@ -405,7 +419,7 @@ public class WelcomeActivity extends ActionBarActivity {
                 return true;
 
             case R.id.logoutMenu:
-                UserData.Username = "/";
+                saveSharedPreference.setUsername("/");
                 Intent intent3 = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent3);
                 finish();

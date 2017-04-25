@@ -42,7 +42,7 @@
     <string name="course_hint">Course</string>
     <string name="sign_in_button">Next</string>
 
-    <string name="login_hint">* If you already have a username, just press \"Sign in\". Otherwise you should enter new username, then first press \"Sign up\", and then \"Sign in\". </string>
+    <string name="login_hint">* Please, log in. You can do it by adding/choosing profile at the top right corner of the screen. </string>
     <string name="attend_text">Will you attend the next lecture?</string>
     <string name="attend_yes">I will!</string>
     <string name="attend_no">Sorry, I won\'t...</string>

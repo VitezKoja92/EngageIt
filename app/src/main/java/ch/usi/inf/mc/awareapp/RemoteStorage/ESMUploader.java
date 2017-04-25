@@ -35,6 +35,7 @@ import java.util.Date;
 
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
 import ch.usi.inf.mc.awareapp.Database.ESMClass;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 
 /**
@@ -67,9 +68,11 @@ public class ESMUploader extends IntentService {
     protected void onHandleIntent(Intent intent) {
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
+        SaveSharedPreference saveSharedPreference= new SaveSharedPreference(context);
+        String username = saveSharedPreference.getUsername();
 
         String esm_JSON = intent.getStringExtra(EXTRA_ESM_DATA);
-        String username = UserData.Username;
+
         String androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
 
 

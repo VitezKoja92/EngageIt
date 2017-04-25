@@ -30,6 +30,7 @@ import java.util.Date;
 
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
 import ch.usi.inf.mc.awareapp.Database.RegistrationClass;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.R;
 import ch.usi.inf.mc.awareapp.TermsActivity;
@@ -55,6 +56,8 @@ public class EditProfileActivity extends AppCompatActivity {
     String selectedCoursesString = "";
     ImageButton goToWelcome;
     final Context context = this;
+    SaveSharedPreference saveSharedPreference;
+    String usernameShared;
 
 
 
@@ -68,12 +71,14 @@ public class EditProfileActivity extends AppCompatActivity {
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        saveSharedPreference= new SaveSharedPreference(context);
+        usernameShared = saveSharedPreference.getUsername();
 
 
         /********** PICK CURRENT REGISTRATION **********/
         RegistrationClass registration = new RegistrationClass();
         for(RegistrationClass reg: dbHandler.getAllRegistrations()){
-            if(reg._username.equals(UserData.Username)){
+            if(reg._username.equals(usernameShared)){
                 registration = reg;
                 break;
             }
@@ -341,13 +346,13 @@ public class EditProfileActivity extends AppCompatActivity {
 
 
                 //Get registration with current username
-                dbHandler.updateRegistration(age,gender, faculty, studyLevel, selectedCoursesString,"Yes", "Yes", UserData.Username,currentDateAndTime);
+                dbHandler.updateRegistration(age,gender, faculty, studyLevel, selectedCoursesString,"Yes", "Yes", usernameShared,currentDateAndTime);
 
 
                 //test-remove
                 RegistrationClass registration = new RegistrationClass();
                 for(RegistrationClass reg: dbHandler.getAllRegistrations()){
-                    if(reg._username.equals(UserData.Username)){
+                    if(reg._username.equals(usernameShared)){
                         registration = reg;
                         break;
                     }
@@ -388,7 +393,7 @@ public class EditProfileActivity extends AppCompatActivity {
         terms.setVisible(true);
         logout.setVisible(true);
 
-        if(UserData.Username.equals("/")){
+        if(usernameShared.equals("/")){
             terms.setEnabled(false);
             edit_profile.setEnabled(false);
             logout.setEnabled(false);
@@ -411,7 +416,7 @@ public class EditProfileActivity extends AppCompatActivity {
             //Add button
             case R.id.addProfileMenu:
 
-                if(UserData.Username =="/"){
+                if(usernameShared.equals("/")){
                     if(dbHandler.getAllRegistrations().size() > 0){ // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
@@ -506,7 +511,7 @@ public class EditProfileActivity extends AppCompatActivity {
                 return true;
 
             case R.id.logoutMenu:
-                UserData.Username = "/";
+                saveSharedPreference.setUsername("/");
                 Intent intent3 = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent3);
                 finish();

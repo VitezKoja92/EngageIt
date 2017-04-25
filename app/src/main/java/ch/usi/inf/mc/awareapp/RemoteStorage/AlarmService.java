@@ -21,6 +21,7 @@ import ch.usi.inf.mc.awareapp.Database.ESMClass;
 import ch.usi.inf.mc.awareapp.Database.LocalDbUtility;
 import ch.usi.inf.mc.awareapp.Database.LocalTables;
 import ch.usi.inf.mc.awareapp.Database.SQLiteController;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.R;
 
@@ -248,11 +249,13 @@ public class AlarmService extends IntentService {
 
 
     private String buildFileName(LocalTables table) {
+        SaveSharedPreference saveSharedPreference= new SaveSharedPreference(getApplicationContext());
+        String username = saveSharedPreference.getUsername();
         //get current date
         String today = buildDate();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         String time = sdf.format(new Date());
-        return androidID + "_" +time+"_"+ today + "_" + LocalDbUtility.getTableName(table) + "_" + UserData.Username + ".csv";
+        return androidID + "_" +time+"_"+ today + "_" + LocalDbUtility.getTableName(table) + "_" + username + ".csv";
     }
 
 

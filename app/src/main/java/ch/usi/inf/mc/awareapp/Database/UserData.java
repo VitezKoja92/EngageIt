@@ -11,7 +11,6 @@ public class UserData {
     public static Boolean RegistrationDone = false;
     public static Boolean TermsAccepted = false;
 
-    public static String Username = "/";
     public static String SelectedCourses;
     public static Boolean AlarmForUploadTriggered = false;
 

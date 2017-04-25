@@ -33,6 +33,7 @@ import org.json.JSONException;
 import java.util.ArrayList;
 
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.Settings.ChooseOtherProfilesActivity;
 import ch.usi.inf.mc.awareapp.Settings.EditProfileActivity;
@@ -48,6 +49,8 @@ public class SurveysActivity extends AppCompatActivity {
     private Button pamBtn;
     ImageButton goToWelcome;
     final Context context = this;
+    SaveSharedPreference saveSharedPreference;
+    String usernameShared;
 
 
     private Intent awareIntent;
@@ -60,6 +63,8 @@ public class SurveysActivity extends AppCompatActivity {
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
+        saveSharedPreference= new SaveSharedPreference(context);
+        usernameShared = saveSharedPreference.getUsername();
 
 
 
@@ -581,7 +586,7 @@ public class SurveysActivity extends AppCompatActivity {
         terms.setVisible(true);
         logout.setVisible(true);
 
-        if(UserData.Username.equals("/")){
+        if(usernameShared.equals("/")){
             terms.setEnabled(false);
             edit_profile.setEnabled(false);
             logout.setEnabled(false);
@@ -604,7 +609,7 @@ public class SurveysActivity extends AppCompatActivity {
             //Add button
             case R.id.addProfileMenu:
 
-                if(UserData.Username =="/"){
+                if(usernameShared.equals("/")){
                     if(dbHandler.getAllRegistrations().size() > 0){ // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
@@ -699,7 +704,7 @@ public class SurveysActivity extends AppCompatActivity {
                 return true;
 
             case R.id.logoutMenu:
-                UserData.Username = "/";
+                saveSharedPreference.setUsername("/");
                 Intent intent3 = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent3);
                 finish();

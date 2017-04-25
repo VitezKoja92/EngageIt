@@ -9,6 +9,7 @@ import android.icu.util.Calendar;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.RemoteStorage.AlarmReceiver;
 
@@ -20,6 +21,7 @@ import static android.content.Context.ALARM_SERVICE;
  */
 
 public class NewScheduler {
+
 
     /* Creation of the courses - BEGIN */
 
@@ -54,35 +56,37 @@ public class NewScheduler {
 
     /********** FIRST PAM **********/
     public void createFirstPAM(Context context, String courses) {
+        SaveSharedPreference saveSharedPreference = new SaveSharedPreference(context);
+        String username = saveSharedPreference.getUsername();
 
         /*LINEAR ALGEBRA*/
-        if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(LinearAlgebra.getName()) && !username.equals("/")) {
             setAlarm(context, "MondayLA", "PAM", 1, mondayLA, 0, 0);
             setAlarm(context, "WednesdayLA", "PAM", 2, wednesdayLA, 0, 0);
         }
 
         /*PROGRAMMING FUNDAMENTALS 2*/
-        if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(ProgrammingFundamentals.getName()) && !username.equals("/")) {
             setAlarm(context, "MondayPF", "PAM", 3, mondayPF, 0, 0);
             setAlarm(context, "WednesdayPF", "PAM", 4, wednesdayPF, 0, 0);
             setAlarm(context, "FridayPF", "PAM", 5, fridayPF, 0, 0);
         }
 
         /*CYBER COMMUNICATION*/
-        if (courses.contains(CyberCommunication.getName())&& !UserData.Username.equals("/")) {
+        if (courses.contains(CyberCommunication.getName())&& !username.equals("/")) {
             setAlarm(context, "TuesdayCC", "PAM", 6, tuesdayCC, 0, 0);
             setAlarm(context, "WednesdayCC", "PAM", 7, wednesdayCC, 0, 0);
             setAlarm(context, "ThursdayCC", "PAM", 8, thursdayCC, 0, 0);
         }
 
         /*INFORMATION SECURITY*/
-        if (courses.contains(InformationSecurity.getName())&& !UserData.Username.equals("/")) {
+        if (courses.contains(InformationSecurity.getName())&& !username.equals("/")) {
             setAlarm(context, "MondayInf1", "PAM", 9, mondayInf1, 0, 0);
             setAlarm(context, "MondayInf2", "PAM", 10, mondayInf2, 0, 0);
         }
 
         /*SOFTWARE ARCHITECTURE AND DESIGN*/
-        if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(SoftwareArchitecture.getName()) && !username.equals("/")) {
             setAlarm(context, "TuesdaySAD", "PAM", 11, tuesdaySAD, 0, 0);
             setAlarm(context, "ThursdaySAD", "PAM", 12, thursdaySAD, 0, 0);
         }
@@ -90,35 +94,37 @@ public class NewScheduler {
 
     /********** FIRST POSTLECTURE **********/
     public void createFirstPostlecture(Context context, String courses) {
+        SaveSharedPreference saveSharedPreference = new SaveSharedPreference(context);
+        String username = saveSharedPreference.getUsername();
 
         /*LINEAR ALGEBRA*/
-        if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(LinearAlgebra.getName()) && !username.equals("/")) {
             setAlarm(context, "MondayLA", "FirstPostlecture", 13, mondayLA, 1, -15);  //hour and time addition 1 and 15
             setAlarm(context, "WednesdayLA", "FirstPostlecture", 14, wednesdayLA, 1, -15);
         }
 
         /*PROGRAMMING FUNDAMENTALS 2*/
-        if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(ProgrammingFundamentals.getName()) && !username.equals("/")) {
             setAlarm(context, "MondayPF", "FirstPostlecture", 15, mondayPF, 1, -15);
             setAlarm(context, "WednesdayPF", "FirstPostlecture", 16, wednesdayPF, 1, -15);
             setAlarm(context, "FridayPF", "FirstPostlecture", 17, fridayPF, 1, -15);
         }
 
         /*CYBER COMMUNICATION*/
-        if (courses.contains(CyberCommunication.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(CyberCommunication.getName()) && !username.equals("/")) {
             setAlarm(context, "TuesdayCC", "FirstPostlecture", 18, tuesdayCC, 1, -15);
             setAlarm(context, "WednesdayCC", "FirstPostlecture", 19, wednesdayCC, 1, -15);
             setAlarm(context, "ThursdayCC", "FirstPostlecture", 20, thursdayCC, 1, -15);
         }
 
         /*INFORMATION SECURITY*/
-        if (courses.contains(InformationSecurity.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(InformationSecurity.getName()) && !username.equals("/")) {
             setAlarm(context, "MondayInf1", "FirstPostlecture", 21, mondayInf1, 1, -15);
             setAlarm(context, "MondayInf2", "FirstPostlecture", 22, mondayInf2, 1, -15);
         }
 
         /*SOFTWARE ARCHITECTURE AND DESIGN*/
-        if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(SoftwareArchitecture.getName()) && !username.equals("/")) {
             setAlarm(context, "TuesdaySAD", "FirstPostlecture", 23, tuesdaySAD, 1, -15);
             setAlarm(context, "ThursdaySAD", "FirstPostlecture", 24, thursdaySAD, 1, -15);
         }
@@ -126,35 +132,37 @@ public class NewScheduler {
 
     /********** SECOND POSTLECTURE **********/
     public void createSecondPostlecture(Context context, String courses) {
+        SaveSharedPreference saveSharedPreference = new SaveSharedPreference(context);
+        String username = saveSharedPreference.getUsername();
 
         /*LINEAR ALGEBRA*/
-        if (courses.contains(LinearAlgebra.getName()) && !UserData.Username.equals("/")){
+        if (courses.contains(LinearAlgebra.getName()) && !username.equals("/")){
             setAlarm(context, "MondayLA", "SecondPostlecture", 25, mondayLA, 2, -15);  //hour and time addition 2 and 15
             setAlarm(context, "WednesdayLA", "SecondPostlecture", 26, wednesdayLA, 2, -15);
         }
 
         /*PROGRAMMING FUNDAMENTALS 2*/
-        if (courses.contains(ProgrammingFundamentals.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(ProgrammingFundamentals.getName()) && !username.equals("/")) {
             setAlarm(context, "MondayPF", "SecondPostlecture", 27, mondayPF, 2, -15);
             setAlarm(context, "WednesdayPF", "SecondPostlecture", 28, wednesdayPF, 2, -15);
             setAlarm(context, "FridayPF", "SecondPostlecture", 29, fridayPF, 2, -15);
         }
 
         /*CYBER COMMUNICATION*/
-        if (courses.contains(CyberCommunication.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(CyberCommunication.getName()) && !username.equals("/")) {
             setAlarm(context, "TuesdayCC", "SecondPostlecture", 30, tuesdayCC, 2, -15);
             setAlarm(context, "WednesdayCC", "SecondPostlecture", 31, wednesdayCC, 2, -15);
             setAlarm(context, "ThursdayCC", "SecondPostlecture", 32, thursdayCC, 2, -15);
         }
 
         /*INFORMATION SECURITY*/
-        if (courses.contains(InformationSecurity.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(InformationSecurity.getName()) && !username.equals("/")) {
             setAlarm(context, "MondayInf1", "SecondPostlecture", 33, mondayInf1, 2, -15);
             setAlarm(context, "MondayInf2", "SecondPostlecture", 34, mondayInf2, 2, -15);
         }
 
         /*SOFTWARE ARCHITECTURE AND DESIGN*/
-        if (courses.contains(SoftwareArchitecture.getName()) && !UserData.Username.equals("/")) {
+        if (courses.contains(SoftwareArchitecture.getName()) && !username.equals("/")) {
             setAlarm(context, "TuesdaySAD", "SecondPostlecture", 35, tuesdaySAD, 2, -15);
             setAlarm(context, "ThursdaySAD", "SecondPostlecture", 36, thursdaySAD, 2, -15);
         }
@@ -180,10 +188,10 @@ public class NewScheduler {
         Calendar calendar1 = createCalendar(weekday.getDay(),weekday.getHour()+hourAddition, weekday.getMinute()+minuteAddition);
 
         if (calendar1.getTimeInMillis() > System.currentTimeMillis()) {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis(), pendingIntent1);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis(), pendingIntent1);
         } else {
             calendar1.add(java.util.Calendar.DAY_OF_MONTH, 7);
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis(), pendingIntent1);
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar1.getTimeInMillis(), pendingIntent1);
         }
 
     }

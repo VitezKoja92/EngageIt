@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
 import ch.usi.inf.mc.awareapp.Database.RegistrationClass;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.R;
 import ch.usi.inf.mc.awareapp.TermsActivity;
@@ -38,6 +39,8 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
     TextView usernameLabel;
     ImageButton goToWelcome;
     final Context context = this;
+    SaveSharedPreference saveSharedPreference;
+    String usernameShared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,8 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
         androidID = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.ANDROID_ID);
         usernameLabel = (TextView)findViewById(R.id.username_label);
+        saveSharedPreference= new SaveSharedPreference(context);
+        usernameShared = saveSharedPreference.getUsername();
 
 
 
@@ -77,11 +82,11 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
         profilesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                UserData.Username = profilesList.getItemAtPosition(position).toString();
+                saveSharedPreference.setUsername(profilesList.getItemAtPosition(position).toString());
 
                 RegistrationClass registration = new RegistrationClass();
                 for(RegistrationClass reg: dbHandler.getAllRegistrations()){
-                    if(reg._username.equals(UserData.Username)){
+                    if(reg._username.equals(usernameShared)){
                         registration = reg;
                     }
                 }
@@ -111,7 +116,7 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
         terms.setVisible(true);
         logout.setVisible(true);
 
-        if(UserData.Username.equals("/")){
+        if(usernameShared.equals("/")){
             terms.setEnabled(false);
             edit_profile.setEnabled(false);
             logout.setEnabled(false);
@@ -134,7 +139,7 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
             //Add button
             case R.id.addProfileMenu:
 
-                if(UserData.Username =="/"){
+                if(usernameShared.equals("/")){
                     if(dbHandler.getAllRegistrations().size() > 0){ // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
@@ -229,7 +234,7 @@ public class ChooseOtherProfilesActivity extends AppCompatActivity {
                 return true;
 
             case R.id.logoutMenu:
-                UserData.Username = "/";
+                saveSharedPreference.setUsername("/");
                 Intent intent3 = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent3);
                 finish();

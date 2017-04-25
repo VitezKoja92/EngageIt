@@ -9,6 +9,7 @@ import android.content.Intent;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 import ch.usi.inf.mc.awareapp.Courses.AlarmNotificationReceiver;
 import ch.usi.inf.mc.awareapp.Database.UserData;
@@ -33,7 +34,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Intent intent = new Intent(context, AlarmReceiver.class);
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
 
-        alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+86400000, PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_ONE_SHOT)); //86 400 000 (1 day)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+86400000, PendingIntent.getBroadcast(context, requestCode, intent, PendingIntent.FLAG_ONE_SHOT)); //86 400 000 (1 day)
 
     }
 }

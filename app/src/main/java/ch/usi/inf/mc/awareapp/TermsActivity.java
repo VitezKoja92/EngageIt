@@ -21,6 +21,7 @@ import java.util.List;
 
 import ch.usi.inf.mc.awareapp.Database.DatabaseHandler;
 import ch.usi.inf.mc.awareapp.Database.RegistrationClass;
+import ch.usi.inf.mc.awareapp.Database.SaveSharedPreference;
 import ch.usi.inf.mc.awareapp.Database.UserData;
 import ch.usi.inf.mc.awareapp.Settings.AddProfileActivity;
 import ch.usi.inf.mc.awareapp.Settings.ChooseOtherProfilesActivity;
@@ -38,6 +39,8 @@ public class TermsActivity extends AppCompatActivity{
     List<RegistrationClass> allRegs;
     ImageButton goToWelcome;
     final Context context = this;
+    SaveSharedPreference saveSharedPreference;
+    String usernameShared;
 
 
     @Override
@@ -46,7 +49,9 @@ public class TermsActivity extends AppCompatActivity{
         setContentView(R.layout.activity_terms);
 
         dbHandler = DatabaseHandler.getInstance(getApplicationContext());
-        final String username = UserData.Username;
+        //final String username = UserData.Username;
+        saveSharedPreference= new SaveSharedPreference(context);
+        usernameShared = saveSharedPreference.getUsername();
 
         /********** DEFINING HOME BUTTON **********/
         goToWelcome = (ImageButton)findViewById(R.id.welcome);
@@ -66,7 +71,7 @@ public class TermsActivity extends AppCompatActivity{
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UserData.Username == "/"){
+                if(usernameShared.equals("/")){
                     Intent i =new Intent (getApplicationContext(), AddProfileActivity.class);
                     startActivity(i);
                     finish();
@@ -91,7 +96,7 @@ public class TermsActivity extends AppCompatActivity{
                         .setPositiveButton(R.string.refuse_ok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if(UserData.Username == "/"){
+                                if(usernameShared.equals("/")){
                                     Intent i =new Intent (getApplicationContext(), AddProfileActivity.class);
                                     startActivity(i);
                                     finish();
@@ -104,7 +109,7 @@ public class TermsActivity extends AppCompatActivity{
                         }).setNegativeButton(R.string.refuse_nok, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if(UserData.Username == "/"){
+                                if(usernameShared.equals("/")){
                                     Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
                                     startActivity(i);
                                     finish();
@@ -112,13 +117,13 @@ public class TermsActivity extends AppCompatActivity{
                                     RegistrationClass registration = new RegistrationClass();
 
                                     for(RegistrationClass reg: dbHandler.getAllRegistrations()){
-                                        if(UserData.Username.equals(reg._username)){
+                                        if(usernameShared.equals(reg._username)){
                                             registration = reg;
                                         }
                                     }
                                     dbHandler.deleteRegistration(registration);
                                     Intent i =new Intent (getApplicationContext(), WelcomeActivity.class);
-                                    UserData.Username = "/";
+                                    saveSharedPreference.setUsername("/");
                                     startActivity(i);
                                     dialog.cancel();
                                     finish();
@@ -161,7 +166,7 @@ public class TermsActivity extends AppCompatActivity{
         terms.setVisible(true);
         logout.setVisible(true);
 
-        if(UserData.Username.equals("/")){
+        if(usernameShared.equals("/")){
             terms.setEnabled(false);
             edit_profile.setEnabled(false);
             logout.setEnabled(false);
@@ -184,7 +189,7 @@ public class TermsActivity extends AppCompatActivity{
             //Add button
             case R.id.addProfileMenu:
 
-                if(UserData.Username =="/"){
+                if(usernameShared.equals("/")){
                     if(dbHandler.getAllRegistrations().size() > 0){ // check the database
                         LayoutInflater inflater = LayoutInflater.from(context);
                         View passwordView = inflater.inflate(R.layout.dialog_password, null);
@@ -279,7 +284,7 @@ public class TermsActivity extends AppCompatActivity{
                 return true;
 
             case R.id.logoutMenu:
-                UserData.Username = "/";
+                saveSharedPreference.setUsername("/");
                 Intent intent3 = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(intent3);
                 finish();
