@@ -2,9 +2,12 @@
     <string name="app_name">EngageIt 1.0</string>
     <string name="acceptbtn">Accept</string>
     <string name="refusebtn">Refuse</string>
-    <string name="aggrement">The data collected with this app will be used only for the purpose of the University research.
-        The data will be collected in private manner so that it cannot be related to its provider.
-    Using the buttons bellow you can either \"Accept\" or \"Refuse\" to allow us to collect your data.</string>
+    <string name="agreement">The information and data collected  in this study will be stored safely and handled confidentially.
+        Your data will be anonymized through the assignment of an alphanumerical code and your name will never be mentioned
+        in connection to the data or in any report. Any attempt to deduce your identity from the data is explicitly
+        forbidden by our data analysis policy.Your participation in the study is completely voluntary. \nYou have the right to withdraw from the study at any time without penalty and to
+        require your data to be entirely and permanently deleted.\n\n
+    By pressing \"Accept\" you confirm that you carefully read and understood the information reported above and that you agree to participate in the research study.</string>
     <string name="refuse_text">You can be sure that your data won\'t be used for illegal activities. Please help us by providing your data, otherwise your account will be deleted.</string>
     <string name="refuse_ok">Okay, I will!</string>
     <string name="terms_title">Informed consent</string>

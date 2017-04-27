@@ -223,9 +223,9 @@ public class WelcomeActivity extends ActionBarActivity {
             usernameLabel.setVisibility(View.INVISIBLE);
         }
 
-        if(UserData.general){
+        if(saveSharedPreference.getGeneral()){
             createGeneralSurvey();
-            UserData.general = false;
+            saveSharedPreference.setGeneral(false);
         }
 
     }

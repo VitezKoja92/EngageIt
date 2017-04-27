@@ -12,6 +12,7 @@ public class SaveSharedPreference {
 
     private SharedPreferences sharedPreferences;
     private final String USERNAME = "USERNAME";
+    private final String GENERAL = "GENERAL";
 
     public SaveSharedPreference(Context context) {
         sharedPreferences = context.getSharedPreferences("Preferences", 0);
@@ -25,6 +26,15 @@ public class SaveSharedPreference {
 
     public String getUsername(){
         return sharedPreferences.getString(USERNAME, "/");
+    }
+
+    public void setGeneral(Boolean general){
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putBoolean(GENERAL, general);
+        edit.commit();
+    }
+    public Boolean getGeneral(){
+        return sharedPreferences.getBoolean(GENERAL, false);
     }
 
 }

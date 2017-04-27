@@ -316,7 +316,7 @@ public class AddProfileActivity extends AppCompatActivity {
                 System.out.println("Selected courses are: "+ UserData.SelectedCourses);
                 saveSharedPreference.setUsername(username);
 
-                UserData.general = true;
+                saveSharedPreference.setGeneral(true);
                 Intent i = new Intent(getApplicationContext(), WelcomeActivity.class);
                 startActivity(i);
                 finish();
