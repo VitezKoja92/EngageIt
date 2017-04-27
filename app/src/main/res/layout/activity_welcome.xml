@@ -75,7 +75,7 @@
         android:id="@+id/loginHint"
         android:text="@string/login_hint"
         android:layout_width="match_parent"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"

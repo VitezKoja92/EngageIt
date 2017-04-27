@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 
 import java.util.Random;
 
@@ -278,22 +279,27 @@ public class AlarmNotificationReceiver extends BroadcastReceiver {
         Random rand = new Random();
         int code = rand.nextInt(100000000);
         System.out.println("code: "+code);
-        Intent intent = new Intent(context, QuestionnaireActivity.class);
-        intent.putExtra("questionnaire", questionnaire);
-        intent.putExtra("course", course);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, code, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
         builder.setContentTitle(title);
         builder.setContentText(content);
         builder.setDefaults(Notification.DEFAULT_SOUND);
         builder.setAutoCancel(true);
+
+        Intent intent = new Intent(context, QuestionnaireActivity.class);
+        intent.putExtra("questionnaire", questionnaire);
+        intent.putExtra("course", course);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(QuestionnaireActivity.class);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(code, PendingIntent.FLAG_UPDATE_CURRENT);
+
         builder.setContentIntent(pendingIntent);
         builder.setSmallIcon(R.drawable.logo_shku); //bad logo
 
         //System.out.println("in setNotification");
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
-
         notificationManager.notify(code, builder.build());
 
     }

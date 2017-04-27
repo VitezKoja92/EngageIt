@@ -13,5 +13,6 @@ public class UserData {
 
     public static String SelectedCourses;
     public static Boolean AlarmForUploadTriggered = false;
+    public static Boolean general = false;
 
 }

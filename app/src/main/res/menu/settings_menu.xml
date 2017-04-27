@@ -26,6 +26,11 @@
         android:title="@string/terms_and_conditions"
         app:showAsAction="never" />
     <item
+        android:id="@+id/help"
+        android:title="@string/helpTitle"
+        app:showAsAction="never"
+        />
+    <item
         android:id="@+id/logoutMenu"
         android:title="@string/logout"
         app:showAsAction="never" />
